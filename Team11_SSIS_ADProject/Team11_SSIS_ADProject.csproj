@@ -182,6 +182,10 @@
       <DependentUpon>202001150819137_AddDepartmentAndSupplier.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
+    <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
+    <Compile Include="SSIS.Contracts\IRepository.cs" />
+    <Compile Include="SSIS.Contracts\ISupplierRepository.cs" />
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
@@ -190,6 +194,10 @@
     <Compile Include="SSIS.Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SSIS.Models\Supplier.cs" />
+    <Compile Include="SSIS.Repository\DepartmentRepository.cs" />
+    <Compile Include="SSIS.Repository\ItemCategoryRepository.cs" />
+    <Compile Include="SSIS.Repository\Repository.cs" />
+    <Compile Include="SSIS.Repository\SupplierRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -251,7 +259,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="SSIS.Repository\" />
     <Folder Include="SSIS.Service\" />
     <Folder Include="SSIS.ViewModel\" />
   </ItemGroup>
