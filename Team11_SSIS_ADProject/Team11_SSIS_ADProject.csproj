@@ -187,6 +187,10 @@
     <Compile Include="Migrations\202001151324067_ResolveDifferences.Designer.cs">
       <DependentUpon>202001151324067_ResolveDifferences.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001160207047_ResolveDifferences1.cs" />
+    <Compile Include="Migrations\202001160207047_ResolveDifferences1.Designer.cs">
+      <DependentUpon>202001160207047_ResolveDifferences1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
@@ -468,6 +472,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001151324067_ResolveDifferences.resx">
       <DependentUpon>202001151324067_ResolveDifferences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001160207047_ResolveDifferences1.resx">
+      <DependentUpon>202001160207047_ResolveDifferences1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
