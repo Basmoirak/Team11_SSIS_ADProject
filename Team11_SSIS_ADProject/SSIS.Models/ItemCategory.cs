@@ -10,6 +10,5 @@ namespace Team11_SSIS_ADProject.SSIS.Models
     {
         [Required]
         public string Name { get; set; }
-
     }
 }

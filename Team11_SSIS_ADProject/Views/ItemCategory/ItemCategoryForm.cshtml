@@ -1,0 +1,24 @@
+﻿@model Team11_SSIS_ADProject.SSIS.Models.ItemCategory
+
+@{
+    ViewBag.Title = "ItemCategoryForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ItemCategoryForm</h2>
+
+@using (Html.BeginForm("Save", "ItemCategory"))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name)
+        @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Name)
+    </div>
+    @Html.HiddenFor(x => x.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
