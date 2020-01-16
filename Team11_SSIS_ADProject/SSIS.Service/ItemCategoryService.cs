@@ -47,6 +47,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         {
             var itemCategory = itemCategoryContext.Get(Id);
             itemCategoryContext.Remove(itemCategory);
+            itemCategoryContext.Commit();
         }
     }
 }
