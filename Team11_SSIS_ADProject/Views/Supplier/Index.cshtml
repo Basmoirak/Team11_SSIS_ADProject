@@ -1,0 +1,110 @@
+﻿@model Team11_SSIS_ADProject.SSIS.Models.Supplier
+@{
+    ViewBag.Title = "Suppliers";
+}
+
+<h2>Manage Suppliers</h2>
+
+<!--Form Row-->
+
+@using (Html.BeginForm("Save", "Supplier"))
+{
+    @Html.ValidationSummary(true, "Resolve the following errors to continue.")
+    //modal
+    <!-- Large modal -->
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addSupplierModal"><i class="glyphicon glyphicon-plus"></i> Add New</button>
+    <br /><br />
+    <div id="addSupplierModal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        Add New Supplier
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierCode)
+                                @Html.TextBoxFor(s => s.SupplierCode, new { @class = "form-control", @autofocus = "autofocus" })
+                                @Html.ValidationMessageFor(s => s.SupplierCode)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierName)
+                                @Html.TextBoxFor(s => s.SupplierName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(s => s.SupplierName)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierContactName)
+                                @Html.TextBoxFor(s => s.SupplierContactName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(s => s.SupplierContactName)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierPhone)
+                                @Html.TextBoxFor(s => s.SupplierPhone, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(s => s.SupplierPhone)
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierFax)
+                                @Html.TextBoxFor(s => s.SupplierFax, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(s => s.SupplierFax)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierAddress)
+                                @Html.TextBoxFor(s => s.SupplierAddress, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(s => s.SupplierAddress)
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                @Html.LabelFor(s => s.SupplierGSTNumber)
+                                @Html.TextBoxFor(s => s.SupplierGSTNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(s => s.SupplierGSTNumber)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Supplier Code</th>
+                <th>Supplier Name</th>
+                <th>Contact Name</th>
+                <th>Phone Number</th>
+                <th>Fax Number</th>
+                <th>Address</th>
+                <th>GST Number</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+}
+
