@@ -36,7 +36,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         public void Save(Supplier supplier)
         {
             Supplier s = supplierContext.Get(supplier.Id);
-            if(s == null)
+            if (s == null)
             {
                 supplierContext.Add(supplier);
             }
