@@ -7,8 +7,11 @@ using Team11_SSIS_ADProject.SSIS.Models;
 
 namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
-    public interface ISupplierRepository : IRepository<Supplier>
+    interface ISupplierService
     {
-      
+        void Save(Supplier supplier);
+        Supplier Get(string id);
+        IEnumerable<Supplier> GetAll();
+        void Delete(string Id);
     }
 }

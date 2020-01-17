@@ -39,5 +39,11 @@
 
     @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $(".datatable").DataTable()
+        });
+
+    </script>
 </body>
 </html>
