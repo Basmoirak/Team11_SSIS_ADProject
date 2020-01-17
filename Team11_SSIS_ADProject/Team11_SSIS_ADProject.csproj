@@ -188,6 +188,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemCategoryController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -213,11 +214,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
+    <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryService.cs" />
     <Compile Include="SSIS.Contracts\IRepository.cs" />
     <Compile Include="SSIS.Contracts\ISupplierRepository.cs" />
-    <Compile Include="SSIS.Contracts\ISupplierService.cs" />
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
@@ -230,9 +231,8 @@
     <Compile Include="SSIS.Repository\ItemCategoryRepository.cs" />
     <Compile Include="SSIS.Repository\Repository.cs" />
     <Compile Include="SSIS.Repository\SupplierRepository.cs" />
+    <Compile Include="SSIS.Service\DepartmentService.cs" />
     <Compile Include="SSIS.Service\ItemCategoryService.cs" />
-    <Compile Include="SSIS.Service\SupplierService.cs" />
-    <Compile Include="SSIS.ViewModels\SupplierViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -468,10 +468,13 @@
     <Content Include="Views\Supplier\Index.cshtml" />
     <Content Include="Views\ItemCategory\Index.cshtml" />
     <Content Include="Views\ItemCategory\ItemCategoryForm.cshtml" />
-    <Content Include="Views\Supplier\SupplierForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="SSIS.ViewModel\" />
+    <Folder Include="Views\DepartmentService\" />
+    <Folder Include="Views\Department\" />
+    <Folder Include="Views\IDepartmentService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
