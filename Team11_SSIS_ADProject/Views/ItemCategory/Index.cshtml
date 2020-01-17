@@ -5,11 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Manage Item Categories</h2>
 <p>
-    @Html.ActionLink("New Category", "Create", "ItemCategory", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add New", "Create", "ItemCategory", null, new { @class = "btn btn-primary" })
 </p>
-<table id="datatable" class="table table-bordered table-hover">
+<table class="datatable" class="table table-bordered table-hover">
     <thead>
         <tr>
             <th>Category</th>
@@ -28,16 +28,3 @@
         }
     </tbody>
 </table>
-
-@section scripts
-{
-    <script>
-        $(document).ready(function () {
-            $("#datatable").DataTable()
-        });
-
-    </script>
-
-
-}
-
