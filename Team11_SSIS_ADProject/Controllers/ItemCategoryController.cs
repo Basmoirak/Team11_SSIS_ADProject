@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.Service;
 
@@ -10,11 +11,11 @@ namespace Team11_SSIS_ADProject.Controllers
 {
     public class ItemCategoryController : Controller
     {
-        ItemCategoryService itemCategoryService;
+        IItemCategoryService itemCategoryService;
 
-        public ItemCategoryController()
+        public ItemCategoryController(IItemCategoryService itemCategoryService)
         {
-            this.itemCategoryService = new ItemCategoryService();
+            this.itemCategoryService = itemCategoryService;
         }
 
         // GET: ItemCategory

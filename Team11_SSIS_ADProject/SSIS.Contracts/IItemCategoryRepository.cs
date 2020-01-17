@@ -7,7 +7,7 @@ using Team11_SSIS_ADProject.SSIS.Models;
 
 namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
-    interface IItemCategoryRepository : IRepository<ItemCategory>
+    public interface IItemCategoryRepository : IRepository<ItemCategory>
     {
 
     }

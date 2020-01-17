@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.Service;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
@@ -11,11 +12,11 @@ namespace Team11_SSIS_ADProject.Controllers
 {
     public class SupplierController : Controller
     {
-        SupplierService supplierService;
+        ISupplierService supplierService;
         Supplier supplier;
-        public SupplierController()
+        public SupplierController(ISupplierService supplierService)
         {
-            this.supplierService = new SupplierService();
+            this.supplierService = supplierService;
         }
         public ActionResult Create()
         {

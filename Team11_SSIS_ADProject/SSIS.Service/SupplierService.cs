@@ -10,10 +10,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class SupplierService : ISupplierService
     {
-        SupplierRepository supplierContext;
-        public SupplierService()
+        ISupplierRepository supplierContext;
+        public SupplierService(ISupplierRepository supplierRepository)
         {
-            this.supplierContext = new SupplierRepository();
+            this.supplierContext = supplierRepository;
         }
 
         public void Delete(string Id)
