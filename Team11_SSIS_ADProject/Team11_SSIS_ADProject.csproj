@@ -168,6 +168,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemCategoryController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -193,6 +194,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
+    <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryService.cs" />
     <Compile Include="SSIS.Contracts\IRepository.cs" />
@@ -209,6 +211,7 @@
     <Compile Include="SSIS.Repository\ItemCategoryRepository.cs" />
     <Compile Include="SSIS.Repository\Repository.cs" />
     <Compile Include="SSIS.Repository\SupplierRepository.cs" />
+    <Compile Include="SSIS.Service\DepartmentService.cs" />
     <Compile Include="SSIS.Service\ItemCategoryService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -449,6 +452,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="SSIS.ViewModel\" />
+    <Folder Include="Views\DepartmentService\" />
+    <Folder Include="Views\Department\" />
+    <Folder Include="Views\IDepartmentService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
