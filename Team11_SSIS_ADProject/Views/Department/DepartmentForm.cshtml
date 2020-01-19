@@ -63,6 +63,29 @@
         </div>
     </div>
 
+    @Html.LabelFor(d => d.DepartmentCollectionPoint)
+    <br />
+
+    @Html.RadioButtonFor(d => d.DepartmentCollectionPoint, "Stationary Store - Administration Building", new { @checked = "checked" })
+    <span>Stationary Store - Administration Building</span>
+    <br />
+    @Html.RadioButtonFor(d => d.DepartmentCollectionPoint, "Management School")
+    <span>Management School</span>
+    <br />
+    @Html.RadioButtonFor(d => d.DepartmentCollectionPoint, "Medical School")
+    <span>Medical School</span>
+    <br />
+    @Html.RadioButtonFor(d => d.DepartmentCollectionPoint, "Engineering School")
+    <span>Engineering School</span>
+    <br />
+    @Html.RadioButtonFor(d => d.DepartmentCollectionPoint, "Science School")
+    <span>Science School</span>
+    <br />
+    @Html.RadioButtonFor(d => d.DepartmentCollectionPoint, "University Hospital")
+    <span>University Hospital</span>
+    <br />
+    @Html.ValidationMessageFor(d => d.DepartmentCollectionPoint)
+    <br />
     @Html.HiddenFor(x => x.Id)
     <button type="submit" class="btn btn-primary">Save</button>
 }

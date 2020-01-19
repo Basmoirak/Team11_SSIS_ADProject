@@ -18,6 +18,9 @@
                     <th>Fax Number</th>
                     <th>Department Head Name</th>
                     <th>Department Representative</th>
+                    <th>Department Collection Point</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +34,7 @@
                     <td>@department.DepartmentFax</td>
                     <td>@department.DepartmentHeadName</td>
                     <td>@department.DepartmentRepresentative</td>
+                    <td>@department.DepartmentCollectionPoint</td>
                     <td>@Html.ActionLink("Edit", "Edit", "Department", new { id = department.Id }, new { @class = "btn btn-primary" })</td>
                     <td>
                         @Html.ActionLink("Delete", "Delete", "Department", new { id = department.Id }, new { @class = "btn btn-danger" })

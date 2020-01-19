@@ -32,5 +32,8 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         [Display(Name = "Department Representative")]
         public string DepartmentRepresentative { get; set; }
         public IEnumerable<Department> Departments { get; set; }
+        [Required]
+        [Display(Name = "Collection Point")]
+        public string DepartmentCollectionPoint { get; set; }
     }
 }

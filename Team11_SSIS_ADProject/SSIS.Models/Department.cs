@@ -23,5 +23,7 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public string DepartmentHeadName { get; set; }
         [Required]
         public string DepartmentRepresentative { get; set; }
+        [Required]
+        public string DepartmentCollectionPoint { get; set; }
     }
 }

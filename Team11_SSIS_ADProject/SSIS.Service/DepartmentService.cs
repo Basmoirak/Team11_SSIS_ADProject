@@ -30,7 +30,8 @@ namespace Team11_SSIS_ADProject.SSIS.Service
                 d.DepartmentPhone = department.DepartmentPhone;
                 d.DepartmentFax = department.DepartmentFax;
                 d.DepartmentHeadName = department.DepartmentHeadName;
-                d.DepartmentRepresentative = department.DepartmentRepresentative;           
+                d.DepartmentRepresentative = department.DepartmentRepresentative;
+                d.DepartmentCollectionPoint = department.DepartmentCollectionPoint;
             }
             departmentContext.Commit();
         }

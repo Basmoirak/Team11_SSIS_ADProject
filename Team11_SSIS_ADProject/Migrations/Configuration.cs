@@ -71,17 +71,20 @@ namespace Team11_SSIS_ADProject.Migrations
             context.Departments.AddOrUpdate(c => c.Id, new Department()
             {
                 Id = "1", DepartmentCode = "ENGL", DepartmentName = "English Department", DepartmentContactName = "Mrs Pamela Kow",
-                DepartmentRepresentative = "4", DepartmentHeadName = "5", DepartmentFax = "879-555-666", DepartmentPhone = "8112-8383"
+                DepartmentRepresentative = "4", DepartmentHeadName = "5", DepartmentFax = "879-555-666", DepartmentPhone = "8112-8383",
+                DepartmentCollectionPoint = "Stationery Store - Administration Building"
             });
             context.Departments.AddOrUpdate(c => c.Id, new Department()
             {
                 Id = "2", DepartmentCode = "COMP", DepartmentName = "Computer Science", DepartmentContactName = "Jane Doe",
-                DepartmentRepresentative = "6", DepartmentHeadName = "7", DepartmentFax = "879-555-666", DepartmentPhone = "8112-8383"
+                DepartmentRepresentative = "6", DepartmentHeadName = "7", DepartmentFax = "879-555-666", DepartmentPhone = "8112-8383",
+                DepartmentCollectionPoint = "Science School"
             });
             context.Departments.AddOrUpdate(c => c.Id, new Department()
             {
                 Id = "3", DepartmentCode = "ECON", DepartmentName = "Economics Department", DepartmentContactName = "Jane Doe",
-                DepartmentRepresentative = "8", DepartmentHeadName = "9", DepartmentFax = "879-555-666", DepartmentPhone = "8112-8383"
+                DepartmentRepresentative = "8", DepartmentHeadName = "9", DepartmentFax = "879-555-666", DepartmentPhone = "8112-8383",
+                DepartmentCollectionPoint = "Management School"
             });
         }
     }

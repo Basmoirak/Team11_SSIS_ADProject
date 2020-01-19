@@ -220,6 +220,10 @@
     <Compile Include="Migrations\202001190631047_SeedUsers.Designer.cs">
       <DependentUpon>202001190631047_SeedUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001191129134_add_Collection_Point_to_Department.cs" />
+    <Compile Include="Migrations\202001191129134_add_Collection_Point_to_Department.Designer.cs">
+      <DependentUpon>202001191129134_add_Collection_Point_to_Department.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
@@ -523,6 +527,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001190631047_SeedUsers.resx">
       <DependentUpon>202001190631047_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001191129134_add_Collection_Point_to_Department.resx">
+      <DependentUpon>202001191129134_add_Collection_Point_to_Department.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
