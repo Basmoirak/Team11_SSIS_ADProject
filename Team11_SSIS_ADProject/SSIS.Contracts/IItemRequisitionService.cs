@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Text;
+using System.Threading.Tasks;
 using Team11_SSIS_ADProject.SSIS.Models;
 
 namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
-    public interface IItemCategoryService
+    public interface IItemRequisitionService
     {
-        void Save(ItemCategory itemCategory);
+        void Save(ItemRequisition itemRequisition);
         ItemCategory Get(string id);
-        IEnumerable<ItemCategory> GetAll();
-        IEnumerable<SelectListItem> GetCategoryList();
+        IEnumerable<ItemRequisition> GetAll();
         void Delete(string Id);
     }
 }

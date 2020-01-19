@@ -13,7 +13,6 @@ namespace Team11_SSIS_ADProject.Controllers
     public class SupplierController : Controller
     {
         ISupplierService supplierService;
-        Supplier supplier;
         public SupplierController(ISupplierService supplierService)
         {
             this.supplierService = supplierService;
@@ -26,18 +25,8 @@ namespace Team11_SSIS_ADProject.Controllers
         // GET: Supplier
         public ActionResult Index()
         {
-            Supplier s = new Supplier();
             var viewModel = new SupplierViewModel()
             {
-
-                SupplierCode = s.SupplierCode,
-                SupplierName = s.SupplierName,
-                SupplierPhone = s.SupplierPhone,
-                SupplierAddress = s.SupplierAddress,
-                SupplierFax = s.SupplierFax,
-                SupplierGSTNumber = s.SupplierGSTNumber,
-                SupplierContactName = s.SupplierContactName,
-
                 Suppliers = supplierService.GetAll()
             };
 
@@ -69,7 +58,6 @@ namespace Team11_SSIS_ADProject.Controllers
 
         public ActionResult Delete(string id)
         {
-            var supplier = supplierService.Get(id);
 
             supplierService.Delete(id);
 

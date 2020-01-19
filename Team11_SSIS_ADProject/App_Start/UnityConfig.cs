@@ -45,6 +45,15 @@ namespace Team11_SSIS_ADProject
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<IItemCategoryService, ItemCategoryService>();
 
+            container.RegisterType<IItemService, ItemService>();
+            container.RegisterType<IItemRepository, ItemRepository>();
+
+            container.RegisterType<IRequisitionRepository, RequisitionRepository>();
+            container.RegisterType<IRequisitionService, RequisitionRepostiory>();
+
+            container.RegisterType<IItemRequisitionRepository, ItemRequisitionRepository>();
+            container.RegisterType<IItemRequisitionService, ItemRequisitionService>();
+
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();

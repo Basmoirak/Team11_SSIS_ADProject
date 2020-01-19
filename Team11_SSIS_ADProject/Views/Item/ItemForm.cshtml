@@ -1,0 +1,84 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.ItemViewModel
+
+@{
+    ViewBag.Title = "Item Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@if (Model.ItemDescription == null)
+{
+    <h2>Add New Item <a class="btn btn-success" href="/Item"><i class="glyphicon glyphicon-list"></i> See all</a></h2>
+}
+else
+{
+    <h2>Update @Model.ItemDescription <a class="btn btn-success" href="/Item"><i class="glyphicon glyphicon-list"></i> See all</a></h2>
+}
+
+
+
+@using (Html.BeginForm("Save", "Item", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(i => i.ImagePath)
+            @Html.TextBoxFor(i => i.ImagePath, new { type = "file", @class = "form-control" })
+            @Html.ValidationMessageFor(i => i.ImagePath)
+        
+           @if(Model.ItemDescription != null)
+           {
+            <img src="@Url.Content(Model.ImagePath)" alt="Model.ItemDescription" width="70px" height="70px" />
+           }
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            @Html.LabelFor(i => i.ItemNumber)
+            @Html.TextBoxFor(i => i.ItemNumber, new { @class = "form-control", @autofocus = "autofocus" })
+            @Html.ValidationMessageFor(i => i.ItemNumber)
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(i => i.ItemDescription)
+            @Html.TextBoxFor(i => i.ItemDescription, new { @class = "form-control" })
+            @Html.ValidationMessageFor(i => i.ItemDescription)
+        </div>
+
+
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            @Html.LabelFor(i => i.ItemCategoryId)
+            @Html.DropDownListFor(i => i.ItemCategoryId, new SelectList(Model.ItemCategories, "Value", "Text"), htmlAttributes: new { @class = "form-control select2" })
+            @Html.ValidationMessageFor(i => i.ItemCategoryId)
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(i => i.ItemReorderLevel)
+            @Html.EditorFor(i => i.ItemReorderLevel, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1", @value = "0" } })
+            @Html.ValidationMessageFor(i => i.ItemReorderLevel)
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(i => i.ItemReorderQty)
+            @Html.EditorFor(i => i.ItemReorderQty, new { htmlAttributes = new { @class = "form-control", @type = "number", @min = "0", @step = "1", @value = "0" } })
+            @Html.ValidationMessageFor(i => i.ItemReorderQty)
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(i => i.ItemUnit)
+            @Html.DropDownListFor(i => i.ItemUnit, new List<SelectListItem>
+            {
+                new SelectListItem() {Text = "Each", Value = "Each"},
+                new SelectListItem() {Text = "Dozen", Value = "Dozen"},
+                new SelectListItem() {Text = "Box", Value = "Box"},
+                new SelectListItem() {Text = "Set", Value = "Set"},
+                new SelectListItem() {Text = "Packet", Value = "Packet"}
+            }, new { @class = "form-control select2" })
+            @Html.ValidationMessageFor(i => i.ItemUnit)
+        </div>
+    </div>
+    <br />
+
+    @Html.HiddenFor(i => i.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

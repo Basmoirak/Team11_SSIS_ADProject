@@ -6,6 +6,12 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        .select2 {
+            width:100%!important;
+         }
+    </style>
 
 </head>
 <body>
@@ -39,9 +45,12 @@
 
     @Scripts.Render("~/bundles/lib")
     @RenderSection("scripts", required: false)
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
             $(".datatable").DataTable()
+            $(".select2").select2();
         });
 
     </script>

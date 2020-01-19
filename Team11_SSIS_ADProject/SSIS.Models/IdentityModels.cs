@@ -24,6 +24,10 @@ namespace Team11_SSIS_ADProject.Models
         public DbSet<ItemCategory> ItemCategories { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Requisition> Requisitions { get; set; }
+
+        public DbSet<ItemRequisition> ItemRequisitions { get; set; } 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
