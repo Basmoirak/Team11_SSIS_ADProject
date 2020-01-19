@@ -68,7 +68,6 @@ namespace Team11_SSIS_ADProject.Controllers
 
         public ActionResult Delete(string id)
         {
-            var department = departmentService.Get(id);
 
             departmentService.Delete(id);
 
