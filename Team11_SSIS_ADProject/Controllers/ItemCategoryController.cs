@@ -9,6 +9,7 @@ using Team11_SSIS_ADProject.SSIS.Service;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
+    [Authorize(Roles = CustomRoles.CanManageItemCategory)]
     public class ItemCategoryController : Controller
     {
         IItemCategoryService itemCategoryService;

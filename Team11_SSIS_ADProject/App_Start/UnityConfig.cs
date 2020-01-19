@@ -1,8 +1,10 @@
 using System;
+using Team11_SSIS_ADProject.Controllers;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Repository;
 using Team11_SSIS_ADProject.SSIS.Service;
 using Unity;
+using Unity.Injection;
 
 namespace Team11_SSIS_ADProject
 {
@@ -38,12 +40,15 @@ namespace Team11_SSIS_ADProject
         /// </remarks>
         public static void RegisterTypes(IUnityContainer container)
         {
+            container.RegisterType<AccountController>(new InjectionConstructor());
+
             container.RegisterType<ISupplierRepository, SupplierRepository>();
             container.RegisterType<IItemCategoryRepository, ItemCategoryRepository>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
 
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<IItemCategoryService, ItemCategoryService>();
+            container.RegisterType<IDepartmentService, DepartmentService>();
 
             container.RegisterType<IItemService, ItemService>();
             container.RegisterType<IItemRepository, ItemRepository>();

@@ -10,6 +10,7 @@ using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
+    [Authorize(Roles = CustomRoles.CanManageSupplier)]
     public class SupplierController : Controller
     {
         ISupplierService supplierService;

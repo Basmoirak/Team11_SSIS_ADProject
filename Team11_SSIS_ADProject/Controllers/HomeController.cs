@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()

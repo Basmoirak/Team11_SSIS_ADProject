@@ -10,26 +10,29 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class DepartmentService : IDepartmentService
     {
-        DepartmentRepository departmentContext;
-        public DepartmentService()
+        IDepartmentRepository departmentContext;
+        public DepartmentService(IDepartmentRepository departmentRepository)
         {
-            this.departmentContext = new DepartmentRepository();
+            this.departmentContext = departmentRepository;
         }
         public void Save(Department department)
         {
-            //Check if itemCategory is in DB
-            var departmentInDb = departmentContext.Get(department.Id);
-
-            //If not in DB, create new
-            if (departmentInDb == null)
+            Department d = departmentContext.Get(department.Id);
+            if (d == null)
+            {
                 departmentContext.Add(department);
-            //If in DB, update
+            }
             else
             {
-                departmentInDb.DepartmentName = department.DepartmentName;
+                d.DepartmentCode = department.DepartmentCode;
+                d.DepartmentName = department.DepartmentName;
+                d.DepartmentContactName = department.DepartmentContactName;
+                d.DepartmentPhone = department.DepartmentPhone;
+                d.DepartmentFax = department.DepartmentFax;
+                d.DepartmentHeadName = department.DepartmentHeadName;
+                d.DepartmentRepresentative = department.DepartmentRepresentative;
+                d.DepartmentCollectionPoint = department.DepartmentCollectionPoint;
             }
-
-            //Commit changes
             departmentContext.Commit();
         }
 

@@ -259,6 +259,18 @@
     <Compile Include="Migrations\202001191358543_create_requisition_and_itemRequisition_tables.designer.cs">
       <DependentUpon>202001191358543_create_requisition_and_itemRequisition_tables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001190340399_AddDepartmentIDToUsers.cs" />
+    <Compile Include="Migrations\202001190340399_AddDepartmentIDToUsers.Designer.cs">
+      <DependentUpon>202001190340399_AddDepartmentIDToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001190631047_SeedUsers.cs" />
+    <Compile Include="Migrations\202001190631047_SeedUsers.Designer.cs">
+      <DependentUpon>202001190631047_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001191129134_add_Collection_Point_to_Department.cs" />
+    <Compile Include="Migrations\202001191129134_add_Collection_Point_to_Department.Designer.cs">
+      <DependentUpon>202001191129134_add_Collection_Point_to_Department.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
@@ -275,7 +287,9 @@
     <Compile Include="SSIS.Contracts\ISupplierService.cs" />
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
+    <Compile Include="SSIS.Models\CustomRoles.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
+    <Compile Include="SSIS.Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="SSIS.Models\IdentityModels.cs" />
     <Compile Include="SSIS.Models\Item.cs" />
     <Compile Include="SSIS.Models\ItemCategory.cs" />
@@ -299,6 +313,7 @@
     <Compile Include="SSIS.Service\SupplierService.cs" />
     <Compile Include="SSIS.ViewModels\ItemViewModel.cs" />
     <Compile Include="SSIS.ViewModels\RequisitionViewModel.cs" />
+    <Compile Include="SSIS.ViewModels\DepartmentViewModel.cs" />
     <Compile Include="SSIS.ViewModels\SupplierViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -539,12 +554,14 @@
     <Content Include="Views\Supplier\SupplierForm.cshtml" />
     <Content Include="Views\Item\Index.cshtml" />
     <Content Include="Views\Item\ItemForm.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Department\DepartmentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
     <Folder Include="Views\DepartmentService\" />
-    <Folder Include="Views\Department\" />
+    <Folder Include="Views\DepartmentViewModel\" />
     <Folder Include="Views\IDepartmentService\" />
     <Folder Include="Views\Requisition\" />
   </ItemGroup>
@@ -591,6 +608,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001191358543_create_requisition_and_itemRequisition_tables.resx">
       <DependentUpon>202001191358543_create_requisition_and_itemRequisition_tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001190340399_AddDepartmentIDToUsers.resx">
+      <DependentUpon>202001190340399_AddDepartmentIDToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001190631047_SeedUsers.resx">
+      <DependentUpon>202001190631047_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001191129134_add_Collection_Point_to_Department.resx">
+      <DependentUpon>202001191129134_add_Collection_Point_to_Department.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
