@@ -271,6 +271,10 @@
     <Compile Include="Migrations\202001191129134_add_Collection_Point_to_Department.Designer.cs">
       <DependentUpon>202001191129134_add_Collection_Point_to_Department.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001191506404_resolve_conflcits.cs" />
+    <Compile Include="Migrations\202001191506404_resolve_conflcits.designer.cs">
+      <DependentUpon>202001191506404_resolve_conflcits.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
@@ -560,9 +564,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\DepartmentService\" />
-    <Folder Include="Views\DepartmentViewModel\" />
-    <Folder Include="Views\IDepartmentService\" />
     <Folder Include="Views\Requisition\" />
   </ItemGroup>
   <ItemGroup>
@@ -617,6 +618,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001191129134_add_Collection_Point_to_Department.resx">
       <DependentUpon>202001191129134_add_Collection_Point_to_Department.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001191506404_resolve_conflcits.resx">
+      <DependentUpon>202001191506404_resolve_conflcits.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
