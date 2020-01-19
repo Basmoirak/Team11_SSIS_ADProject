@@ -1,0 +1,68 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.DepartmentViewModel
+@{
+    ViewBag.Title = "Add New Department";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add New Department <a class="btn btn-success" href="/Department"><i class="glyphicon glyphicon-list"></i> See all</a></h2>
+
+@using (Html.BeginForm("Save", "Department"))
+{
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentCode)
+                @Html.TextBoxFor(d => d.DepartmentCode, new { @class = "form-control", @autofocus = "autofocus" })
+                @Html.ValidationMessageFor(d => d.DepartmentCode)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentName)
+                @Html.TextBoxFor(d => d.DepartmentName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DepartmentName)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentContactName)
+                @Html.TextBoxFor(d => d.DepartmentContactName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DepartmentContactName)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentPhone)
+                @Html.TextBoxFor(d => d.DepartmentPhone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DepartmentPhone)
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentFax)
+                @Html.TextBoxFor(d => d.DepartmentFax, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DepartmentFax)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentHeadName)
+                @Html.TextBoxFor(d => d.DepartmentHeadName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DepartmentHeadName)
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                @Html.LabelFor(d => d.DepartmentRepresentative)
+                @Html.TextBoxFor(d => d.DepartmentRepresentative, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.DepartmentRepresentative)
+            </div>
+        </div>
+    </div>
+
+    @Html.HiddenFor(x => x.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

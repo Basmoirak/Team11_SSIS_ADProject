@@ -235,6 +235,7 @@
     <Compile Include="SSIS.Service\DepartmentService.cs" />
     <Compile Include="SSIS.Service\ItemCategoryService.cs" />
     <Compile Include="SSIS.Service\SupplierService.cs" />
+    <Compile Include="SSIS.ViewModels\DepartmentViewModel.cs" />
     <Compile Include="SSIS.ViewModels\SupplierViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -472,12 +473,13 @@
     <Content Include="Views\ItemCategory\Index.cshtml" />
     <Content Include="Views\ItemCategory\ItemCategoryForm.cshtml" />
     <Content Include="Views\Supplier\SupplierForm.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Department\DepartmentForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="SSIS.ViewModels\" />
     <Folder Include="Views\DepartmentService\" />
-    <Folder Include="Views\Department\" />
+    <Folder Include="Views\DepartmentViewModel\" />
     <Folder Include="Views\IDepartmentService\" />
   </ItemGroup>
   <ItemGroup>
