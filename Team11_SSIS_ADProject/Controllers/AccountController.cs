@@ -18,6 +18,7 @@ namespace Team11_SSIS_ADProject.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
+        //Constructor method
         public AccountController()
         {
         }
