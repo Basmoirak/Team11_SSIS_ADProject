@@ -212,6 +212,14 @@
     <Compile Include="Migrations\202001160207047_ResolveDifferences1.Designer.cs">
       <DependentUpon>202001160207047_ResolveDifferences1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001190340399_AddDepartmentIDToUsers.cs" />
+    <Compile Include="Migrations\202001190340399_AddDepartmentIDToUsers.Designer.cs">
+      <DependentUpon>202001190340399_AddDepartmentIDToUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001190631047_SeedUsers.cs" />
+    <Compile Include="Migrations\202001190631047_SeedUsers.Designer.cs">
+      <DependentUpon>202001190631047_SeedUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
@@ -222,7 +230,9 @@
     <Compile Include="SSIS.Contracts\ISupplierService.cs" />
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
+    <Compile Include="SSIS.Models\CustomRoles.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
+    <Compile Include="SSIS.Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="SSIS.Models\IdentityModels.cs" />
     <Compile Include="SSIS.Models\ItemCategory.cs" />
     <Compile Include="SSIS.Models\ManageViewModels.cs" />
@@ -475,7 +485,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="SSIS.ViewModels\" />
     <Folder Include="Views\DepartmentService\" />
     <Folder Include="Views\Department\" />
     <Folder Include="Views\IDepartmentService\" />
@@ -505,6 +514,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001160207047_ResolveDifferences1.resx">
       <DependentUpon>202001160207047_ResolveDifferences1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001190340399_AddDepartmentIDToUsers.resx">
+      <DependentUpon>202001190340399_AddDepartmentIDToUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001190631047_SeedUsers.resx">
+      <DependentUpon>202001190631047_SeedUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
