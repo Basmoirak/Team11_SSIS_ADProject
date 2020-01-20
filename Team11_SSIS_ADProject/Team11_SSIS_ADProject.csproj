@@ -292,6 +292,7 @@
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
     <Compile Include="SSIS.Models\CustomRoles.cs" />
+    <Compile Include="SSIS.Models\DepartmenDelegation.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
     <Compile Include="SSIS.Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="SSIS.Models\IdentityModels.cs" />
@@ -564,6 +565,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\DepartmenDelegation\" />
     <Folder Include="Views\Requisition\" />
   </ItemGroup>
   <ItemGroup>
