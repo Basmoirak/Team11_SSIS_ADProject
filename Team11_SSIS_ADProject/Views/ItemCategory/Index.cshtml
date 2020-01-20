@@ -7,7 +7,7 @@
 
 <h2>Manage Item Categories</h2>
 <p>
-    @Html.ActionLink("Add New", "Create", "ItemCategory", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Add New", "Create", "ItemCategory", null, new { @class = "btn btn-success" })
 </p>
 <table class="datatable table table-bordered table-hover">
     <thead>
@@ -22,8 +22,8 @@
         {
             <tr>
                 <td>@item.Name</td>
-                <td>@Html.ActionLink("Edit", "Edit", "ItemCategory", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
-                <td>@Html.ActionLink("Delete", "Delete", "ItemCategory", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
+                <td>@Html.ActionLink("Edit", "Edit", "ItemCategory", new { id = item.Id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Delete", "Delete", "ItemCategory", new { id = item.Id }, new { @class = "btn btn-danger" })</td>
             </tr>
         }
     </tbody>
