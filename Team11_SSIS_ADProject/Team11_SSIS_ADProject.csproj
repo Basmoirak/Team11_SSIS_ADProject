@@ -276,6 +276,10 @@
     <Compile Include="Migrations\202001191506404_resolve_conflcits.designer.cs">
       <DependentUpon>202001191506404_resolve_conflcits.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001200911355_add_department_delegation.cs" />
+    <Compile Include="Migrations\202001200911355_add_department_delegation.designer.cs">
+      <DependentUpon>202001200911355_add_department_delegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
@@ -4388,6 +4392,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001191506404_resolve_conflcits.resx">
       <DependentUpon>202001191506404_resolve_conflcits.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001200911355_add_department_delegation.resx">
+      <DependentUpon>202001200911355_add_department_delegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
