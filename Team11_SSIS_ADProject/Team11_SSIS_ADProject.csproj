@@ -210,6 +210,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemCategoryController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomAuthorize.cs" />
     <Compile Include="Helpers\HTMLHelperExtensions.cs" />
     <Compile Include="Migrations\202001150801084_InitialMigration.cs" />
     <Compile Include="Migrations\202001150801084_InitialMigration.Designer.cs">
@@ -4330,6 +4332,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
