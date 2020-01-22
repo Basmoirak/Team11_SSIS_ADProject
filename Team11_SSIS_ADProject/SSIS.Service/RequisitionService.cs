@@ -21,12 +21,12 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public Requisition Get(string id)
         {
-            throw new NotImplementedException();
+            return requisitionContext.Get(id);
         }
 
         public IEnumerable<Requisition> GetAll()
         {
-            throw new NotImplementedException();
+            return requisitionContext.GetAll();
         }
 
         public void Save(Requisition requisition)

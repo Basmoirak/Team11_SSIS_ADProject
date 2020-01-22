@@ -26,6 +26,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -211,6 +212,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DepartmentDelegationController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemCategoryController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
@@ -220,6 +222,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CustomAuthorize.cs" />
     <Compile Include="Helpers\HTMLHelperExtensions.cs" />
     <Compile Include="Migrations\202001150801084_InitialMigration.cs" />
     <Compile Include="Migrations\202001150801084_InitialMigration.Designer.cs">
@@ -285,6 +288,10 @@
     <Compile Include="Migrations\202001220338030_edit_departmentDelegation.designer.cs">
       <DependentUpon>202001220338030_edit_departmentDelegation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220656245_UpdateItemAttribute.cs" />
+    <Compile Include="Migrations\202001220656245_UpdateItemAttribute.designer.cs">
+      <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentDelegationService.cs" />
@@ -304,6 +311,7 @@
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
     <Compile Include="SSIS.Models\CustomRoles.cs" />
+    <Compile Include="SSIS.Models\CustomStatus.cs" />
     <Compile Include="SSIS.Models\DepartmenDelegation.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
     <Compile Include="SSIS.Models\Extensions\IdentityExtensions.cs" />
@@ -4244,6 +4252,9 @@
     <Content Include="Scripts\adminlte\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\DataTables\css\mixins.scss" />
+    <Content Include="Content\DataTables\css\common.scss" />
+    <Content Include="app.config" />
     <Content Include="Content\adminlte\css\adminlte.css.map" />
     <Content Include="Content\adminlte\css\adminlte.min.css.map" />
     <Content Include="Scripts\adminlte\components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css.map" />
@@ -4333,6 +4344,9 @@
     <Content Include="Views\Item\ItemForm.cshtml" />
     <Content Include="Views\Department\Index.cshtml" />
     <Content Include="Views\Department\DepartmentForm.cshtml" />
+    <Content Include="Views\Requisition\RequisitionForm.cshtml" />
+    <Content Include="Views\Requisition\Index.cshtml" />
+    <Content Include="Views\Requisition\Details.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_Footer.cshtml" />
@@ -4340,6 +4354,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\DepartmentDelegation\DepartmentDelegationForm.cshtml" />
     <Content Include="Views\DepartmentDelegation\Index.cshtml" />
   </ItemGroup>
@@ -4349,6 +4364,7 @@
     <Folder Include="Views\IDepartmentDelegationRepository\" />
     <Folder Include="Views\IDepartmentDelegationService\" />
     <Folder Include="Views\Requisition\" />
+    <Folder Include="Views\DepartmenDelegation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -4412,10 +4428,16 @@
     <EmbeddedResource Include="Migrations\202001220338030_edit_departmentDelegation.resx">
       <DependentUpon>202001220338030_edit_departmentDelegation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220656245_UpdateItemAttribute.resx">
+      <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
@@ -4437,6 +4459,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:60591/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>

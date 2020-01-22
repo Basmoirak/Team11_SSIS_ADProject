@@ -9,5 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
     public interface IItemRequisitionRepository : IRepository<ItemRequisition>
     {
+        IEnumerable<ItemRequisition> GetAllByRequisitionId(string id);
     }
 }

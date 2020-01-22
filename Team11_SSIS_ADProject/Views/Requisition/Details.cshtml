@@ -1,0 +1,106 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.RequisitionViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Details</h2>
+    </div>
+
+    <div class="box-body">
+        <div class="row">
+            <h3>Requistion Id : @Model.Id</h3>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ItemRequisitions)
+                    {
+                        <tr>
+                            <td>@item.Item.ItemDescription</td>
+                            <td>@item.Quantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @Html.HiddenFor(x => x.Id, new { id = "requsitionId" })
+        </div>
+    </div>
+
+    @* If requisition status is not already approved/rejected, show approve/reject buttons *@
+    @if ((Model.Status != 2 || Model.Status != 3) && User.IsInRole("StoreClerk"))
+    {
+        <div class="box-footer">
+            <button class="btn btn-danger" id="btnReject"><i class="glyphicon glyphicon-save"></i> Reject</button>
+            <button class="btn btn-success" id="btnApprove"><i class="glyphicon glyphicon-save"></i> Approve</button>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(() => {
+            /*Approve Button*/
+            $("body").on("click", "#btnApprove", function () {
+                     var requsitionId = $("#requsitionID").val();
+
+                $.ajax({
+                        type: "POST",
+                        url: "/Requisition/Approve",
+                        data: JSON.stringify({
+
+                            Id: requsitionId
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (res) {
+                            //success message
+                            toastr.success("Requisition ID-" + res.id + " successfully approved.", {
+                                progressBar : false
+                            })
+                        }
+                    })
+            })
+
+            /*Reject Button*/
+             $("body").on("click", "#btnReject", function () {
+                     var requsitionId = $("#requsitionID").val();
+
+                $.ajax({
+                        type: "POST",
+                        url: "/Requisition/Reject",
+                        data: JSON.stringify({
+
+                            Id: requsitionId
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (res) {
+                            //success message
+                            toastr.success("Requisition ID-" + res.id + " rejected.", {
+                                progressBar : false
+                            })
+                        }
+                    })
+            })
+        })
+
+    </script>
+}
+
+
+
+
+
+
+

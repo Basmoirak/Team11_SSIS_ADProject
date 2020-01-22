@@ -29,9 +29,29 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             throw new NotImplementedException();
         }
 
+        public IEnumerable<ItemRequisition> GetAllByRequisitionId(string Id)
+        {
+            return itemRequisitionContext.GetAllByRequisitionId(Id);
+        }
+
         public void Save(ItemRequisition itemRequisition)
         {
-            throw new NotImplementedException();
+            //Check if itemCategory is in DB
+            var ir = itemRequisitionContext.Get(itemRequisition.Id);
+
+            //If not in DB, create new
+            if (ir == null)
+                itemRequisitionContext.Add(itemRequisition);
+            //If in DB, update
+            else
+            {
+                ir.Quantity = itemRequisition.Quantity;
+                ir.ItemId = itemRequisition.ItemId;
+            }
+
+            //Commit changes
+            itemRequisitionContext.Commit();
         }
+
     }
 }
