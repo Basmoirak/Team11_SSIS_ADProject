@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Team11_SSIS_ADProject.Helpers;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.Service;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
-    [Authorize(Roles = CustomRoles.CanManageItemCategory)]
+    [CustomAuthorize(Roles = CustomRoles.CanManageItemCategory)]
     public class ItemCategoryController : Controller
     {
         IItemCategoryService itemCategoryService;

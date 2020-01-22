@@ -5,18 +5,21 @@
         ViewBag.Title = "Suppliers";
     }
 
-    <h2>Manage Suppliers</h2>
-    <p>
-        @Html.ActionLink("Add New", "Create", "Supplier", null, new { @class = "btn btn-primary" })
-    </p>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Manage Suppliers</h2>
+        <p>
+            @Html.ActionLink("Add New", "Create", "Supplier", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+
+    <div class="box-body">
         <table class="datatable table table-bordered table-hover">
             <thead>
                 <tr>
-                    <th>Supplier Code</th>
                     <th>Supplier Name</th>
                     <th>Contact Name</th>
                     <th>Phone Number</th>
-                    <th>Fax Number</th>
                     <th>Address</th>
                     <th>GST Number</th>
                     <td></td>
@@ -26,21 +29,25 @@
             <tbody>
                 @foreach (var supplier in Model.Suppliers)
                 {
-                <tr>
-                    <td>@supplier.SupplierCode</td>
-                    <td>@supplier.SupplierName</td>
-                    <td>@supplier.SupplierContactName</td>
-                    <td>@supplier.SupplierPhone</td>
-                    <td>@supplier.SupplierFax</td>
-                    <td>@supplier.SupplierAddress</td>
-                    <td>@supplier.SupplierGSTNumber</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Supplier", new { id = supplier.Id }, new { @class = "btn btn-primary" })</td>
-                    <td>
-                        @Html.ActionLink("Delete", "Delete", "Supplier", new { id = supplier.Id }, new { @class = "btn btn-danger" })
-                    </td>
+                    <tr>
+                        <td>@supplier.SupplierName</td>
+                        <td>@supplier.SupplierContactName</td>
+                        <td>@supplier.SupplierPhone</td>
+                        <td>@supplier.SupplierAddress</td>
+                        <td>@supplier.SupplierGSTNumber</td>
+                        <td>@Html.ActionLink("Edit", "Edit", "Supplier", new { id = supplier.Id }, new { @class = "btn btn-primary" })</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "Supplier", new { id = supplier.Id }, new { @class = "btn btn-danger" })
+                        </td>
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>
+    </div>
+
+</div>
+
+
+
 

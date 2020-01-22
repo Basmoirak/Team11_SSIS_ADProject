@@ -3,11 +3,17 @@
     @{
         ViewBag.Title = "Departments";
     }
+    
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Manage Departments</h2>
+        <p>
+            @Html.ActionLink("Add New", "Create", "Department", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
 
-    <h2>Manage Departments</h2>
-    <p>
-        @Html.ActionLink("Add New", "Create", "Department", null, new { @class = "btn btn-primary" })
-    </p>
+    <div class="box-body">
+
         <table class="datatable table table-bordered table-hover">
             <thead>
                 <tr>
@@ -26,22 +32,25 @@
             <tbody>
                 @foreach (var department in Model.Departments)
                 {
-                <tr>
-                    <td>@department.DepartmentCode</td>
-                    <td>@department.DepartmentName</td>
-                    <td>@department.DepartmentContactName</td>
-                    <td>@department.DepartmentPhone</td>
-                    <td>@department.DepartmentFax</td>
-                    <td>@department.DepartmentHeadName</td>
-                    <td>@department.DepartmentRepresentative</td>
-                    <td>@department.DepartmentCollectionPoint</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Department", new { id = department.Id }, new { @class = "btn btn-primary" })</td>
-                    <td>
-                        @Html.ActionLink("Delete", "Delete", "Department", new { id = department.Id }, new { @class = "btn btn-danger" })
-                    </td>
+                    <tr>
+                        <td>@department.DepartmentCode</td>
+                        <td>@department.DepartmentName</td>
+                        <td>@department.DepartmentContactName</td>
+                        <td>@department.DepartmentPhone</td>
+                        <td>@department.DepartmentFax</td>
+                        <td>@department.DepartmentHeadName</td>
+                        <td>@department.DepartmentRepresentative</td>
+                        <td>@department.DepartmentCollectionPoint</td>
+                        <td>@Html.ActionLink("Edit", "Edit", "Department", new { id = department.Id }, new { @class = "btn btn-primary" })</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "Department", new { id = department.Id }, new { @class = "btn btn-danger" })
+                        </td>
 
-                </tr>
+                    </tr>
                 }
             </tbody>
         </table>
+    </div>
+</div>
+
 
