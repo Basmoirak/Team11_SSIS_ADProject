@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
+using Team11_SSIS_ADProject.SSIS.Models.Extensions;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
@@ -46,8 +47,8 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             Requisition req = new Requisition
             {
-                DepartmentId = "1",
-                Remark = requisition.Remark,
+                DepartmentId = User.Identity.GetDepartmentId(),
+                Remark = requisition.Remark
             };
             requisitionService.Save(req);
 
@@ -78,6 +79,26 @@ namespace Team11_SSIS_ADProject.Controllers
                 ItemRequisitions = irs
             };
             return View("Details", requisitionViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Approve(string id)
+        {
+            var requisition = requisitionService.Get(id);
+            requisition.Status = CustomStatus.Approved;
+            requisitionService.Save(requisition);
+
+            return Json(new { id = requisition.Id});
+        }
+
+        [HttpPost]
+        public ActionResult Reject(string id)
+        {
+            var requisition = requisitionService.Get(id);
+            requisition.Status = CustomStatus.Rejected;
+            requisitionService.Save(requisition);
+
+            return Json(new { id = requisition.Id });
         }
     }
 }
