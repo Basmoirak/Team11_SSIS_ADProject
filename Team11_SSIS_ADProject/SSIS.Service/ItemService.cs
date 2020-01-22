@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Models;
 
@@ -51,6 +52,26 @@ namespace Team11_SSIS_ADProject.SSIS.Service
                 i.ImagePath = item.ImagePath;
             }
             itemContext.Commit();
+        }
+
+        public IEnumerable<SelectListItem> GetItemList()
+        {
+            List<SelectListItem> items = itemContext.GetAll()
+                                              .OrderBy(i => i.ItemDescription)
+                                              .Select(i =>
+                                                new SelectListItem
+                                                {
+                                                    Value = i.Id,
+                                                    Text = i.ItemDescription
+                                                }).ToList();
+            var placeholder = new SelectListItem()
+            {
+                Value = null,
+                Text = "--Select Item--"
+            };
+            items.Insert(0, placeholder);
+            return new SelectList(items, "Value", "Text");
+
         }
     }
 }

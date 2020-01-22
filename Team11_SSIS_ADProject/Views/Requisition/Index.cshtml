@@ -1,0 +1,35 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.RequisitionViewModel
+@{
+    ViewBag.Title = "All Requisitions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <h2>All Requisitions</h2>
+    <p>
+        @Html.ActionLink("Create New", "Create", "Requisition", null, new { @class = "btn btn-primary" })
+    </p>
+       
+    <table class="dataTable table table-hover table-bordered">
+        <tr>
+            <th>Created Time</th>
+            <th>Requested by</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        @foreach(var item in Model.Requisitions)
+        {
+            <tr>
+                <td>@item.createdDateTime</td>
+                <td>@item.Department.DepartmentName</td>
+                @if(item.Status == 0)
+                {
+                    <td><span class="badge badge-warning">Pending</span></td>
+                }
+                else
+                {
+                <td><span class="badge badge-success"></span></td>
+                }
+                <td><a class="btn btn-info" href="@Url.Action("Details", "Requisition", new { id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+            </tr>
+        }
+    </table>

@@ -13,5 +13,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         ItemCategory Get(string id);
         IEnumerable<ItemRequisition> GetAll();
         void Delete(string Id);
+        IEnumerable<ItemRequisition> GetAllByRequisitionId(string Id);
     }
 }

@@ -1,0 +1,35 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.RequisitionViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div class="row">
+    <h3>Requistion Id : @Model.Id</h3>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.ItemRequisitions)
+            {
+                <tr>
+                    <td>@item.Item.ItemDescription</td>
+                    <td>@item.Quantity</td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+
+

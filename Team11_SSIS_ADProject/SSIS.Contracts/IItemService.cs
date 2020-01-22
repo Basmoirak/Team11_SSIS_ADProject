@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.Models;
 
 namespace Team11_SSIS_ADProject.SSIS.Contracts
@@ -13,5 +14,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         Item Get(string id);
         IEnumerable<Item> GetAll();
         void Delete(string id);
+        IEnumerable<SelectListItem> GetItemList();
     }
 }
