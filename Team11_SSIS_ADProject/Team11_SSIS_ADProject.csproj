@@ -292,6 +292,10 @@
     <Compile Include="Migrations\202001220656245_UpdateItemAttribute.designer.cs">
       <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220817244_UpdateDelegation.cs" />
+    <Compile Include="Migrations\202001220817244_UpdateDelegation.designer.cs">
+      <DependentUpon>202001220817244_UpdateDelegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentDelegationService.cs" />
@@ -4361,10 +4365,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\DepartmenDelegation\" />
     <Folder Include="Views\IDepartmentDelegationRepository\" />
     <Folder Include="Views\IDepartmentDelegationService\" />
-    <Folder Include="Views\Requisition\" />
-    <Folder Include="Views\DepartmenDelegation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -4430,6 +4433,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001220656245_UpdateItemAttribute.resx">
       <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220817244_UpdateDelegation.resx">
+      <DependentUpon>202001220817244_UpdateDelegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
