@@ -13,9 +13,9 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         [Required]
         public string ItemDescription { get; set; }
         [Required]
-        public string ItemReorderLevel { get; set; }
+        public int ItemReorderLevel { get; set; }
         [Required]
-        public string ItemReorderQty { get; set; }
+        public int ItemReorderQty { get; set; }
         [Required]
         public string ItemUnit { get; set; }
         [Required]

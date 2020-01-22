@@ -283,6 +283,10 @@
     <Compile Include="Migrations\202001200911355_add_department_delegation.designer.cs">
       <DependentUpon>202001200911355_add_department_delegation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220656245_UpdateItemAttribute.cs" />
+    <Compile Include="Migrations\202001220656245_UpdateItemAttribute.designer.cs">
+      <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
@@ -300,6 +304,7 @@
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
     <Compile Include="SSIS.Models\CustomRoles.cs" />
+    <Compile Include="SSIS.Models\CustomStatus.cs" />
     <Compile Include="SSIS.Models\DepartmenDelegation.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
     <Compile Include="SSIS.Models\Extensions\IdentityExtensions.cs" />
@@ -4345,7 +4350,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
     <Folder Include="Views\DepartmenDelegation\" />
-    <Folder Include="Views\Requisition\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -4405,6 +4409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001200911355_add_department_delegation.resx">
       <DependentUpon>202001200911355_add_department_delegation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220656245_UpdateItemAttribute.resx">
+      <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

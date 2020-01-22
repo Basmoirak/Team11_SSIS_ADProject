@@ -4,52 +4,61 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Requisition Form <a class="btn btn-success" href="/Requisition"><i class="glyphicon glyphicon-list"></i> See all</a></h2>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Requisition Form</h2>
+        <a class="btn btn-success" href="/Requisition"><i class="glyphicon glyphicon-list"></i> See all</a>
+    </div>
 
-<table class="table table-striped" style="width: 2px" id="ir_table">
-    <thead>
-        <tr>
-            <th>Item</th>
-            <th>Quantity</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td>
-                <select class="select2" id="itemId" required>
-                    <option id="default" value="">--Select an item--</option>
-                    @{
-                        foreach (var item in Model.Items)
-                        {
-                            <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
-                        }
-                    }
+    <div class="box-body">
+        <table class="table table-striped" style="width: 2px" id="ir_table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <select class="select2" id="itemId" required>
+                            <option id="default" value="">--Select an item--</option>
+                            @{
+                                foreach (var item in Model.Items)
+                                {
+                                    <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", id = "quantity" } })
+                    </td>
 
-                </select>
-            </td>
-            <td>
-                @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", id = "quantity" } })
-            </td>
-            
-            <td>
-                <button class="btn btn-success" id="btnAdd"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
-            </td>
-        </tr>
-    </tfoot>
-</table>
-<hr />
-<div class="row">
-    <div class="col-md-6">
-        <div class="form-group">
-            <label for="remark">Remark</label>
-            <textarea class="form-control" id="remark" placeholder="Optional"></textarea>
+                    <td>
+                        <button class="btn btn-success" id="btnAdd"><i class="glyphicon glyphicon-plus-sign"></i> Add</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="remark">Remark</label>
+                    <textarea class="form-control" id="remark" placeholder="Optional"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            <button class="btn btn-success" id="btnSave"><i class="glyphicon glyphicon-save"></i> Save</button>
         </div>
     </div>
+
 </div>
-<button class="btn btn-success" id="btnSave"><i class="glyphicon glyphicon-save"></i> Save</button>
 
 @section scripts
 {

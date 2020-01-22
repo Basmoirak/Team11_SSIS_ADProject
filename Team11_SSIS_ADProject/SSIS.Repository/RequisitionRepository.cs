@@ -9,5 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class RequisitionRepository : Repository<Requisition>, IRequisitionRepository
     {
+
     }
 }

@@ -18,10 +18,10 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public string ItemDescription { get; set; }
         [Required]
         [Display(Name = "Reorder Level")]
-        public string ItemReorderLevel { get; set; }
+        public int ItemReorderLevel { get; set; }
         [Required]
         [Display(Name = "Reorder Quantity")]
-        public string ItemReorderQty { get; set; }
+        public int ItemReorderQty { get; set; }
         [Required]
         [Display(Name = "Unit of Measure")]
         public string ItemUnit { get; set; }

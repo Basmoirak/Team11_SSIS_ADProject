@@ -9,7 +9,7 @@ namespace Team11_SSIS_ADProject.SSIS.Models.Extensions
 {
     public static class IdentityExtensions
     {
-        public static string GetOrganizationId(this IIdentity identity)
+        public static string GetDepartmentId(this IIdentity identity)
         {
             var claim = ((ClaimsIdentity)identity).FindFirst("DepartmentId");
             // Test for null to avoid issues during local testing
