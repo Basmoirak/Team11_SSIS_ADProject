@@ -1,0 +1,48 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.DepartmentDelegationViewModel
+
+@{
+    ViewBag.Title = "DepartmentDelegations";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Manage Delegations</h2>
+        <p>
+            @Html.ActionLink("Add New", "Create", "DepartmentDelegation", null, new { @class = "btn btn-primary" })
+        </p>
+    </div>
+
+    <div class="box-body">
+
+        <table class="datatable table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dd in Model.DepartmentDelegations)
+                {
+                    <tr>
+                        <td>@dd.UserId</td>
+                        <td>@dd.StartDate</td>
+                        <td>@dd.EndDate</td>
+                        <td>@dd.Status</td>
+                        <td>@Html.ActionLink("Edit", "Edit", "DepartmentDelegation", new { id = dd.Id }, new { @class = "btn btn-primary" })</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "DepartmentDelegation", new { id = dd.Id }, new { @class = "btn btn-danger" })
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

@@ -27,18 +27,8 @@ namespace Team11_SSIS_ADProject.Controllers
         // GET: Department
         public ActionResult Index()
         {
-            Department d = new Department();
             var viewModel = new DepartmentViewModel()
             {
-
-                DepartmentCode = d.DepartmentCode,
-                DepartmentName = d.DepartmentName,
-                DepartmentContactName = d.DepartmentContactName,
-                DepartmentPhone = d.DepartmentPhone,
-                DepartmentFax = d.DepartmentFax,
-                DepartmentHeadName = d.DepartmentHeadName,
-                DepartmentRepresentative = d.DepartmentRepresentative,
-
                 Departments = departmentService.GetAll()
             };
 
@@ -75,5 +65,6 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return RedirectToAction("Index", "Department");
         }
+
     }
 }

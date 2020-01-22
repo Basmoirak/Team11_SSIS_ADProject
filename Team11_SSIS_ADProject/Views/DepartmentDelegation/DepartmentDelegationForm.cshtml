@@ -1,0 +1,55 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.DepartmentDelegationViewModel
+@{
+    ViewBag.Title = "Department Delegation Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Add New Delegation</h2>
+        <p>
+            <a class="btn btn-success" href="/DepartmentDelegation"><i class="glyphicon glyphicon-list"></i> See all</a>
+        </p>
+    </div>
+
+    <div class="box-body">
+        @using (Html.BeginForm("Save", "DepartmentDelegation"))
+        {
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(d => d.UserId)
+                        @Html.TextBoxFor(d => d.UserId, new { @class = "form-control", @autofocus = "autofocus" })
+                        @Html.ValidationMessageFor(d => d.UserId)
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(d => d.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <p><input type="text" id="datepicker" name="DateOfBirth" class="form-control"></p>
+                            @Html.TextBoxFor(d => d.StartDate, new { @Value = Model.StartDate.ToString("dd/MM/yyyy"), @class = "datepicker" })
+                            @Html.ValidationMessageFor(d => d.StartDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        @Html.LabelFor(d => d.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <p><input type="text" id="datepicker" name="DateOfBirth" class="form-control"></p>
+                            @Html.TextBoxFor(d => d.EndDate, new { @Value = Model.StartDate.ToString("dd/MM/yyyy"), @class = "datepicker" })
+                            @Html.ValidationMessageFor(d => d.EndDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @Html.HiddenFor(x => x.Id)
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        }
+    </div>
+</div>

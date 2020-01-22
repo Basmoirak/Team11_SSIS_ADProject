@@ -211,6 +211,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DepartmentDelegationController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemCategoryController.cs" />
@@ -283,11 +284,21 @@
     <Compile Include="Migrations\202001200911355_add_department_delegation.designer.cs">
       <DependentUpon>202001200911355_add_department_delegation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220338030_edit_departmentDelegation.cs" />
+    <Compile Include="Migrations\202001220338030_edit_departmentDelegation.designer.cs">
+      <DependentUpon>202001220338030_edit_departmentDelegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202001220656245_UpdateItemAttribute.cs" />
     <Compile Include="Migrations\202001220656245_UpdateItemAttribute.designer.cs">
       <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001220817244_UpdateDelegation.cs" />
+    <Compile Include="Migrations\202001220817244_UpdateDelegation.designer.cs">
+      <DependentUpon>202001220817244_UpdateDelegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SSIS.Contracts\IDepartmentDelegationRepository.cs" />
+    <Compile Include="SSIS.Contracts\IDepartmentDelegationService.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
@@ -316,6 +327,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SSIS.Models\Requisition.cs" />
     <Compile Include="SSIS.Models\Supplier.cs" />
+    <Compile Include="SSIS.Repository\DepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Repository\DepartmentRepository.cs" />
     <Compile Include="SSIS.Repository\ItemCategoryRepository.cs" />
     <Compile Include="SSIS.Repository\ItemRepository.cs" />
@@ -323,12 +335,14 @@
     <Compile Include="SSIS.Repository\Repository.cs" />
     <Compile Include="SSIS.Repository\RequisitionRepository.cs" />
     <Compile Include="SSIS.Repository\SupplierRepository.cs" />
+    <Compile Include="SSIS.Service\DepartmentDelegationService.cs" />
     <Compile Include="SSIS.Service\DepartmentService.cs" />
     <Compile Include="SSIS.Service\ItemCategoryService.cs" />
     <Compile Include="SSIS.Service\ItemRequisitionService.cs" />
     <Compile Include="SSIS.Service\ItemService.cs" />
     <Compile Include="SSIS.Service\RequisitionService.cs" />
     <Compile Include="SSIS.Service\SupplierService.cs" />
+    <Compile Include="SSIS.ViewModels\DepartmentDelegationViewModel.cs" />
     <Compile Include="SSIS.ViewModels\ItemViewModel.cs" />
     <Compile Include="SSIS.ViewModels\RequisitionViewModel.cs" />
     <Compile Include="SSIS.ViewModels\DepartmentViewModel.cs" />
@@ -4345,11 +4359,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Sidebar.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\DepartmentDelegation\DepartmentDelegationForm.cshtml" />
+    <Content Include="Views\DepartmentDelegation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
     <Folder Include="Views\DepartmenDelegation\" />
+    <Folder Include="Views\IDepartmentDelegationRepository\" />
+    <Folder Include="Views\IDepartmentDelegationService\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -4410,8 +4428,14 @@
     <EmbeddedResource Include="Migrations\202001200911355_add_department_delegation.resx">
       <DependentUpon>202001200911355_add_department_delegation.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220338030_edit_departmentDelegation.resx">
+      <DependentUpon>202001220338030_edit_departmentDelegation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001220656245_UpdateItemAttribute.resx">
       <DependentUpon>202001220656245_UpdateItemAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001220817244_UpdateDelegation.resx">
+      <DependentUpon>202001220817244_UpdateDelegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
