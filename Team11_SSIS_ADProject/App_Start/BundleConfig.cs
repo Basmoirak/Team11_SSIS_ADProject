@@ -27,7 +27,7 @@ namespace Team11_SSIS_ADProject
                 .Include(lteplugins + "jvectormap/jquery-jvectormap-world-mill-en.js")
                 .Include(ltecomponents + "jquery-knob/dist/jquery.knob.min.js")
                 .Include(ltecomponents + "moment/moment.js")
-                .Include(ltecomponents + "PACE/pace.min.js")
+               
                 .Include(ltecomponents + "ckeditor/ckeditor.js")
                 .Include(ltecomponents + "datatables.net/js/jquery.dataTables.min.js")
                 .Include(ltecomponents + "datatables.net-bs/js/dataTables.bootstrap.min.js")

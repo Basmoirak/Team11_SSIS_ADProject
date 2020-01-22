@@ -37,7 +37,7 @@
     </div>
 
     @* If requisition status is not already approved/rejected, show approve/reject buttons *@
-    @if ((Model.Status != 2 || Model.Status != 3) && User.IsInRole("StoreClerk"))
+    @if ((Model.Status == 1) && User.IsInRole("DepartmentHead"))
     {
         <div class="box-footer">
             <button class="btn btn-danger" id="btnReject"><i class="glyphicon glyphicon-save"></i> Reject</button>
@@ -52,14 +52,14 @@
         $(document).ready(() => {
             /*Approve Button*/
             $("body").on("click", "#btnApprove", function () {
-                     var requsitionId = $("#requsitionID").val();
+                     var requsitionId = $("#requsitionId").val();
 
                 $.ajax({
                         type: "POST",
                         url: "/Requisition/Approve",
                         data: JSON.stringify({
 
-                            Id: requsitionId
+                            id: requsitionId
                         }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -68,13 +68,17 @@
                             toastr.success("Requisition ID-" + res.id + " successfully approved.", {
                                 progressBar : false
                             })
+
+                            setTimeout(() => {
+                                window.location.replace("/Requisition");
+                            }, 1500)
                         }
                     })
             })
 
             /*Reject Button*/
              $("body").on("click", "#btnReject", function () {
-                     var requsitionId = $("#requsitionID").val();
+                     var requsitionId = $("#requsitionId").val();
 
                 $.ajax({
                         type: "POST",
@@ -87,7 +91,13 @@
                         dataType: "json",
                         success: function (res) {
                             //success message
-                            toastr.success("Requisition ID-" + res.id + " rejected.", {
+
+                            setTimeout(() => {
+                                window.location.replace("/Requisition");
+                            }, 1500)
+                            
+
+                            toastr.error("Requisition ID-" + res.id + " rejected.", {
                                 progressBar : false
                             })
                         }

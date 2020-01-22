@@ -16,12 +16,14 @@ namespace Team11_SSIS_ADProject.Controllers
         IRequisitionService requisitionService;
         IItemRequisitionService itemRequisitionService;
         IItemService itemService;
+        IDepartmentService departmentService;
 
-        public RequisitionController(IItemService itemService, IRequisitionService requisitionService, IItemRequisitionService itemRequisitionService)
+        public RequisitionController(IDepartmentService departmentService, IItemService itemService, IRequisitionService requisitionService, IItemRequisitionService itemRequisitionService)
         {
             this.requisitionService = requisitionService;
             this.itemRequisitionService = itemRequisitionService;
             this.itemService = itemService;
+            this.departmentService = departmentService;
         }
         // GET: Requisition
         public ActionResult Index()
@@ -48,11 +50,16 @@ namespace Team11_SSIS_ADProject.Controllers
             Requisition req = new Requisition
             {
                 DepartmentId = User.Identity.GetDepartmentId(),
-                Remark = requisition.Remark
+                Remark = requisition.Remark,
+                Status = CustomStatus.PendingApproval
             };
+            
             requisitionService.Save(req);
 
-            foreach(ItemRequisition ir in requisition.ItemRequisitions)
+            //get the department 
+            var department = departmentService.Get(req.DepartmentId);
+
+            foreach (ItemRequisition ir in requisition.ItemRequisitions)
             {
                 ItemRequisition itemRequisition = new ItemRequisition
                 {
@@ -62,7 +69,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 };
                 itemRequisitionService.Save(itemRequisition);
             }
-            return Json(new { req = requisition });
+            return Json(new { req = req, dept = department });
         }
 
         public ActionResult Details(string id)

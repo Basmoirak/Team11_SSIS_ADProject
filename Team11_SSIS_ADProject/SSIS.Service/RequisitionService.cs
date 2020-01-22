@@ -31,7 +31,18 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public void Save(Requisition requisition)
         {
-            requisitionContext.Add(requisition);
+            Requisition r = requisitionContext.Get(requisition.Id);
+            if(r == null)
+            {
+                requisitionContext.Add(requisition);
+            }
+            else
+            {
+                r.Remark = requisition.Remark;
+                r.Status = requisition.Status;
+             
+            }
+            
             requisitionContext.Commit();
         }
     }

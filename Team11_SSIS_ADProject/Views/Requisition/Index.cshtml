@@ -6,7 +6,6 @@
 
 <h2>All Requisitions</h2>
 <p>
-    @Html.ActionLink("Create New", "Create", "Requisition", null, new { @class = "btn btn-primary" })
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
         <i class="glyphicon glyphicon-plus"></i> Create
     </button>
@@ -81,29 +80,38 @@
 </div>
 <!--Modal ends-->
 
-<table class="table table-hover table-bordered">
-    <tr>
-        <th>Created Time</th>
-        <th>Requested by</th>
-        <th>Status</th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model.Requisitions)
-    {
+<table class="table table-hover table-bordered" id="requisitionTable">
+    <thead>
+        <tr>
+            <th>Created Time</th>
+            <th>Requested by</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Requisitions)
+        {
         <tr>
             <td>@item.createdDateTime</td>
             <td>@item.Department.DepartmentName</td>
-            @if (item.Status == 0)
+            @if (item.Status == 1)
             {
-                <td><span class="badge badge-warning">Pending</span></td>
+                <td><span class="label label-warning">Pending Approval</span></td>
             }
-            else
+            else if (item.Status == 2)
             {
-                <td><span class="badge badge-success"></span></td>
+                <td><span class="label label-success">Approved</span></td>
+            }
+            else if (item.Status == 3)
+            {
+                <td><span class="label label-danger">Rejected</span></td>
             }
             <td><a class="btn btn-info" href="@Url.Action("Details", "Requisition", new { id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
         </tr>
-    }
+        }
+    </tbody> 
+    
 </table>
 
 @section scripts
@@ -187,6 +195,24 @@
                         dataType: "json",
                         success: function (res) {
                             console.log(res)
+                            //push to requisition table
+                            $("#requisitionTable").prepend(
+                                "<tr>"
+                                + "<td>"
+                                + "<span class='label label-success' style='width: 100px'>"
+                                +"New"
+                                +"</span>"
+                                + "</td>"
+                                + "<td>"
+                                +res.dept.DepartmentName
+                                + "</td>"
+                                + "<td>"
+                                +"<span class='label label-warning'>Pending Approval</span>"
+                                +"</td>"
+                                +"</tr>"
+                            )
+                            //hide the modal
+                            $("#createModal").modal("hide")
                             //clear remark field
                             $("#remark").val("")
                             //clear tbody
