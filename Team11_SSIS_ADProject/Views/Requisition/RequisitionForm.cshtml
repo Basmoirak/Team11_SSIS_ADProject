@@ -6,7 +6,7 @@
 
 <h2>Requisition Form <a class="btn btn-success" href="/Requisition"><i class="glyphicon glyphicon-list"></i> See all</a></h2>
 
-<table class="table table-striped" style="width: 2px" id="ir_table">
+<table class="datatable table table-striped" style="width: 2px" id="ir_table">
     <thead>
         <tr>
             <th>Item</th>
@@ -138,6 +138,8 @@
                             $("#ir_table TBODY").empty()
                             //Clear selected selected2 item
                             $("#itemId").val("").trigger("change")
+                            //hide the modal
+                            $("#createModal").modal("hide")
                             //success message
                             toastr.success("Requisition ID-" + res.id + " successfully created.", {
                                 progressBar : false

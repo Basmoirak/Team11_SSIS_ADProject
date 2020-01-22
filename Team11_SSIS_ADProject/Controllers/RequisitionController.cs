@@ -27,6 +27,7 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             var requistionViewModel = new RequisitionViewModel()
             {
+                Items = itemService.GetAll(),
                 Requisitions = requisitionService.GetAll().OrderByDescending(r => r.createdDateTime)
             };
             return View("Index", requistionViewModel);
@@ -60,7 +61,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 };
                 itemRequisitionService.Save(itemRequisition);
             }
-            return Json(new { id = req.Id });
+            return Json(new { req = requisition });
         }
 
         public ActionResult Details(string id)
