@@ -151,7 +151,7 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DepartmentId = null };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, DepartmentId = null, Notifications=null };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
