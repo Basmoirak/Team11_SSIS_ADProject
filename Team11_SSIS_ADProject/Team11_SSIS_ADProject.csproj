@@ -53,6 +53,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="IdentityManager, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\IdentityManager.1.0.0-beta5-5\lib\net45\IdentityManager.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
       <Private>True</Private>
@@ -112,6 +115,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>True</Private>
@@ -126,6 +132,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -208,7 +220,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\StockAdjustmentController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -295,7 +309,40 @@
     <Compile Include="Migrations\202001230216273_Add_NotificationsToIdentityUser.designer.cs">
       <DependentUpon>202001230216273_Add_NotificationsToIdentityUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001230745003_AddItemQuantity.cs" />
+    <Compile Include="Migrations\202001230745003_AddItemQuantity.designer.cs">
+      <DependentUpon>202001230745003_AddItemQuantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001230807406_AddStockAdjustmentTables.cs" />
+    <Compile Include="Migrations\202001230807406_AddStockAdjustmentTables.designer.cs">
+      <DependentUpon>202001230807406_AddStockAdjustmentTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001240827383_AddInventory.cs" />
+    <Compile Include="Migrations\202001240827383_AddInventory.designer.cs">
+      <DependentUpon>202001240827383_AddInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IDepartmentDelegationRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IDepartmentDelegationService.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IDepartmentRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IDepartmentService.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IInventoryRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IItemCategoryRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IItemCategoryService.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IItemRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IItemRequisitionRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IItemRequisitionService.cs" />
+    <Compile Include="SSIS.Contracts\Services\IItemService.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IItemStockAdjustmentRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IRequisitionRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IRequisitionService.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IStockAdjustmentRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\ISupplierRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IStockAdjustmentService.cs" />
+    <Compile Include="SSIS.Contracts\Services\ISupplierService.cs" />
+    <Compile Include="SSIS.Service\StockAdjustmentService.cs" />
+    <Compile Include="SSIS.ViewModels\AccountViewModels.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
     <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
@@ -313,27 +360,33 @@
     <Compile Include="SSIS.Contracts\ISupplierService.cs" />
     <Compile Include="SSIS.Models\AccountViewModels.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
-    <Compile Include="SSIS.Models\CustomRoles.cs" />
-    <Compile Include="SSIS.Models\CustomStatus.cs" />
-    <Compile Include="SSIS.Models\DepartmenDelegation.cs" />
+    <Compile Include="SSIS.Models\Custom\CustomRoles.cs" />
+    <Compile Include="SSIS.Models\Custom\CustomStatus.cs" />
+    <Compile Include="SSIS.Models\DepartmentDelegation.cs" />
     <Compile Include="SSIS.Models\Department.cs" />
     <Compile Include="SSIS.Models\Extensions\IdentityExtensions.cs" />
     <Compile Include="SSIS.Models\IdentityModels.cs" />
+    <Compile Include="SSIS.Models\Inventory.cs" />
     <Compile Include="SSIS.Models\Item.cs" />
     <Compile Include="SSIS.Models\ItemCategory.cs" />
     <Compile Include="SSIS.Models\ItemRequisition.cs" />
-    <Compile Include="SSIS.Models\ManageViewModels.cs" />
+    <Compile Include="SSIS.Models\ItemStockAdjustment.cs" />
+    <Compile Include="SSIS.ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SSIS.Models\Notification.cs" />
     <Compile Include="SSIS.Models\Requisition.cs" />
+    <Compile Include="SSIS.Models\StockAdjustment.cs" />
     <Compile Include="SSIS.Models\Supplier.cs" />
     <Compile Include="SSIS.Repository\DepartmentRepository.cs" />
+    <Compile Include="SSIS.Repository\InventoryRepository.cs" />
     <Compile Include="SSIS.Repository\ItemCategoryRepository.cs" />
     <Compile Include="SSIS.Repository\ItemRepository.cs" />
     <Compile Include="SSIS.Repository\ItemRequisitionRepository.cs" />
     <Compile Include="SSIS.Repository\NotificationRepository.cs" />
+    <Compile Include="SSIS.Repository\ItemStockAdjustmentRepository.cs" />
     <Compile Include="SSIS.Repository\Repository.cs" />
     <Compile Include="SSIS.Repository\RequisitionRepository.cs" />
+    <Compile Include="SSIS.Repository\StockAdjustmentRepository.cs" />
     <Compile Include="SSIS.Repository\SupplierRepository.cs" />
     <Compile Include="SSIS.Service\DepartmentService.cs" />
     <Compile Include="SSIS.Service\ItemCategoryService.cs" />
@@ -4366,7 +4419,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\DepartmenDelegation\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -4435,6 +4487,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001230216273_Add_NotificationsToIdentityUser.resx">
       <DependentUpon>202001230216273_Add_NotificationsToIdentityUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001230745003_AddItemQuantity.resx">
+      <DependentUpon>202001230745003_AddItemQuantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001230807406_AddStockAdjustmentTables.resx">
+      <DependentUpon>202001230807406_AddStockAdjustmentTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001240827383_AddInventory.resx">
+      <DependentUpon>202001240827383_AddInventory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

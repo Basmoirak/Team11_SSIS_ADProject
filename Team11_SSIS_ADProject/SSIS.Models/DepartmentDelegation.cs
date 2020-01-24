@@ -21,6 +21,5 @@ namespace Team11_SSIS_ADProject.SSIS.Models
        
         public bool Status { get; set; }
 
-
     }
 }
