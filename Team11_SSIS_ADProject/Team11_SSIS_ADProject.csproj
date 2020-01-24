@@ -321,6 +321,10 @@
     <Compile Include="Migrations\202001240827383_AddInventory.designer.cs">
       <DependentUpon>202001240827383_AddInventory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001241411403_resolve-conflict.cs" />
+    <Compile Include="Migrations\202001241411403_resolve-conflict.designer.cs">
+      <DependentUpon>202001241411403_resolve-conflict.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentDelegationService.cs" />
@@ -343,22 +347,8 @@
     <Compile Include="SSIS.Contracts\Services\ISupplierService.cs" />
     <Compile Include="SSIS.Service\StockAdjustmentService.cs" />
     <Compile Include="SSIS.ViewModels\AccountViewModels.cs" />
-    <Compile Include="SSIS.Contracts\IDepartmentRepository.cs" />
-    <Compile Include="SSIS.Contracts\IDepartmentService.cs" />
-    <Compile Include="SSIS.Contracts\IItemCategoryRepository.cs" />
-    <Compile Include="SSIS.Contracts\IItemCategoryService.cs" />
-    <Compile Include="SSIS.Contracts\IItemRepository.cs" />
-    <Compile Include="SSIS.Contracts\IItemRequisitionRepository.cs" />
-    <Compile Include="SSIS.Contracts\IItemRequisitionService.cs" />
-    <Compile Include="SSIS.Contracts\IItemService.cs" />
-    <Compile Include="SSIS.Contracts\INotificationRepository.cs" />
-    <Compile Include="SSIS.Contracts\INotificationService.cs" />
-    <Compile Include="SSIS.Contracts\IRepository.cs" />
-    <Compile Include="SSIS.Contracts\IRequisitionRepository.cs" />
-    <Compile Include="SSIS.Contracts\IRequisitionService.cs" />
-    <Compile Include="SSIS.Contracts\ISupplierRepository.cs" />
-    <Compile Include="SSIS.Contracts\ISupplierService.cs" />
-    <Compile Include="SSIS.Models\AccountViewModels.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\INotificationRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\INotificationService.cs" />
     <Compile Include="SSIS.Models\BaseEntity.cs" />
     <Compile Include="SSIS.Models\Custom\CustomRoles.cs" />
     <Compile Include="SSIS.Models\Custom\CustomStatus.cs" />
@@ -4496,6 +4486,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001240827383_AddInventory.resx">
       <DependentUpon>202001240827383_AddInventory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001241411403_resolve-conflict.resx">
+      <DependentUpon>202001241411403_resolve-conflict.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -35,7 +35,6 @@ namespace Team11_SSIS_ADProject.Models
         public DbSet<DepartmentDelegation> DepartmentDelegations { get; set; }
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<ItemRequisition> ItemRequisitions { get; set; } 
-        public DbSet<ItemRequisition> ItemRequisitions { get; set; }
         public DbSet<StockAdjustment> StockAdjustments { get; set; }
         public DbSet<ItemStockAdjustment> ItemStockAdjustments { get; set; }
         public ApplicationDbContext()
