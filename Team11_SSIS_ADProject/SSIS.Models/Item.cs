@@ -21,8 +21,8 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         [Required]
         public string ItemCategoryId { get; set; }
         public virtual ItemCategory ItemCategory { get; set; }
-        [Required]
-        public int Quantity { get; set; }
+        public string InventoryId { get; set; }
+        public virtual Inventory Inventory { get; set; }
         public string ImagePath { get; set; }
     }
 }

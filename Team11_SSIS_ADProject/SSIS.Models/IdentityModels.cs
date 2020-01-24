@@ -29,6 +29,7 @@ namespace Team11_SSIS_ADProject.Models
         public DbSet<Department> Departments { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
         public DbSet<Requisition> Requisitions { get; set; }
         public DbSet<DepartmentDelegation> DepartmentDelegations { get; set; }
         public DbSet<ItemRequisition> ItemRequisitions { get; set; }

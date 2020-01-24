@@ -1,6 +1,7 @@
 using System;
 using Team11_SSIS_ADProject.Controllers;
 using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Repository;
 using Team11_SSIS_ADProject.SSIS.Service;
 using Unity;
@@ -50,8 +51,12 @@ namespace Team11_SSIS_ADProject
             container.RegisterType<IItemCategoryService, ItemCategoryService>();
             container.RegisterType<IDepartmentService, DepartmentService>();
 
-            container.RegisterType<IItemService, ItemService>();
             container.RegisterType<IItemRepository, ItemRepository>();
+            container.RegisterType<IInventoryRepository, InventoryRepository>();
+            container.RegisterType<IStockAdjustmentRepository, StockAdjustmentRepository>();
+            container.RegisterType<IItemStockAdjustmentRepository, ItemStockAdjustmentRepository>();
+            container.RegisterType<IItemService, ItemService>();
+            container.RegisterType<IStockAdjustmentService, StockAdjustmentService>();
 
             container.RegisterType<IRequisitionRepository, RequisitionRepository>();
             container.RegisterType<IRequisitionService, RequisitionRepostiory>();

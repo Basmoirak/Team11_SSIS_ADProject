@@ -90,40 +90,56 @@ namespace Team11_SSIS_ADProject.Migrations
             //Add Items
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "1", ItemNumber = "C001", ItemDescription = "Clips Double 1", ItemReorderLevel = 50, ItemReorderQty = 30,
-                ItemUnit = "Dozen", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", Quantity = 80});            
+                ItemUnit = "Dozen", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", InventoryId = "1"});            
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "2", ItemNumber = "C002", ItemDescription = "Clips Double 2", ItemReorderLevel = 50, ItemReorderQty = 30,
-                ItemUnit = "Dozen", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", Quantity = 80});            
+                ItemUnit = "Dozen", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", InventoryId = "2"});            
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "3", ItemNumber = "C003", ItemDescription = "Clips Double 3/4", ItemReorderLevel = 50, ItemReorderQty = 30,
-                ItemUnit = "Dozen", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", Quantity = 80});            
+                ItemUnit = "Dozen", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", InventoryId = "3"});            
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "4", ItemNumber = "C004", ItemDescription = "Clips Paper Large", ItemReorderLevel = 50, ItemReorderQty = 30,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", Quantity = 80});            
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", InventoryId = "4"});            
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "5", ItemNumber = "C005", ItemDescription = "Clips Paper Medium", ItemReorderLevel = 50, ItemReorderQty = 30,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", Quantity = 80});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", InventoryId = "5"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "6", ItemNumber = "C006", ItemDescription = "Clips Paper Small", ItemReorderLevel = 50, ItemReorderQty = 30,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", Quantity = 80});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "1", ImagePath = "~/Uploads/sale.png", InventoryId = "6"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "7", ItemNumber = "E001", ItemDescription = "Envelope Brown (3x6)", ItemReorderLevel = 600, ItemReorderQty = 400,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", Quantity = 1000});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", InventoryId = "7"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "8", ItemNumber = "E002", ItemDescription = "Envelope Brown (5x7)", ItemReorderLevel = 600, ItemReorderQty = 400,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", Quantity = 1000});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", InventoryId = "8"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "9", ItemNumber = "E003", ItemDescription = "Envelope White (3x6)", ItemReorderLevel = 600, ItemReorderQty = 400,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", Quantity = 1000});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", InventoryId = "9"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "10", ItemNumber = "E004", ItemDescription = "Envelope White (5x7)", ItemReorderLevel = 600, ItemReorderQty = 400,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", Quantity = 1000});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "2", ImagePath = "~/Uploads/sale.png", InventoryId = "10"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "11", ItemNumber = "E020", ItemDescription = "Eraser (hard)", ItemReorderLevel = 50, ItemReorderQty = 20,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "3", ImagePath = "~/Uploads/sale.png", Quantity = 70});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "3", ImagePath = "~/Uploads/sale.png", InventoryId = "11"});
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "12", ItemNumber = "E021", ItemDescription = "Eraser (soft)", ItemReorderLevel = 50, ItemReorderQty = 20,
-                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "3", ImagePath = "~/Uploads/sale.png", Quantity = 70});
+                ItemUnit = "Box", createdDateTime = DateTime.Now, ItemCategoryId = "3", ImagePath = "~/Uploads/sale.png", InventoryId = "12"});
+
+            //Add Inventory Quantity
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "1", Quantity = 80 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "2", Quantity = 80 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "3", Quantity = 80 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "4", Quantity = 80 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "5", Quantity = 80 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "6", Quantity = 80 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "7", Quantity = 1000 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "8", Quantity = 1000 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "9", Quantity = 1000 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "10", Quantity = 1000 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "11", Quantity = 70 });
+            context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "12", Quantity = 70 });
         }
+
+
     }
 }
