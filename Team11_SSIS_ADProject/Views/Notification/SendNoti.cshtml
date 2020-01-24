@@ -1,0 +1,19 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.NotificationViewModel
+@{
+    ViewBag.Title = "Notify";
+}
+@using (Html.BeginForm("Notify", "Notification"))
+{
+
+    <center>
+        <table>
+            <tr><td>TO:</td><td>@Html.TextBoxFor(m=>m.Notification.To)</td></tr>
+            <tr><td>Subject:</td><td>@Html.TextBoxFor(m => m.Notification.Subject)</td></tr>
+            <tr><td>Body:</td><td>@Html.TextAreaFor(m => m.Notification.Body, new { rows = "5", cols = "30" })</td></tr>
+            <tr><td><input type="submit" value="send" /></td></tr>
+        </table>
+        <span>@ViewBag.Message</span>
+    </center>
+}
+<h2>Notify</h2>
+

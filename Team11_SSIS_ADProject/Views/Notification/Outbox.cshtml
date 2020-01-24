@@ -1,0 +1,36 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.NotificationViewModel
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>View</h2>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>OutBox</h2>
+    </div>
+    <div class="box-body">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>To</th>
+                    <th>Subject</th>
+                    <th>Body</th>
+                    <th>Send Time</th>
+                </tr>
+            </thead>
+            @foreach (var notification in Model.Notifications)
+            {
+                <tr>
+                    <td>@notification.To</td>
+                    <td>@notification.Subject</td>
+                    <td>@notification.Body</td>
+                    <td>@notification.createdDateTime</td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", "Notification", new { id = notification.Id }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+

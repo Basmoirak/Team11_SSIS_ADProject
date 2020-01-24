@@ -153,10 +153,22 @@
                             toastr.success("Requisition ID-" + res.id + " successfully created.", {
                                 progressBar : false
                             })
+                            $.ajax({
+                                type: "POST",
+                                url: "/Notification/notify_when_save",
+                                data: JSON.stringify({
+
+                                    Notification: Notification
+                                }),
+                                dataType: "json",
+                                success: function (res) {
+                                    alert("Notification send to head successfully");
+                                }
+                            })
                         }
                     })
                 }
-                else {
+                else {                  
                     toastr.error("You have no items to request.")
                 }
                

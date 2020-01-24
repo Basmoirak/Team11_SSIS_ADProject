@@ -94,7 +94,6 @@ namespace Team11_SSIS_ADProject.Controllers
             var requisition = requisitionService.Get(id);
             requisition.Status = CustomStatus.Approved;
             requisitionService.Save(requisition);
-
             return Json(new { id = requisition.Id});
         }
 
@@ -104,7 +103,6 @@ namespace Team11_SSIS_ADProject.Controllers
             var requisition = requisitionService.Get(id);
             requisition.Status = CustomStatus.Rejected;
             requisitionService.Save(requisition);
-
             return Json(new { id = requisition.Id });
         }
     }

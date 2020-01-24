@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Team11_SSIS_ADProject.SSIS.Models;
+using System.Collections.Generic;
 
 namespace Team11_SSIS_ADProject.Models
 {
@@ -16,11 +17,11 @@ namespace Team11_SSIS_ADProject.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
             userIdentity.AddClaim(new Claim("DepartmentId", this.DepartmentId.ToString()));
-
             return userIdentity;
         }
 
         public string DepartmentId { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -31,7 +32,7 @@ namespace Team11_SSIS_ADProject.Models
         public DbSet<Item> Items { get; set; }
         public DbSet<Requisition> Requisitions { get; set; }
         public DbSet<DepartmentDelegation> DepartmentDelegations { get; set; }
-
+        public DbSet<Notification> Notifications { get; set; }
         public DbSet<ItemRequisition> ItemRequisitions { get; set; } 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
