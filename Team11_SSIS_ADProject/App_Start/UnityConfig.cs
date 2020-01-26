@@ -57,6 +57,7 @@ namespace Team11_SSIS_ADProject
             container.RegisterType<IItemStockAdjustmentRepository, ItemStockAdjustmentRepository>();
             container.RegisterType<IItemService, ItemService>();
             container.RegisterType<IStockAdjustmentService, StockAdjustmentService>();
+            container.RegisterType<IItemStockAdjustmentService, ItemStockAdjustmentService>();
 
             container.RegisterType<IRequisitionRepository, RequisitionRepository>();
             container.RegisterType<IRequisitionService, RequisitionRepostiory>();

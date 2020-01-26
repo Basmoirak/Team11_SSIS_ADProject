@@ -9,5 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
     public interface IItemStockAdjustmentRepository : IRepository<ItemStockAdjustment>
     {
+        IQueryable<ItemStockAdjustment> FindByStockAdjustmentId(string id);
     }
 }

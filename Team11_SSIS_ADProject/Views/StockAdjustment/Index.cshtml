@@ -1,0 +1,233 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.StockAdjustmentViewModel
+
+@{
+    ViewBag.Title = "StockAdjustment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!--Modal starts-->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLabel">
+                    Create New
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </h3>
+
+            </div>
+            <div class="modal-body">
+                <!--**Modal body starts-->
+                <table class="table table-striped" id="ir_table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Adjustment</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <select class="select2" id="itemId" required>
+                                    <option id="default" value="">--Select an item--</option>
+                                    @{
+                                        foreach (var item in Model.Items)
+                                        {
+                                            <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
+                                        }
+                                    }
+
+                                </select>
+                            </td>
+                            <td>
+                                @Html.EditorFor(i => i.Adjustment, new { htmlAttributes = new { @type = "number", @step = "1", @value = "0", id = "quantity" } })
+                            </td>
+
+                            <td>
+                                <button class="btn btn-success" id="btnAdd"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <hr />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="remark">Remark</label>
+                            <textarea class="form-control" id="remark" placeholder="Optional"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Modal body ends**-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" id="btnSave" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal ends-->
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>All Stock Adjustments</h2>
+        <p>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                <i class="glyphicon glyphicon-plus"></i> Create
+            </button>
+        </p>
+    </div>
+
+    <div class="box-body">
+        <table class="datatable table table-hover table-bordered" id="stockAdjustmentTable">
+            <thead>
+                <tr>
+                    <th>Created Time</th>
+                    <th>Remarks</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.StockAdjustments)
+                {
+                    <tr>
+                        <td>@item.createdDateTime</td>
+                        <td>@item.Remarks</td>
+                        @if (item.Status == 1)
+                        {
+                            <td><span class="label label-warning">Pending Approval</span></td>
+                        }
+                        else if (item.Status == 2)
+                        {
+                            <td><span class="label label-success">Approved</span></td>
+                        }
+                        else if (item.Status == 3)
+                        {
+                            <td><span class="label label-danger">Rejected</span></td>
+                        }
+                        <td><a class="btn btn-info" href="@Url.Action("Details", "StockAdjustment", new { id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+        @section scripts
+{
+            <script>
+                $(document).ready(() => {
+                    $("body").on("click", "#btnAdd", function () {
+
+                        //get data from ids
+                        var itemId = $("#itemId")
+                        var item = $("#itemId :selected").text()
+                        var quantity = $("#quantity")
+                        console.log(itemId.val())
+                        console.log(quantity)
+                        if (itemId.val() == "" || quantity.val() == "") {
+                            toastr.error("Please choose item and enter adjustment quantity.")
+                        }
+                        else {
+                            //get tbody
+                            var tBody = $("#ir_table > tbody")[0]
+
+                            //add row
+                            var row = tBody.insertRow(-1)
+
+                            //add item cell
+                            var cell = $(row.insertCell(-1))
+                            cell.html(item)
+
+                            //add quantity cell
+                            cell = $(row.insertCell(-1))
+                            cell.html(quantity.val())
+
+                            //add remove button
+                            cell = $(row.insertCell(-1));
+                            var btnRemove = $("<input />");
+                            btnRemove.attr("type", "button");
+                            btnRemove.attr("class", "btn btn-danger")
+                            btnRemove.attr("onclick", "Remove(this);");
+                            btnRemove.val("Remove");
+                            cell.append(btnRemove);
+
+                            //add item id
+                            cell = $(row.insertCell(-1))
+                            cell.html("<input type='hidden' id='itemIdField' value='" + itemId.val() + "'>")
+
+                            //Clear selected selected2 item
+                            $("#itemId").val("").trigger("change")
+                            //clear quantity textbox
+                            quantity.val("")
+                        }
+
+                    })
+
+                    $("body").on("click", "#btnSave", function () {
+                        var itemStockAdjustments = new Array()
+
+                        if ($("#ir_table TBODY").children().length > 0) {
+                            $("#ir_table TBODY TR").each(function () {
+                                var row = $(this)
+                                var itemStockAdjustment = {}
+                                itemStockAdjustment.ItemId = $("#itemIdField").val()
+
+                                itemStockAdjustment.StockMovement = row.find("TD").eq(1).html()
+                                itemStockAdjustments.push(itemStockAdjustment)
+
+                            })
+
+
+                            var stockAdjustment = {}
+                            stockAdjustment.itemStockAdjustments = itemStockAdjustments
+                            stockAdjustment.Remarks = $("#remark").val()
+
+                            $.ajax({
+                                type: "POST",
+                                url: "/StockAdjustment/Save",
+                                data: JSON.stringify({
+
+                                    stockAdjustment: stockAdjustment
+                                }),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function (res) {
+                                    location.reload();
+                                }
+                            })
+                        }
+                        else {
+
+                            toastr.error("You have no items to request.")
+                        }
+
+                    })
+                })
+                function Remove(button) {
+
+                    var row = $(button).closest("TR");
+                    var name = $("TD", row).eq(0).html();
+                    if (confirm("Do you want to delete: " + name)) {
+                        //Get the reference of the Table.
+                        var table = $("#ir_table")[0];
+
+                        //Delete the Table row using it's Index.
+                        table.deleteRow(row[0].rowIndex);
+                    }
+                }
+            </script>
+        }
+

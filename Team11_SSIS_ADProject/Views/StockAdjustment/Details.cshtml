@@ -1,0 +1,109 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.StockAdjustmentViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Details</h2>
+    </div>
+
+    <div class="box-body">
+        <div class="row">
+            <h3>Stock Adjustment Id : @Model.Id</h3>
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Adjustment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.itemStockAdjustments)
+                    {
+                        <tr>
+                            <td>@item.ItemId</td>
+                            <td>@item.StockMovement</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @Html.HiddenFor(x => x.Id, new { id = "stockAdjustmentId" })
+        </div>
+    </div>
+
+    @if ((Model.Status == 1) && (User.IsInRole("StoreManager") || (User.IsInRole("StoreSupervisor"))))
+    {
+        <div class="box-footer">
+            <button class="btn btn-danger" id="btnReject"><i class="glyphicon glyphicon-save"></i> Reject</button>
+            <button class="btn btn-success" id="btnApprove"><i class="glyphicon glyphicon-save"></i> Approve</button>
+        </div>
+    }
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(() => {
+            /*Approve Button*/
+            $("body").on("click", "#btnApprove", function () {
+                     var stockAdjustmentId = $("#stockAdjustmentId").val();
+
+                $.ajax({
+                        type: "POST",
+                        url: "/StockAdjustment/Approve",
+                        data: JSON.stringify({
+
+                            id: stockAdjustmentId
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (res) {
+                            //success message
+                            toastr.success("StockAdjustment ID-" + res.id + " successfully approved.", {
+                                progressBar : false
+                            })
+
+                            setTimeout(() => {
+                                window.location.replace("/StockAdjustment");
+                            }, 1500)
+                        }
+                    })
+            })
+
+            /*Reject Button*/
+             $("body").on("click", "#btnReject", function () {
+                     var stockAdjustmentId = $("#stockAdjustmentId").val();
+
+                $.ajax({
+                        type: "POST",
+                        url: "/StockAdjustment/Reject",
+                        data: JSON.stringify({
+
+                            Id: stockAdjustmentId
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (res) {
+                            //success message
+
+                            setTimeout(() => {
+                                window.location.replace("/StockAdjustment");
+                            }, 1500)
+
+
+                            toastr.error("StockAdjustment ID-" + res.id + " rejected.", {
+                                progressBar : false
+                            })
+                        }
+                    })
+            })
+        })
+
+    </script>
+}
+

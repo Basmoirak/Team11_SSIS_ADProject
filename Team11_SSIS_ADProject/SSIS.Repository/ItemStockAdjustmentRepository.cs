@@ -9,5 +9,9 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class ItemStockAdjustmentRepository : Repository<ItemStockAdjustment>, IItemStockAdjustmentRepository
     {
+        public IQueryable<ItemStockAdjustment> FindByStockAdjustmentId(string id)
+        {
+            return _context.ItemStockAdjustments.Where(x => x.StockAdjustmentId == id);
+        }
     }
 }
