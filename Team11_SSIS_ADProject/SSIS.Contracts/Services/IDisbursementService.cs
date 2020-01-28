@@ -13,5 +13,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Services
         Disbursement Get(string id);
         IEnumerable<Disbursement> GetAll();
         void Delete(string Id);
+        IEnumerable<ItemDisbursement> getAllItemDisbursementsByStatus(int status);
     }
 }

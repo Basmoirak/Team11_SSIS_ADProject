@@ -60,7 +60,7 @@ namespace Team11_SSIS_ADProject.Controllers
             mm.Subject = notification.Subject;
             mm.Body = notification.Body;
             mm.To.Add(notification.To);
-            client.Send(mm);
+            //client.Send(mm);
         }
         
         //Send Email

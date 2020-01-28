@@ -13,9 +13,13 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         [Required]
         public string ItemId { get; set; }
         [Required]
-        public int Quantity { get; set; }
+        public int RequestedQuantity { get; set; }
+        [Required]
+        public int AvailableQuantity { get; set; }
         public string Remark { get; set; }
+        public int Status { get; set; }
         public virtual Disbursement Disbursement { get; set; }
         public virtual Item Item { get; set; }
+
     }
 }

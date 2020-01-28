@@ -9,5 +9,12 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class DisbursementRepository: Repository<Disbursement>, IDisbursementRepository
     {
+        public IEnumerable<ItemDisbursement> getAllItemDisbursementsByStatus(int status)
+        {
+            return _context.Disbursements
+                .Include("ItemDisbursements")
+                .Where(x => x.Status == CustomStatus.ForRetrieval)
+                .SelectMany(x => x.ItemDisbursements).ToList();
+        }
     }
 }

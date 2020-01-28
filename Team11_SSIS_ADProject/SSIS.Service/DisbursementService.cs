@@ -34,6 +34,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             return disbursementContext.GetAll();
         }
 
+        public IEnumerable<ItemDisbursement> getAllItemDisbursementsByStatus(int status)
+        {
+            return disbursementContext.getAllItemDisbursementsByStatus(status);
+        }
+
         public void Save(Disbursement disbursement)
         {
             Disbursement d = disbursementContext.Get(disbursement.Id);

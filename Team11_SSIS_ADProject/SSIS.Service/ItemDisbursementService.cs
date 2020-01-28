@@ -44,8 +44,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             {
                 id.ItemId = itemDisbursement.ItemId;
                 id.DisbursementId = itemDisbursement.DisbursementId;
-                id.Quantity = itemDisbursement.Quantity;
+                id.RequestedQuantity = itemDisbursement.RequestedQuantity;
+                id.AvailableQuantity = itemDisbursement.AvailableQuantity;
                 id.Remark = itemDisbursement.Remark;
+                id.Status = itemDisbursement.Status;
             }
 
             itemDisbursementContext.Commit();

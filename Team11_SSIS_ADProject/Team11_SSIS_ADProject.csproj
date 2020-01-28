@@ -330,6 +330,10 @@
     <Compile Include="Migrations\202001280215332_AddDisbursementAndItemDisbursementTable.designer.cs">
       <DependentUpon>202001280215332_AddDisbursementAndItemDisbursementTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001280949076_UpdateDisbursementTable.cs" />
+    <Compile Include="Migrations\202001280949076_UpdateDisbursementTable.designer.cs">
+      <DependentUpon>202001280949076_UpdateDisbursementTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDisbursementRepository.cs" />
@@ -340,6 +344,7 @@
     <Compile Include="SSIS.Contracts\Repositories\IInventoryRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemCategoryRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDisbursementService.cs" />
+    <Compile Include="SSIS.Contracts\Services\IInventoryService.cs" />
     <Compile Include="SSIS.Contracts\Services\IItemCategoryService.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemRequisitionRepository.cs" />
@@ -360,6 +365,7 @@
     <Compile Include="SSIS.Repository\DisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemDisbursementRepository.cs" />
     <Compile Include="SSIS.Service\DisbursementService.cs" />
+    <Compile Include="SSIS.Service\InventoryService.cs" />
     <Compile Include="SSIS.Service\ItemDisbursementService.cs" />
     <Compile Include="SSIS.Service\ItemStockAdjustmentService.cs" />
     <Compile Include="SSIS.Service\StockAdjustmentService.cs" />
@@ -4512,6 +4518,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001280215332_AddDisbursementAndItemDisbursementTable.resx">
       <DependentUpon>202001280215332_AddDisbursementAndItemDisbursementTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001280949076_UpdateDisbursementTable.resx">
+      <DependentUpon>202001280949076_UpdateDisbursementTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

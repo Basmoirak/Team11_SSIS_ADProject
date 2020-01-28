@@ -14,5 +14,6 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public int Status { get; set; }
         public virtual Department Department { get; set; }
         public ICollection<ItemDisbursement> ItemDisbursements { get; set; }
+
     }
 }
