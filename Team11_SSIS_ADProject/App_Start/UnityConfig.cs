@@ -1,6 +1,7 @@
 using System;
 using Team11_SSIS_ADProject.Controllers;
 using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Repositories;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Repository;
 using Team11_SSIS_ADProject.SSIS.Service;
@@ -43,28 +44,38 @@ namespace Team11_SSIS_ADProject
         {
             container.RegisterType<AccountController>(new InjectionConstructor());
 
+            //Supplier & Department
             container.RegisterType<ISupplierRepository, SupplierRepository>();
-            container.RegisterType<IItemCategoryRepository, ItemCategoryRepository>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
-
             container.RegisterType<ISupplierService, SupplierService>();
-            container.RegisterType<IItemCategoryService, ItemCategoryService>();
             container.RegisterType<IDepartmentService, DepartmentService>();
 
-            container.RegisterType<IItemRepository, ItemRepository>();
+            //Items, ItemCategories and Inventory
+            container.RegisterType<IItemCategoryRepository, ItemCategoryRepository>();
             container.RegisterType<IInventoryRepository, InventoryRepository>();
+            container.RegisterType<IItemRepository, ItemRepository>();
+            container.RegisterType<IItemCategoryService, ItemCategoryService>();
+            container.RegisterType<IItemService, ItemService>();
+
+            //StockAdjustments
             container.RegisterType<IStockAdjustmentRepository, StockAdjustmentRepository>();
             container.RegisterType<IItemStockAdjustmentRepository, ItemStockAdjustmentRepository>();
-            container.RegisterType<IItemService, ItemService>();
             container.RegisterType<IStockAdjustmentService, StockAdjustmentService>();
             container.RegisterType<IItemStockAdjustmentService, ItemStockAdjustmentService>();
 
+            //Requisitions
             container.RegisterType<IRequisitionRepository, RequisitionRepository>();
-            container.RegisterType<IRequisitionService, RequisitionRepostiory>();
-
             container.RegisterType<IItemRequisitionRepository, ItemRequisitionRepository>();
+            container.RegisterType<IRequisitionService, RequisitionRepostiory>();
             container.RegisterType<IItemRequisitionService, ItemRequisitionService>();
 
+            //Disbursements
+            container.RegisterType<IItemDisbursementRepository, ItemDisbursementRepository>();
+            container.RegisterType<IDisbursementRepository, DisbursementRepository>();
+            container.RegisterType<IDisbursementService, DisbursementService>();
+            container.RegisterType<IItemDisbursementService, ItemDisbursementService>();
+
+            //Notifications
             container.RegisterType<INotificationRepository, NotificationRepository>();
             container.RegisterType<INotificationService, NotificationService>();
 
