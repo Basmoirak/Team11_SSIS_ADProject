@@ -30,7 +30,7 @@ namespace Team11_SSIS_ADProject.Controllers
             var viewModel = new NotificationViewModel
             {
                 Notifications = notificationService.GetAll().ToList()
-                               .Where(n => n.To == User.Identity.Name).OrderByDescending(n => n.createdDateTime).ToList() 
+                               .Where(n => n.To.Contains(User.Identity.Name)).OrderByDescending(n => n.createdDateTime).ToList() 
 
             };
             return View(viewModel);
@@ -59,8 +59,13 @@ namespace Team11_SSIS_ADProject.Controllers
             MailMessage mm = new MailMessage();
             mm.Subject = notification.Subject;
             mm.Body = notification.Body;
-            mm.To.Add(notification.To);
-            //client.Send(mm);
+            String[] multi_emailaddress = notification.To.Split(new char[2] { ',', ';' });
+            foreach (var emaddress in multi_emailaddress)
+            {
+                mm.To.Add(emaddress);
+            }
+                       
+            client.Send(mm);
         }
         
         //Send Email
