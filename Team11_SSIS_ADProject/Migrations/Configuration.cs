@@ -138,6 +138,60 @@ namespace Team11_SSIS_ADProject.Migrations
             context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "10", Quantity = 1000 });
             context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "11", Quantity = 70 });
             context.Inventories.AddOrUpdate(c => c.Id, new Inventory() { Id = "12", Quantity = 70 });
+
+            //Add Requisitions
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "1", DepartmentId = "1", Remark = null, Status = 2, createdDateTime = DateTime.Now });
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "2", DepartmentId = "1", Remark = null, Status = 2, createdDateTime = DateTime.Now });
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "3", DepartmentId = "2", Remark = null, Status = 2, createdDateTime = DateTime.Now });
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "4", DepartmentId = "2", Remark = null, Status = 2, createdDateTime = DateTime.Now });
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "5", DepartmentId = "3", Remark = null, Status = 2, createdDateTime = DateTime.Now });
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "6", DepartmentId = "3", Remark = null, Status = 2, createdDateTime = DateTime.Now });
+            context.Requisitions.AddOrUpdate(c => c.Id, new Requisition() { Id = "7", DepartmentId = "3", Remark = null, Status = 1, createdDateTime = DateTime.Now });
+
+            //Add ItemRequisitions
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "1", RequisitionId = "1", ItemId = "1", Quantity = 25, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "2", RequisitionId = "1", ItemId = "2", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "3", RequisitionId = "2", ItemId = "1", Quantity = 20, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "4", RequisitionId = "2", ItemId = "11", Quantity = 25, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "5", RequisitionId = "2", ItemId = "2", Quantity = 10, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "6", RequisitionId = "3", ItemId = "4", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "7", RequisitionId = "3", ItemId = "5", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "8", RequisitionId = "3", ItemId = "6", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "9", RequisitionId = "4", ItemId = "3", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "10", RequisitionId = "4", ItemId = "7", Quantity = 25, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "11", RequisitionId = "5", ItemId = "1", Quantity = 20, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "12", RequisitionId = "5", ItemId = "2", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "13", RequisitionId = "5", ItemId = "3", Quantity = 10, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "14", RequisitionId = "6", ItemId = "10", Quantity = 20, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "15", RequisitionId = "6", ItemId = "9", Quantity = 10, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "16", RequisitionId = "7", ItemId = "6", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "17", RequisitionId = "7", ItemId = "3", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+            context.ItemRequisitions.AddOrUpdate(c => c.Id, new ItemRequisition() { Id = "18", RequisitionId = "7", ItemId = "12", Quantity = 15, Remark = null, createdDateTime = DateTime.Now });
+
+            //Add Disbursements
+            context.Disbursements.AddOrUpdate(c => c.Id, new Disbursement() { Id = "1", DepartmentId = "1", Remarks = null, Status = 4, createdDateTime = DateTime.Now});
+            context.Disbursements.AddOrUpdate(c => c.Id, new Disbursement() { Id = "2", DepartmentId = "1", Remarks = null, Status = 4, createdDateTime = DateTime.Now});
+            context.Disbursements.AddOrUpdate(c => c.Id, new Disbursement() { Id = "3", DepartmentId = "2", Remarks = null, Status = 4, createdDateTime = DateTime.Now});
+            context.Disbursements.AddOrUpdate(c => c.Id, new Disbursement() { Id = "4", DepartmentId = "2", Remarks = null, Status = 4, createdDateTime = DateTime.Now});
+            context.Disbursements.AddOrUpdate(c => c.Id, new Disbursement() { Id = "5", DepartmentId = "3", Remarks = null, Status = 4, createdDateTime = DateTime.Now});
+            context.Disbursements.AddOrUpdate(c => c.Id, new Disbursement() { Id = "6", DepartmentId = "3", Remarks = null, Status = 4, createdDateTime = DateTime.Now});
+
+            //Add ItemDisbursements
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "1", DisbursementId = "1", ItemId = "1", Remark = null, RequestedQuantity = 25, AvailableQuantity = 25, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "2", DisbursementId = "1", ItemId = "2", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "3", DisbursementId = "2", ItemId = "1", Remark = null, RequestedQuantity = 20, AvailableQuantity = 20, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "4", DisbursementId = "2", ItemId = "11", Remark = null, RequestedQuantity = 25, AvailableQuantity = 25, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "5", DisbursementId = "2", ItemId = "2", Remark = null, RequestedQuantity = 10, AvailableQuantity = 10, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "6", DisbursementId = "3", ItemId = "4", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "7", DisbursementId = "3", ItemId = "5", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "8", DisbursementId = "3", ItemId = "6", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "9", DisbursementId = "4", ItemId = "3", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "10", DisbursementId = "4", ItemId = "7", Remark = null, RequestedQuantity = 25, AvailableQuantity = 25, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "11", DisbursementId = "5", ItemId = "1", Remark = null, RequestedQuantity = 20, AvailableQuantity = 20, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "12", DisbursementId = "5", ItemId = "2", Remark = null, RequestedQuantity = 10, AvailableQuantity = 10, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "13", DisbursementId = "5", ItemId = "3", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "14", DisbursementId = "6", ItemId = "10", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
+            context.ItemDisbursements.AddOrUpdate(c => c.Id, new ItemDisbursement() { Id = "15", DisbursementId = "6", ItemId = "9", Remark = null, RequestedQuantity = 15, AvailableQuantity = 15, Status = 6, createdDateTime = DateTime.Now });
         }
 
 

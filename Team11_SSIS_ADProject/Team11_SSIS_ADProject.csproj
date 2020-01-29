@@ -224,6 +224,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\StockAdjustmentController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DisbursementController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ItemCategoryController.cs" />
@@ -384,6 +385,7 @@
     <Compile Include="SSIS.Models\ItemCategory.cs" />
     <Compile Include="SSIS.Models\ItemRequisition.cs" />
     <Compile Include="SSIS.Models\ItemStockAdjustment.cs" />
+    <Compile Include="SSIS.ViewModels\DisbursementRetrievalViewModel.cs" />
     <Compile Include="SSIS.ViewModels\StockAdjustmentViewModel.cs" />
     <Compile Include="SSIS.ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -4431,6 +4433,7 @@
     <Content Include="Views\Notification\OutBox.cshtml" />
     <Content Include="Views\StockAdjustment\Index.cshtml" />
     <Content Include="Views\StockAdjustment\Details.cshtml" />
+    <Content Include="Views\Disbursement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

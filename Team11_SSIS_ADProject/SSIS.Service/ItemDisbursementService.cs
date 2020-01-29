@@ -5,6 +5,7 @@ using System.Web;
 using Team11_SSIS_ADProject.SSIS.Contracts.Repositories;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.SSIS.Service
 {
@@ -51,6 +52,16 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             }
 
             itemDisbursementContext.Commit();
+        }
+
+        public IQueryable<GroupedItemDisbursements> groupItemDisbursementByDepartment()
+        {
+            return itemDisbursementContext.groupItemDisbursementByDepartment();
+        }
+
+        public IEnumerable<GroupedItemID> groupItemDisbursementByItemID()
+        {
+            return itemDisbursementContext.groupItemDisbursementByItemID();
         }
     }
 }
