@@ -9,9 +9,11 @@ using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 using Team11_SSIS_ADProject.SSIS.Models.Extensions;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
+using Team11_SSIS_ADProject.Helpers;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
+    [CustomAuthorize(Roles = CustomRoles.CanManageRequisitions)]
     public class RequisitionController : Controller
     {
         IRequisitionService requisitionService;

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Team11_SSIS_ADProject.Helpers;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
+    [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
     public class DisbursementController : Controller
     {
         IDisbursementService disbursementService;
