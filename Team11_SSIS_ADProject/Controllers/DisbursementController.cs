@@ -7,10 +7,11 @@ using Team11_SSIS_ADProject.Helpers;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
+using Team11_SSIS_ADProject.SSIS.Models.Extensions;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
-    [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
+    //[CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
     public class DisbursementController : Controller
     {
         IDisbursementService disbursementService;
@@ -23,6 +24,7 @@ namespace Team11_SSIS_ADProject.Controllers
         }
 
         // GET: Disbursement
+        [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
         public ActionResult Index()
         {
             var viewModel = new DisbursementRetrievalViewModel()
@@ -34,6 +36,7 @@ namespace Team11_SSIS_ADProject.Controllers
             return View(viewModel);
         }
 
+        [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
         [HttpPost]
         public ActionResult Disburse()
         {
@@ -51,11 +54,25 @@ namespace Team11_SSIS_ADProject.Controllers
             return RedirectToAction("Index","Disbursement");
         }
 
-        public ActionResult Collection()
+        [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
+        public ActionResult StoreCollection()
         {
             var viewModel = new CollectionsViewModel()
             {
                 groupedDepartmentCollections = itemDisbursementService.groupItemDisbursementByDepartment()
+            };
+
+            return View(viewModel);
+        }
+
+        [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentCollection)]
+        public ActionResult DepartmentCollection()
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+
+            var viewModel = new CollectionsViewModel()
+            {
+                groupedDepartmentCollections = itemDisbursementService.GetDepartmentCollection(departmentId)
             };
 
             return View(viewModel);

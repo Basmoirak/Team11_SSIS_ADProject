@@ -13,6 +13,7 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         //Department Roles
         public const string CanManageDepartmentDelegation = "DepartmentHead";
         public const string CanManageRequisitions = "DepartmentHead, Employee";
+        public const string CanManageDepartmentCollection = "DepartmentHead, Employee";
 
         //Store Roles
         public const string CanManageSupplier = "StoreClerk,StoreManager,StoreSupervisor";
