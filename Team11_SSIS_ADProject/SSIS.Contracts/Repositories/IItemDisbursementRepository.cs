@@ -10,7 +10,7 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Repositories
 {
     public interface IItemDisbursementRepository : IRepository<ItemDisbursement>
     {
-        IQueryable<GroupedItemDisbursements> groupItemDisbursementByDepartment();
+        IEnumerable<GroupedDepartmentCollections> groupItemDisbursementByDepartment();
         IEnumerable<GroupedItemID> groupItemDisbursementByItemID();
     }
 }

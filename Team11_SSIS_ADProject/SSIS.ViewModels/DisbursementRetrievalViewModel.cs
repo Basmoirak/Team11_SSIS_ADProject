@@ -21,9 +21,24 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public int AvailableQuantity { get; set; }
     }
 
-    public class GroupedItemDisbursements
+    public class CollectionsViewModel
+    {
+        public IEnumerable<GroupedDepartmentCollections> groupedDepartmentCollections { get; set; }
+    }
+
+    public class GroupedDepartmentCollections
     {
         public string DepartmentName { get; set; }
-        public IEnumerable<ItemDisbursement> ItemDisbursements { get; set; }
+        public string CollectionPoint { get; set; }
+        public IEnumerable<GroupedItemCollection> ItemDisbursements { get; set; }
+    }
+
+    public class GroupedItemCollection
+    {
+        public string ItemID { get; set; }
+        public string ItemCode { get; set; }
+        public string ItemDescription { get; set; }
+        public int RequestedQuantity { get; set; }
+        public int AvailableQuantity { get; set; }
     }
 }

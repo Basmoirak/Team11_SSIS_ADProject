@@ -4434,6 +4434,7 @@
     <Content Include="Views\StockAdjustment\Index.cshtml" />
     <Content Include="Views\StockAdjustment\Details.cshtml" />
     <Content Include="Views\Disbursement\Index.cshtml" />
+    <Content Include="Views\Disbursement\Collection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

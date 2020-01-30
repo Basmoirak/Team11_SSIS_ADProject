@@ -31,18 +31,29 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
             return grouped;
         }
 
-        public IQueryable<GroupedItemDisbursements> groupItemDisbursementByDepartment()
+        public IEnumerable<GroupedDepartmentCollections> groupItemDisbursementByDepartment()
         {
             var grouped = _context.Disbursements
                 .Include("Departments")
                 .Include("ItemDisbursements")
-                .Where(x => x.Status == CustomStatus.ForRetrieval)
-                .GroupBy(x => x.Department.DepartmentName)
-                .Select(group => new GroupedItemDisbursements
+                .Include("Items")
+                .Where(x => x.Status == CustomStatus.ReadyForCollection)
+                .GroupBy(x => x.Department)
+                .Select(group => new GroupedDepartmentCollections
                 {
-                    DepartmentName = group.Key,
-                    ItemDisbursements = group.SelectMany(x => x.ItemDisbursements).ToList()
-                });
+                    DepartmentName = group.Key.DepartmentName,
+                    CollectionPoint = group.Key.DepartmentCollectionPoint,
+                    ItemDisbursements = group.SelectMany(x => x.ItemDisbursements)
+                                             .GroupBy(x => x.Item)
+                                             .Select(collection => new GroupedItemCollection
+                                             {
+                                                 ItemID = collection.Key.Id,
+                                                 ItemCode = collection.Key.ItemNumber,
+                                                 ItemDescription = collection.Key.ItemDescription,
+                                                 AvailableQuantity = collection.Sum(x => x.AvailableQuantity),
+                                                 RequestedQuantity = collection.Sum(x => x.RequestedQuantity)
+                                             }).ToList()
+                }).ToList();
 
             return grouped;
         }

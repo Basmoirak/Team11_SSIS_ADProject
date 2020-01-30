@@ -1,0 +1,46 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.CollectionsViewModel
+
+@{
+    ViewBag.Title = "Collection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var department in Model.groupedDepartmentCollections)
+{
+    <div class="box box-primary box-solid collapsed-box">
+        <div class="box-header with-border">
+            <h2 class="box-title">@department.DepartmentName &nbsp &nbsp</h2>
+            <h2 class="box-title btn btn-soundcloud">@department.CollectionPoint</h2> 
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="box-body">
+
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Item Description</th>
+                        <th>Quantity For Collection</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach(var itemDisbursement in department.ItemDisbursements)
+                    {
+                        <tr>
+                            <td>@itemDisbursement.ItemCode</td>
+                            <td>@itemDisbursement.ItemDescription</td>
+                            <td>@itemDisbursement.AvailableQuantity</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>    
+    </div>
+}
+

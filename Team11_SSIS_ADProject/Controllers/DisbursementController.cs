@@ -50,5 +50,15 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return RedirectToAction("Index","Disbursement");
         }
+
+        public ActionResult Collection()
+        {
+            var viewModel = new CollectionsViewModel()
+            {
+                groupedDepartmentCollections = itemDisbursementService.groupItemDisbursementByDepartment()
+            };
+
+            return View(viewModel);
+        }
     }
 }
