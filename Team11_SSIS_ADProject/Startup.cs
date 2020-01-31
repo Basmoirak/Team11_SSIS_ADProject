@@ -1,5 +1,7 @@
-﻿using Microsoft.Owin;
+﻿using IdentityManager.Configuration;
+using Microsoft.Owin;
 using Owin;
+using System.Web.Http;
 
 [assembly: OwinStartupAttribute(typeof(Team11_SSIS_ADProject.Startup))]
 namespace Team11_SSIS_ADProject
@@ -9,6 +11,7 @@ namespace Team11_SSIS_ADProject
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            ConfigureOAuth(app);
         }
     }
 }
