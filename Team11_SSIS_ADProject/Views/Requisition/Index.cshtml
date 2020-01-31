@@ -3,116 +3,122 @@
     ViewBag.Title = "All Requisitions";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h2>All Requisitions</h2>
+        </div>
+        <div class="box-body">
+            <p>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                    <i class="glyphicon glyphicon-plus"></i> Create
+                </button>
+            </p>
 
-<h2>All Requisitions</h2>
-<p>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-        <i class="glyphicon glyphicon-plus"></i> Create
-    </button>
-</p>
+            <!--Modal starts-->
+            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLabel">
+                                Create new requisition <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </h3>
 
-<!--Modal starts-->
-<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLabel">
-                    Create new requisition <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </h3>
-               
-            </div>
-            <div class="modal-body">
-                <!--**Modal body starts-->
-                <table class="table table-striped"  id="ir_table">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Quantity</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td>
-                                <select class="select2" id="itemId" required>
-                                    <option id="default" value="">--Select an item--</option>
-                                    @{
-                                        foreach (var item in Model.Items)
-                                        {
-                                            <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
-                                        }
-                                    }
+                        </div>
+                        <div class="modal-body">
+                            <!--**Modal body starts-->
+                            <table class="table table-striped" id="ir_table">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Quantity</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td>
+                                            <select class="select2" id="itemId" required>
+                                                <option id="default" value="">--Select an item--</option>
+                                                @{
+                                                    foreach (var item in Model.Items)
+                                                    {
+                                                        <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
+                                                    }
+                                                }
 
-                                </select>
-                            </td>
-                            <td>
-                                @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", id = "quantity" } })
-                            </td>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", id = "quantity" } })
+                                        </td>
 
-                            <td>
-                                <button class="btn btn-success" id="btnAdd"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <hr />
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="remark">Remark</label>
-                            <textarea class="form-control" id="remark" placeholder="Optional"></textarea>
+                                        <td>
+                                            <button class="btn btn-success" id="btnAdd"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <hr />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="remark">Remark</label>
+                                        <textarea class="form-control" id="remark" placeholder="Optional"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Modal body ends**-->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" id="btnSave" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
                 </div>
-                
-                <!--Modal body ends**-->
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" id="btnSave" class="btn btn-primary">Submit</button>
-            </div>
+            <!--Modal ends-->
+
+            <table class="table table-hover table-bordered" id="requisitionTable">
+                <thead>
+                    <tr>
+                        <th>Created Time</th>
+                        <th>Requested by</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Requisitions)
+                    {
+                        <tr>
+                            <td>@item.createdDateTime</td>
+                            <td>@item.Department.DepartmentName</td>
+                            @if (item.Status == 1)
+                            {
+                                <td><span class="label label-warning">Pending Approval</span></td>
+                            }
+                            else if (item.Status == 2)
+                            {
+                                <td><span class="label label-success">Approved</span></td>
+                            }
+                            else if (item.Status == 3)
+                            {
+                                <td><span class="label label-danger">Rejected</span></td>
+                            }
+                            <td><a class="btn btn-info" href="@Url.Action("Details", "Requisition", new { id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
         </div>
     </div>
-</div>
-<!--Modal ends-->
 
-<table class="table table-hover table-bordered" id="requisitionTable">
-    <thead>
-        <tr>
-            <th>Created Time</th>
-            <th>Requested by</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Requisitions)
-        {
-        <tr>
-            <td>@item.createdDateTime</td>
-            <td>@item.Department.DepartmentName</td>
-            @if (item.Status == 1)
-            {
-                <td><span class="label label-warning">Pending Approval</span></td>
-            }
-            else if (item.Status == 2)
-            {
-                <td><span class="label label-success">Approved</span></td>
-            }
-            else if (item.Status == 3)
-            {
-                <td><span class="label label-danger">Rejected</span></td>
-            }
-            <td><a class="btn btn-info" href="@Url.Action("Details", "Requisition", new { id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
-        </tr>
-        }
-    </tbody> 
-    
-</table>
 
 @section scripts
 {
@@ -172,8 +178,8 @@
                     $("#ir_table TBODY TR").each(function () {
                         var row = $(this)
                         var itemRequisition = {}
-                        itemRequisition.ItemId = $("#itemIdField").val()
 
+                        itemRequisition.ItemId = row.find("input[id^='itemIdField']").val()
                         itemRequisition.Quantity = row.find("TD").eq(1).html()
                         itemRequisitions.push(itemRequisition)
 

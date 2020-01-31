@@ -11,7 +11,7 @@
     </div>
 
     <div class="box-body">
-        <div class="row">
+
             <h3>Requistion Id : @Model.Id</h3>
 
             <table class="table table-bordered table-hover">
@@ -40,11 +40,18 @@
     @if ((Model.Status == 1) && User.IsInRole("DepartmentHead"))
     {
         <div class="box-footer">
-            <button class="btn btn-danger" id="btnReject"><i class="glyphicon glyphicon-save"></i> Reject</button>
-            <button class="btn btn-success" id="btnApprove"><i class="glyphicon glyphicon-save"></i> Approve</button>
+            <button class="btn btn-danger" id="btnReject"><i class="glyphicon glyphicon-remove-circle"></i> Reject</button>
+            <button class="btn btn-success" id="btnApprove"><i class="glyphicon glyphicon-ok-circle"></i> Approve</button>
         </div>
     }
-</div>
+
+@if ((Model.Status == 1) && User.IsInRole("Employee"))
+        {
+        <div class="box-footer">
+            <button class="btn btn-danger" id="btnCancel"><i class="glyphicon glyphicon-ban-circle"></i> Cancel</button>
+        </div>
+        }
+
 
 @section scripts
 {
