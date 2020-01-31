@@ -1,16 +1,20 @@
 ﻿using System;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
+using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Team11_SSIS_ADProject.Models;
+using Team11_SSIS_ADProject.Providers;
 
 namespace Team11_SSIS_ADProject
 {
     public partial class Startup
     {
+
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
@@ -34,7 +38,7 @@ namespace Team11_SSIS_ADProject
                         validateInterval: TimeSpan.FromMinutes(30),
                         regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -63,6 +67,27 @@ namespace Team11_SSIS_ADProject
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+        }
+        public static string PublicClientId { get; private set; }
+        public static Func<UserManager<IdentityUser>> UserManagerFactory { get; set; }
+
+        public void ConfigureOAuth(IAppBuilder app)
+        {
+            PublicClientId = "self";
+            UserManagerFactory = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>());
+
+            OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions()
+            {
+                AllowInsecureHttp = true,
+                TokenEndpointPath = new PathString("/token"),
+                AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
+                AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
+                Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory)
+            };
+
+            // Token Generation
+            app.UseOAuthAuthorizationServer(OAuthServerOptions);
+            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions());
         }
     }
 }
