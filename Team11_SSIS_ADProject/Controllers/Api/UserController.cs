@@ -13,7 +13,7 @@ using Team11_SSIS_ADProject.SSIS.ViewModels;
 namespace Team11_SSIS_ADProject.Controllers.Api
 {
 
-    //[Authorize]
+    [Authorize]
     public class UserController : ApiController
     {
         UserService userService;
