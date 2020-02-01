@@ -82,7 +82,8 @@ namespace Team11_SSIS_ADProject
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                 AuthorizeEndpointPath = new PathString("/api/Account/ExternalLogin"),
-                Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory)
+                //Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory)
+                Provider = new SimpleAuthorizationServerProvider()
             };
 
             // Token Generation
