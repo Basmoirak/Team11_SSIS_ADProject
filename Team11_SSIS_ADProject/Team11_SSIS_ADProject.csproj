@@ -230,6 +230,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\StockAdjustmentController.cs" />
+    <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DisbursementController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -348,6 +349,7 @@
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDisbursementRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemDisbursementRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IUserRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentDelegationService.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentService.cs" />
@@ -370,15 +372,19 @@
     <Compile Include="SSIS.Contracts\Repositories\ISupplierRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IStockAdjustmentService.cs" />
     <Compile Include="SSIS.Contracts\Services\ISupplierService.cs" />
+    <Compile Include="SSIS.Contracts\Services\IUserService.cs" />
+    <Compile Include="SSIS.Models\Custom\UserRoles.cs" />
     <Compile Include="SSIS.Models\Disbursement.cs" />
     <Compile Include="SSIS.Models\ItemDisbursement.cs" />
     <Compile Include="SSIS.Repository\DisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemDisbursementRepository.cs" />
+    <Compile Include="SSIS.Repository\UserRepository.cs" />
     <Compile Include="SSIS.Service\DisbursementService.cs" />
     <Compile Include="SSIS.Service\InventoryService.cs" />
     <Compile Include="SSIS.Service\ItemDisbursementService.cs" />
     <Compile Include="SSIS.Service\ItemStockAdjustmentService.cs" />
     <Compile Include="SSIS.Service\StockAdjustmentService.cs" />
+    <Compile Include="SSIS.Service\UserService.cs" />
     <Compile Include="SSIS.ViewModels\AccountViewModels.cs" />
     <Compile Include="SSIS.Contracts\Repositories\INotificationRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\INotificationService.cs" />
@@ -425,6 +431,7 @@
     <Compile Include="SSIS.ViewModels\RequisitionViewModel.cs" />
     <Compile Include="SSIS.ViewModels\DepartmentViewModel.cs" />
     <Compile Include="SSIS.ViewModels\SupplierViewModel.cs" />
+    <Compile Include="SSIS.ViewModels\UserViewModel.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -4334,8 +4341,6 @@
     <Content Include="Scripts\adminlte\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\DataTables\css\mixins.scss" />
-    <Content Include="Content\DataTables\css\common.scss" />
     <Content Include="app.config" />
     <Content Include="Content\adminlte\css\adminlte.css.map" />
     <Content Include="Content\adminlte\css\adminlte.min.css.map" />
@@ -4376,6 +4381,7 @@
     <Content Include="Scripts\adminlte\components\jquery\dist\jquery.slim.min.map" />
     <Content Include="Scripts\adminlte\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Scripts\adminlte\plugins\input-mask\phone-codes\phone-codes.json" />
+    <None Include="Properties\PublishProfiles\Team11SSIS - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -4449,6 +4455,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

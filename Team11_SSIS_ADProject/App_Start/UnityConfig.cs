@@ -44,6 +44,10 @@ namespace Team11_SSIS_ADProject
         {
             container.RegisterType<AccountController>(new InjectionConstructor());
 
+            //Users
+            container.RegisterType<IUserRepository, UserRepository>();
+            container.RegisterType<IUserService, UserService>();
+
             //Supplier & Department
             container.RegisterType<ISupplierRepository, SupplierRepository>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
