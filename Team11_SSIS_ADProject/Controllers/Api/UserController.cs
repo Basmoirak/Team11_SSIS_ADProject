@@ -16,11 +16,11 @@ namespace Team11_SSIS_ADProject.Controllers.Api
     [Authorize]
     public class UserController : ApiController
     {
-        UserService userService;
+        IUserService userService;
 
-        public UserController()
+        public UserController(IUserService userService)
         {
-            this.userService = new UserService();
+            this.userService = userService;
         }
 
         [HttpPost]

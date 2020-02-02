@@ -11,11 +11,12 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class UserService : IUserService
     {
-        UserRepository userContext;
+        IUserRepository userContext;
 
-        public UserService()
+        public UserService(IUserRepository userRepository)
         {
-            this.userContext = new UserRepository();
+            userContext = userRepository;
+            //this.userContext = new UserRepository();
         }
 
         public bool FindIfUserExist(string email)
