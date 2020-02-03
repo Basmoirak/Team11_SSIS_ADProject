@@ -13,5 +13,6 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
     {
         public string Email { get; set; }
         public string RoleName { get; set; }
+        public string DepartmentId { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
     public interface IRequisitionRepository : IRepository<Requisition>
     {
+        IEnumerable<Requisition> getAllPendingRequisitionsByDepartment(string departmentId);
     }
 }

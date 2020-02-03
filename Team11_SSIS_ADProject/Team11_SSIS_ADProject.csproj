@@ -232,6 +232,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
+    <Compile Include="Controllers\Api\DepartmentController.cs" />
+    <Compile Include="Controllers\Api\DisbursementController.cs" />
     <Compile Include="Controllers\Api\StockAdjustmentController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />

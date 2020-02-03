@@ -23,4 +23,19 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
     }
+
+    public class RequisitionMobileViewModel
+    {
+        public string RequisitionId { get; set; }
+        public string Remarks { get; set; }
+        public int Status { get; set; }
+        public List<RequisitionDetailsMobileViewModel> ItemRequisitions { get; set; }
+    }
+
+    public class RequisitionDetailsMobileViewModel
+    {
+        public string ItemCode { get; set; }
+        public string Description { get; set; }
+        public int Quantity { get; set; }
+    }
 }

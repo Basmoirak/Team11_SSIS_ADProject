@@ -9,6 +9,12 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class RequisitionRepository : Repository<Requisition>, IRequisitionRepository
     {
-
+        public IEnumerable<Requisition> getAllPendingRequisitionsByDepartment(string departmentId)
+        {
+            return _context.Requisitions
+                .Include("ItemRequisitions")
+                .Where(x => x.DepartmentId == departmentId)
+                .Where(x => x.Status == CustomStatus.PendingApproval);
+        }
     }
 }
