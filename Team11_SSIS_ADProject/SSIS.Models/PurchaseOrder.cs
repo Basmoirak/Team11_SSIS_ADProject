@@ -9,14 +9,11 @@ namespace Team11_SSIS_ADProject.SSIS.Models
     public class PurchaseOrder : BaseEntity
     {
         [Required]
-        public string DepartmentId { get; set; }
-        [Required]
         public string SupplierId { get; set; }
         [Required]
         public DateTime ExpectedDate { get; set; }
         [Required]
         public int Status { get; set; }
-        public Department Department { get; set; }
         public Supplier Supplier { get; set; }
         public string Remark { get; set; }
     }

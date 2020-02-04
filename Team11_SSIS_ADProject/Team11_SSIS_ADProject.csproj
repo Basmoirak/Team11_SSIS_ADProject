@@ -357,6 +357,14 @@
     <Compile Include="Migrations\202002040406558_created purchaseorder and itempurchaseorder.designer.cs">
       <DependentUpon>202002040406558_created purchaseorder and itempurchaseorder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002040426553_drop department from purchaseorder.cs" />
+    <Compile Include="Migrations\202002040426553_drop department from purchaseorder.designer.cs">
+      <DependentUpon>202002040426553_drop department from purchaseorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002040428465_drop departmentId from purchaseorder.cs" />
+    <Compile Include="Migrations\202002040428465_drop departmentId from purchaseorder.designer.cs">
+      <DependentUpon>202002040428465_drop departmentId from purchaseorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -4579,6 +4587,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002040406558_created purchaseorder and itempurchaseorder.resx">
       <DependentUpon>202002040406558_created purchaseorder and itempurchaseorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002040426553_drop department from purchaseorder.resx">
+      <DependentUpon>202002040426553_drop department from purchaseorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002040428465_drop departmentId from purchaseorder.resx">
+      <DependentUpon>202002040428465_drop departmentId from purchaseorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
