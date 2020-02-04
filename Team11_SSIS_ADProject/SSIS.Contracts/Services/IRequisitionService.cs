@@ -13,5 +13,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         Requisition Get(string id);
         IEnumerable<Requisition> GetAll();
         void Delete(string id);
+        IEnumerable<Requisition> getAllPendingRequisitionsByDepartment(string departmentId);
     }
 }

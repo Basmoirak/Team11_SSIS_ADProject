@@ -45,5 +45,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             
             requisitionContext.Commit();
         }
+
+        public IEnumerable<Requisition> getAllPendingRequisitionsByDepartment(string departmentId)
+        {
+            return requisitionContext.getAllPendingRequisitionsByDepartment(departmentId);
+        }
     }
 }

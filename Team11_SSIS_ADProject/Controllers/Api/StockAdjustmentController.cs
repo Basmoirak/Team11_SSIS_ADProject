@@ -4,25 +4,35 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.Controllers.Api
 {
     [Authorize]
     public class StockAdjustmentController : ApiController
     {
-        public List<ItemStockAdjustment> Get()
-        {
-            List<ItemStockAdjustment> stockAdjustments = new List<ItemStockAdjustment>
-            {
-                new ItemStockAdjustment{Id = "1", ItemId = "1", StockAdjustmentId = "2", StockMovement = 5, NewQuantity = 10, OldQuantity = 15},
-                new ItemStockAdjustment{Id = "2", ItemId = "2", StockAdjustmentId = "2", StockMovement = 5, NewQuantity = 10, OldQuantity = 15},
-                new ItemStockAdjustment{Id = "3", ItemId = "3", StockAdjustmentId = "2", StockMovement = 5, NewQuantity = 10, OldQuantity = 15},
-                new ItemStockAdjustment{Id = "4", ItemId = "4", StockAdjustmentId = "2", StockMovement = 5, NewQuantity = 10, OldQuantity = 15},
-                new ItemStockAdjustment{Id = "5", ItemId = "5", StockAdjustmentId = "2", StockMovement = 5, NewQuantity = 10, OldQuantity = 15}
-            };
+        IStockAdjustmentService stockAdjustmentService;
+        IItemStockAdjustmentService itemStockAdjustmentService;
+        IItemService itemService;
 
-            return stockAdjustments;
+        public StockAdjustmentController(IStockAdjustmentService stockAdjustmentService,
+            IItemStockAdjustmentService itemStockAdjustmentService, IItemService itemService)
+        {
+            this.stockAdjustmentService = stockAdjustmentService;
+            this.itemStockAdjustmentService = itemStockAdjustmentService;
+            this.itemService = itemService;
         }
+
+        [Route("api/stockadjustments/getitems")]
+        public IHttpActionResult GetAllItems()
+        {
+            var viewModel = itemService.GetAll().ToList();
+
+            return Ok(viewModel);
+        }
+
     }
 }

@@ -16,11 +16,11 @@ namespace Team11_SSIS_ADProject.Controllers.Api
     [Authorize]
     public class UserController : ApiController
     {
-        UserService userService;
+        IUserService userService;
 
-        public UserController()
+        public UserController(IUserService userService)
         {
-            this.userService = new UserService();
+            this.userService = userService;
         }
 
         [HttpPost]
@@ -34,17 +34,27 @@ namespace Team11_SSIS_ADProject.Controllers.Api
             {
                 //Retrieve User
                 string rolename = null;
+                string departmentId = null;
                 var user = userService.FindUserByEmail(viewModel.Email);
 
-                    if (user.Roles.FirstOrDefault().RoleId == UserRoles.Employee) rolename = "Employee"; 
-                    if (user.Roles.FirstOrDefault().RoleId == UserRoles.DepartmentHead) rolename = "DepartmentHead"; 
+                if (user.Roles.FirstOrDefault().RoleId == UserRoles.Employee)
+                {
+                    rolename = "Employee";
+                    departmentId = user.DepartmentId;
+                };
+                if (user.Roles.FirstOrDefault().RoleId == UserRoles.DepartmentHead)
+                {
+                    rolename = "DepartmentHead";
+                    departmentId = user.DepartmentId;
+                };
                     if (user.Roles.FirstOrDefault().RoleId == UserRoles.StoreClerk) rolename = "StoreClerk"; 
                     if (user.Roles.FirstOrDefault().RoleId == UserRoles.StoreSupervisor) rolename = "StoreSupervisor"; 
                     if (user.Roles.FirstOrDefault().RoleId == UserRoles.StoreManager) rolename = "StoreManager"; 
                     if (user.Roles.FirstOrDefault().RoleId == UserRoles.Admin) rolename = "Admin";
 
-                //Add role to viewmodel
+                //Add role & departmentId to viewmodel
                 viewModel.RoleName = rolename;
+                viewModel.DepartmentId = departmentId;
                 return Ok(viewModel);
             }
         }

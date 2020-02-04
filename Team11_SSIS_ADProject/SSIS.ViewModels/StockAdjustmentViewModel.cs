@@ -34,4 +34,5 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public IEnumerable<ItemStockAdjustment> itemStockAdjustments { get; set; }
     }
 
+
 }
