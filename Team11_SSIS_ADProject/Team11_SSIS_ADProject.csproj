@@ -239,6 +239,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\RequisitionController.cs" />
     <Compile Include="Controllers\StockAdjustmentController.cs" />
     <Compile Include="Controllers\SupplierController.cs" />
@@ -343,12 +344,23 @@
     <Compile Include="Migrations\202001280949076_UpdateDisbursementTable.designer.cs">
       <DependentUpon>202001280949076_UpdateDisbursementTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002020938581_added ItemSupplier Table.cs" />
+    <Compile Include="Migrations\202002020938581_added ItemSupplier Table.designer.cs">
+      <DependentUpon>202002020938581_added ItemSupplier Table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002040406558_created purchaseorder and itempurchaseorder.cs" />
+    <Compile Include="Migrations\202002040406558_created purchaseorder and itempurchaseorder.designer.cs">
+      <DependentUpon>202002040406558_created purchaseorder and itempurchaseorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDisbursementRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemDisbursementRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IItemPurchaseOrderRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IItemSupplierRepository.cs" />
+    <Compile Include="SSIS.Contracts\Repositories\IPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IUserRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentDelegationService.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentRepository.cs" />
@@ -361,12 +373,15 @@
     <Compile Include="SSIS.Contracts\Repositories\IItemRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemRequisitionRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IItemDisbursementService.cs" />
+    <Compile Include="SSIS.Contracts\Services\IItemPurchaseOrderService.cs" />
     <Compile Include="SSIS.Contracts\Services\IItemRequisitionService.cs" />
     <Compile Include="SSIS.Contracts\Services\IItemService.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemStockAdjustmentRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IRequisitionRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IItemStockAdjustmentService.cs" />
+    <Compile Include="SSIS.Contracts\Services\IItemSupplierService.cs" />
+    <Compile Include="SSIS.Contracts\Services\IPurchaseOrderService.cs" />
     <Compile Include="SSIS.Contracts\Services\IRequisitionService.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IStockAdjustmentRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\ISupplierRepository.cs" />
@@ -376,13 +391,22 @@
     <Compile Include="SSIS.Models\Custom\UserRoles.cs" />
     <Compile Include="SSIS.Models\Disbursement.cs" />
     <Compile Include="SSIS.Models\ItemDisbursement.cs" />
+    <Compile Include="SSIS.Models\ItemPurchaseOrder.cs" />
+    <Compile Include="SSIS.Models\ItemSupplier.cs" />
+    <Compile Include="SSIS.Models\PurchaseOrder.cs" />
     <Compile Include="SSIS.Repository\DisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemDisbursementRepository.cs" />
+    <Compile Include="SSIS.Repository\ItemPurchaseOrderRepository.cs" />
+    <Compile Include="SSIS.Repository\ItemSupplierRepository.cs" />
+    <Compile Include="SSIS.Repository\PurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\UserRepository.cs" />
     <Compile Include="SSIS.Service\DisbursementService.cs" />
     <Compile Include="SSIS.Service\InventoryService.cs" />
     <Compile Include="SSIS.Service\ItemDisbursementService.cs" />
+    <Compile Include="SSIS.Service\ItemPurchaseOrderService.cs" />
     <Compile Include="SSIS.Service\ItemStockAdjustmentService.cs" />
+    <Compile Include="SSIS.Service\ItemSupplierService.cs" />
+    <Compile Include="SSIS.Service\PurchaseOrderService.cs" />
     <Compile Include="SSIS.Service\StockAdjustmentService.cs" />
     <Compile Include="SSIS.Service\UserService.cs" />
     <Compile Include="SSIS.ViewModels\AccountViewModels.cs" />
@@ -4451,6 +4475,8 @@
     <Content Include="Views\Disbursement\Index.cshtml" />
     <Content Include="Views\Disbursement\StoreCollection.cshtml" />
     <Content Include="Views\Disbursement\DepartmentCollection.cshtml" />
+    <Content Include="Views\Item\ManageSuppliers.cshtml" />
+    <Content Include="Views\PurchaseOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4542,6 +4568,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001280949076_UpdateDisbursementTable.resx">
       <DependentUpon>202001280949076_UpdateDisbursementTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002020938581_added ItemSupplier Table.resx">
+      <DependentUpon>202002020938581_added ItemSupplier Table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002040406558_created purchaseorder and itempurchaseorder.resx">
+      <DependentUpon>202002040406558_created purchaseorder and itempurchaseorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -25,6 +25,7 @@
                     <th>Unit of Measure</th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +33,7 @@
                 {
                     <tr>
                         <td>
-                            <img src="@Url.Content(item.ImagePath)" alt="@item.ItemDescription" width="200px" height="200px" />
+                            <img src="@Url.Content(item.ImagePath)" alt="@item.ItemDescription" width="100px" height="100px" />
                         </td>
                         <td>@item.ItemNumber</td>
                         <td>@item.ItemDescription</td>
@@ -43,6 +44,9 @@
                         <td>@Html.ActionLink("Edit", "Edit", "Item", new { id = item.Id }, new { @class = "btn btn-primary" })</td>
                         <td>
                             @Html.ActionLink("Delete", "Delete", "Item", new { id = item.Id }, new { @class = "btn btn-danger" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Manage Suppliers", "ManageSuppliers", "Item", new { id = item.Id}, new { @class = "btn btn-warning"})
                         </td>
 
                     </tr>

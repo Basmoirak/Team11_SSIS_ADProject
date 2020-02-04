@@ -30,7 +30,10 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public string ItemCategoryId { get; set; }
         public IEnumerable<SelectListItem> ItemCategories { get; set; }
         public IEnumerable<Item> Items { get; set; }
+        public IEnumerable<Supplier> Suppliers { get; set; }
         [Display(Name = "Choose the image")]
         public string ImagePath { get; set; }
+        public IEnumerable<ItemSupplier> SuppliersByItem {get; set;}
+
     }
 }
