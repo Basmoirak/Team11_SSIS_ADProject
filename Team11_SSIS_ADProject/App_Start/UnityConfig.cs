@@ -51,8 +51,11 @@ namespace Team11_SSIS_ADProject
             //Supplier & Department
             container.RegisterType<ISupplierRepository, SupplierRepository>();
             container.RegisterType<IDepartmentRepository, DepartmentRepository>();
+            container.RegisterType<IItemSupplierRepository, ItemSupplierRepository>();
             container.RegisterType<ISupplierService, SupplierService>();
             container.RegisterType<IDepartmentService, DepartmentService>();
+            container.RegisterType<IItemSupplierService, ItemSupplierService>();
+
 
             //Items, ItemCategories and Inventory
             container.RegisterType<IItemCategoryRepository, ItemCategoryRepository>();
@@ -79,6 +82,12 @@ namespace Team11_SSIS_ADProject
             container.RegisterType<IDisbursementRepository, DisbursementRepository>();
             container.RegisterType<IDisbursementService, DisbursementService>();
             container.RegisterType<IItemDisbursementService, ItemDisbursementService>();
+
+            //Purchase Orders
+            container.RegisterType<IPurchaseOrderRepository, PurchaseOrderRepository>();
+            container.RegisterType<IPurchaseOrderService, PurchaseOrderService>();
+            container.RegisterType<IItemPurchaseOrderRepository, ItemPurchaseOrderRepository>();
+            container.RegisterType<IItemPurchaseOrderService, ItemPurchaseOrderService>();
 
             //Notifications
             container.RegisterType<INotificationRepository, NotificationRepository>();

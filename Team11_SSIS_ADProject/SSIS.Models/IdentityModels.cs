@@ -39,6 +39,11 @@ namespace Team11_SSIS_ADProject.Models
         public DbSet<ItemStockAdjustment> ItemStockAdjustments { get; set; }
         public DbSet<Disbursement> Disbursements { get; set; }
         public DbSet<ItemDisbursement> ItemDisbursements { get; set; }
+        public DbSet<ItemSupplier> ItemSuppliers { get; set; }
+
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<ItemPurchaseOrder> ItemPurchaseOrders { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

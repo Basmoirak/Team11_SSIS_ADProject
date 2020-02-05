@@ -8,11 +8,15 @@
             <h2>All Requisitions</h2>
         </div>
         <div class="box-body">
-            <p>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
-                    <i class="glyphicon glyphicon-plus"></i> Create
-                </button>
-            </p>
+            @if (User.IsInRole("Employee"))
+            {
+                <p>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                        <i class="glyphicon glyphicon-plus"></i> Create
+                    </button>
+                </p>
+            }
+
 
             <!--Modal starts-->
             <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -238,7 +242,7 @@
                                 }),
                                 dataType: "json",
                                 success: function (res) {
-                                    alert("Notification send to head successfully");
+                                    toastr.success("Notification send to head successfully");
                                 }
                             })
                             

@@ -1,0 +1,174 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.ItemViewModel
+@{
+    ViewBag.Title = "Manage Suppliers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    <style>
+        .list-group{
+            font-size: 20px;
+        }
+    </style>    
+}
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h2>Manage Supplier for @Model.ItemDescription</h2>
+        </div>
+        <div class="box-body">
+            <input type="hidden" name="itemId" id="itemId" value="@Model.Id" />
+            @if (Model.SuppliersByItem.Count() < 3)
+            {
+
+                <div id="form">
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <select class="select2" id="supplierId" required>
+                                <option value="">--Choose Supplier--</option>
+                                @foreach (var supplier in Model.Suppliers)
+                                {
+                                    <option value="@supplier.Id">@supplier.SupplierName</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input type="number" name="price" id="price" class="form-control" value="" placeholder="Enter Price" />
+                        </div>
+                        <div class="col-md-2">
+                            <button class="btn btn-primary" id="btnAddSupplier"><i class="glyphicon glyphicon-plus-sign"></i> Add Supplier</button>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+
+            }
+            <h4>Suppliers</h4>
+         
+            
+            <ul id="supplierList" class="list-group col-md-6">
+                <li style="display: none" id="p_@Model.Id"></li>
+                @foreach (var supplier in Model.SuppliersByItem)
+                {
+                    <li class="ui-state-default list-group-item" id="p_@supplier.Priority" data-id="@supplier.Id" data-priority="@supplier.Priority"><span class="glyphicon glyphicon-sort"></span>@supplier.Supplier.SupplierName  -  @supplier.Price $ <a href="#" onClick="remove('@supplier.Id')">Remove</a></li>
+                }
+
+            </ul>
+            
+            
+
+        </div>
+    </div>
+@section scripts {
+    <script>
+        $(document).ready(() => {
+            //apply sortable
+            $("#supplierList").sortable({
+                axis: 'y',
+                update: function (event, ui) {
+                    var data = []
+                    var itemId = $("#itemId").val()
+
+                    data[0] = itemId
+                    data = $(this).sortable('serialize')
+                    console.log(data)
+                    $.ajax({
+                        type: "POST",
+                        data: data,
+                        url: "/Item/ReorderPriority",
+                        success: function (res) {
+                            fetchSuppliers(itemId)
+                            toastr.success(res.message)
+                        }
+                    })
+                }
+            })
+
+            $("body").on("click", "#btnAddSupplier", function () {
+                var itemId = $("#itemId").val()
+                var supplierId = $("#supplierId :selected").val()
+                var price = $("#price").val()
+                //var priority = 1
+
+                if (supplierId == "" || price == "") {
+                    toastr.error("Please choose supplier and enter price.")
+                }
+                else {
+                    var itemSupplier = {}
+                    itemSupplier.itemId = itemId
+                    itemSupplier.supplierId = supplierId
+                    itemSupplier.price = price
+                    //itemSupplier.priority = priority
+                    $.ajax({
+                        type: "POST",
+                        url: "/Item/AssignSupplier",
+                        data: JSON.stringify({
+                            itemSupplier: itemSupplier
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (res) {
+                            $("#supplierId").val("").trigger("change")
+                            $("#price").val("")
+
+                            fetchSuppliers(itemId)
+
+                            toastr.success(res.message)
+                        }
+                    })
+                }
+            })
+        })
+
+        function remove(id) {
+            $.ajax({
+                type: "POST",
+                url: "/Item/DeleteSupplier",
+                data: {
+                    id : id
+                },
+                success: function (res) {
+                    toastr.success(res.message)
+                    $(this).parent().remove()
+                    var itemId = $("#itemId").val()
+                    fetchSuppliers(itemId)
+                }
+            })
+        }
+
+        function fetchSuppliers(itemId) {
+            $("#supplierList").empty()
+
+            $.ajax({
+                type: "GET",
+                url: "/Item/FetchSuppliers",
+                data: {
+                    id: itemId
+                },
+                success: function (res) {
+                    console.log(res.count)
+                    if (res.count == 3) {
+                        $("#form").hide()
+                    }
+                    else if(res.count < 3) {
+                        $("#form").show()
+                    }
+                    var suppliers = []
+                    suppliers = res.suppliers
+                    $("#supplierList").append("<li style='display: none' id='p_" + itemId + "'></li>")
+                    suppliers.forEach(function (i) {
+                        $("#supplierList").append("<li id = 'p_" + i.Priority + "' class='ui-state-default list-group-item'>"
+                            + "<span class='glyphicon glyphicon-sort'></span>"
+                            + i.Supplier.SupplierName + " - "
+                            + i.Price + "$"
+                            + "<a href='#' onclick='remove(\"" + i.Id + "\")'>Remove</a>"
+                            + "</li>")
+                    })
+
+                },
+ 
+            })
+        }
+    </script>
+    }

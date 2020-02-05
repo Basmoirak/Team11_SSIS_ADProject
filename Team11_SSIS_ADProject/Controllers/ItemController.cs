@@ -15,10 +15,14 @@ namespace Team11_SSIS_ADProject.Controllers
     {
         IItemCategoryService itemCategoryService;
         IItemService itemService;
-        public ItemController(IItemCategoryService itemCategoryService, IItemService itemService)
+        ISupplierService supplierService;
+        IItemSupplierService itemSupplierService;
+        public ItemController(IItemSupplierService itemSupplierService, IItemCategoryService itemCategoryService, IItemService itemService, ISupplierService supplierService)
         {
+            this.itemSupplierService = itemSupplierService;
             this.itemCategoryService = itemCategoryService;
             this.itemService = itemService;
+            this.supplierService = supplierService;
         }
 
         public ActionResult Create()
@@ -83,6 +87,86 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             itemService.Delete(id);
             return RedirectToAction("Index", "Item");
+        }
+
+        public ActionResult ManageSuppliers(string id)
+        {
+            var item = itemService.Get(id);
+            var suppliers = supplierService.GetAll();
+            var suppliersByItem = itemSupplierService.GetSuppliersByItem(id);
+            
+            var itemViewModel = new ItemViewModel()
+            {
+                Id = item.Id,
+                ItemDescription = item.ItemDescription,
+                Suppliers = suppliers,
+                SuppliersByItem = suppliersByItem
+            };
+            return View("ManageSuppliers", itemViewModel);
+        }
+
+        public ActionResult AssignSupplier(ItemSupplier itemSupplier)
+        {
+            itemSupplierService.Save(itemSupplier);
+            
+            return Json(new { message = "Added Successfully."});
+        }
+        
+        public ActionResult FetchSuppliers(string id)
+        {
+            var suppliers = itemSupplierService.GetSuppliersByItem(id);
+            int count = itemSupplierService.GetSuppliersByItem(id).Count();
+            return Json(new { suppliers = suppliers, count = count}, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteSupplier(string id)
+        {
+            string itemId = itemSupplierService.Get(id).ItemId;
+            int priority = itemSupplierService.Get(id).Priority;
+            itemSupplierService.Delete(id);
+            //reset the priority after deleting one supplier
+            ResetPriority(itemId, priority);
+            return Json(new { message = "Removed successfully."});
+        }
+
+        //reset the priority
+        public ActionResult ResetPriority(string itemId, int priority)
+        {
+            var suppliers = itemSupplierService.GetSuppliersByItem(itemId);
+            
+            suppliers.ToList().ForEach(x =>
+            {
+                if(x.Priority < priority)
+                {
+                    itemSupplierService.UpdatePriority(x.Id);
+                }
+            });
+            return Json(new { suppliers = suppliers }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ReorderPriority()
+        {
+            //string order = Request.Params["p[]"];
+            string order = Request.Params["p[]"];
+            //order of suppliers from frontend
+            var orders = order.Split(',').ToList();
+
+            
+            //get suppliers by itemId
+            var itemSuppliers = itemSupplierService.GetSuppliersByItem(orders[0]);
+
+            orders.RemoveAt(0);
+            //looping through itemSuppliers
+            int i = 0;
+            itemSuppliers.ToList().ForEach(x =>
+            {
+                //assigning updated order using service
+                itemSupplierService.UpdatePriority(x.Id, Int32.Parse(orders[i]));
+                i++;
+            });
+
+          
+            return Json(new { message = "Priority Updated" }, JsonRequestBehavior.AllowGet);
         }
         
     }
