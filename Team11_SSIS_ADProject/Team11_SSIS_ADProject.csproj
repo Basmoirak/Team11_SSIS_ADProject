@@ -438,6 +438,7 @@
     <Compile Include="SSIS.Models\ItemRequisition.cs" />
     <Compile Include="SSIS.Models\ItemStockAdjustment.cs" />
     <Compile Include="SSIS.ViewModels\DisbursementRetrievalViewModel.cs" />
+    <Compile Include="SSIS.ViewModels\PurchaseOrderViewModel.cs" />
     <Compile Include="SSIS.ViewModels\StockAdjustmentViewModel.cs" />
     <Compile Include="SSIS.ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -4496,6 +4497,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
+    <Folder Include="Views\PurchaseOrderViewModel\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
