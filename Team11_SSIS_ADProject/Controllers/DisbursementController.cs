@@ -77,5 +77,25 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return View(viewModel);
         }
+
+        [HttpPost]
+        public ActionResult ConfirmDepartmentCollection()
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+
+            var disbursements = disbursementService.GetAll()
+            .Where(x => x.Status == CustomStatus.ReadyForCollection)
+            .Where(x => x.DepartmentId == departmentId)
+            .ToList();
+
+            foreach (var d in disbursements)
+            {
+                var disbursement = disbursementService.Get(d.Id);
+                disbursement.Status = CustomStatus.CollectionComplete;
+                disbursementService.Save(disbursement);
+            }
+
+            return RedirectToAction("DepartmentCollection", "Disbursement");
+        }
     }
 }

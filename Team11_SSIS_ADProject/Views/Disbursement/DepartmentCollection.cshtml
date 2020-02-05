@@ -26,7 +26,7 @@
 
         <div class="box-body">
 
-            <table class="datatable table table-bordered table-hover">
+            <table class="datatable table table-bordered table-hover" id="collectionTable">
                 <thead>
                     <tr>
                         <th>Item Code</th>
@@ -46,7 +46,47 @@
                     }
                 </tbody>
             </table>
+
+            <p>
+                <button type="button" id="btnCollection" class="btn btn-primary">Confirm</button>
+            </p>
+
         </div>
     </div>
 }
+
+@section scripts
+{
+    <script>
+        $(document).ready(() => {
+
+            $("body").on("click", "#btnCollection", function () {
+
+                if ($("#collectionTable TBODY").children().length > 0) {
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Disbursement/ConfirmDepartmentCollection",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function () {
+
+                            //success message
+                            toastr.success("Department Collection confirmed", {
+                                progressBar : false
+                            })
+                        }
+                    })
+                }
+                else {
+                    toastr.error("You have no pending collections")
+                }
+
+            })
+        })
+
+    </script>
+}
+
+
 
