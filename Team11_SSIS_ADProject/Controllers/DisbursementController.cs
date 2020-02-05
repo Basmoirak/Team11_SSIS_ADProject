@@ -8,6 +8,7 @@ using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 using Team11_SSIS_ADProject.SSIS.Models.Extensions;
+using Team11_SSIS_ADProject.SSIS.Contracts;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
@@ -16,11 +17,13 @@ namespace Team11_SSIS_ADProject.Controllers
     {
         IDisbursementService disbursementService;
         IItemDisbursementService itemDisbursementService;
+        IInventoryService inventoryService;
 
-        public DisbursementController(IDisbursementService disbursementService, IItemDisbursementService itemDisbursementService)
+        public DisbursementController(IDisbursementService disbursementService, IItemDisbursementService itemDisbursementService, IInventoryService inventoryService)
         {
             this.disbursementService = disbursementService;
             this.itemDisbursementService = itemDisbursementService;
+            this.inventoryService = inventoryService;
         }
 
         // GET: Disbursement
@@ -83,16 +86,22 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             var departmentId = User.Identity.GetDepartmentId();
 
-            var disbursements = disbursementService.GetAll()
-            .Where(x => x.Status == CustomStatus.ReadyForCollection)
-            .Where(x => x.DepartmentId == departmentId)
-            .ToList();
+            var disbursements = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.ReadyForCollection, departmentId)
+                .ToList();
 
             foreach (var d in disbursements)
             {
                 var disbursement = disbursementService.Get(d.Id);
                 disbursement.Status = CustomStatus.CollectionComplete;
                 disbursementService.Save(disbursement);
+
+                foreach (var id in d.ItemDisbursements)
+                {
+                    var inventoryItem = inventoryService.Get(id.ItemId);
+                    inventoryItem.Quantity = inventoryItem.Quantity - id.AvailableQuantity;
+                    inventoryService.Update(inventoryItem);
+                }
             }
 
             return RedirectToAction("DepartmentCollection", "Disbursement");

@@ -13,8 +13,16 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
         {
             return _context.Disbursements
                 .Include("ItemDisbursements")
-                .Where(x => x.Status == CustomStatus.ForRetrieval)
+                .Where(x => x.Status == status)
                 .SelectMany(x => x.ItemDisbursements).ToList();
+        }
+
+        public IEnumerable<Disbursement> getAllDisbursementsByStatusAndDepartmentId(int status, string departmentId)
+        {
+            return _context.Disbursements
+                .Include("ItemDisbursements")
+                .Where(x => x.Status == status)
+                .Where(x => x.DepartmentId == departmentId);
         }
     }
 }

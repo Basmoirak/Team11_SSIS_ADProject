@@ -11,5 +11,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Services
     {
         Inventory Get(string id);
         IEnumerable<Inventory> GetAll();
+        void Update(Inventory inventory);
     }
 }

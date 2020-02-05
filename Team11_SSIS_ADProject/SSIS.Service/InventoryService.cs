@@ -24,5 +24,18 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         {
             return inventoryContext.GetAll();
         }
+
+        public void Update(Inventory inventory)
+        {
+            //Retrieve inventory item
+            var inventoryInDb = inventoryContext.Get(inventory.Id);
+
+            //If in DB, update
+            if (inventoryInDb != null)
+                inventoryInDb.Quantity = inventory.Quantity;
+
+            //Commit changes
+            inventoryContext.Commit();
+        }
     }
 }
