@@ -17,22 +17,25 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         }
         public void Delete(string Id)
         {
-            throw new NotImplementedException();
+            var purchaseOrder = purchaseOrderContext.Get(Id);
+            purchaseOrderContext.Remove(purchaseOrder);
+            purchaseOrderContext.Commit();
         }
 
         public PurchaseOrder Get(string id)
         {
-            throw new NotImplementedException();
+            return purchaseOrderContext.Get(id);
         }
 
         public IEnumerable<PurchaseOrder> GetAll()
         {
-            throw new NotImplementedException();
+            return purchaseOrderContext.GetAll();
         }
 
         public void Save(PurchaseOrder purchaseOrder)
         {
-            throw new NotImplementedException();
+            purchaseOrderContext.Add(purchaseOrder);
+            purchaseOrderContext.Commit();
         }
     }
 }

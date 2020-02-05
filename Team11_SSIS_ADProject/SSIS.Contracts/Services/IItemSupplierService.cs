@@ -13,11 +13,9 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         ItemSupplier Get(string id);
         IEnumerable<ItemSupplier> GetAll();
         void Delete(string Id);
-
         IEnumerable<ItemSupplier> GetSuppliersByItem(string Id);
-
+        IEnumerable<ItemSupplier> GetItemsLowerThanReorderLevelBySupplier(string Id);
         void UpdatePriority(string id);
-
         void UpdatePriority(string id, int order);
     }
 }

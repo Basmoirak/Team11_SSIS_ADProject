@@ -4490,6 +4490,8 @@
     <Content Include="Views\Disbursement\DepartmentCollection.cshtml" />
     <Content Include="Views\Item\ManageSuppliers.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
+    <Content Include="Views\PurchaseOrder\SupplierList.cshtml" />
+    <Content Include="Views\PurchaseOrder\PurchaseOrderForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -41,6 +41,13 @@ namespace Team11_SSIS_ADProject.SSIS.Service
                                        .ToList();
         }
 
+        public IEnumerable<ItemSupplier> GetItemsLowerThanReorderLevelBySupplier(string Id)
+        {
+            return itemSupplierContext.GetAll()
+                                      .Where(s => (s.SupplierId == Id) && (s.Item.Inventory.Quantity < s.Item.ItemReorderLevel))                        
+                                      .ToList();
+        }
+
         public void Save(ItemSupplier itemSupplier)
         {
             int count = GetSuppliersByItem(itemSupplier.ItemId).Count();
