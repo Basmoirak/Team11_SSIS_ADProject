@@ -12,6 +12,12 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public IEnumerable<GroupedItemID> GroupedItemDisbursements { get; set; }
     }
 
+    public class DisbursementRetrievalMobileViewModel
+    {
+        public IEnumerable<GroupedItemID> GroupedItemDisbursements { get; set; }
+    }
+
+
     public class GroupedItemID
     {
         public string ItemID { get; set; }

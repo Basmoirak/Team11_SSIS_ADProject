@@ -26,7 +26,10 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         [Route("api/disbursement/retrieval")]
         public IHttpActionResult GetAllPendingRetrievals()
         {
-            List<GroupedItemID> viewModel = itemDisbursementService.groupItemDisbursementByItemID().ToList(); 
+            DisbursementRetrievalMobileViewModel viewModel = new DisbursementRetrievalMobileViewModel
+            {
+                GroupedItemDisbursements = itemDisbursementService.groupItemDisbursementByItemID().ToList()
+            };
 
             return Ok(viewModel);
         }
@@ -54,7 +57,10 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         [Route("api/disbursement/collection")]
         public IHttpActionResult GetAllCollection()
         {
-            List<GroupedDepartmentCollections> viewModel = itemDisbursementService.groupItemDisbursementByDepartment().ToList();
+            CollectionsViewModel viewModel = new CollectionsViewModel
+            {
+                groupedDepartmentCollections = itemDisbursementService.groupItemDisbursementByDepartment().ToList()
+            };
 
             return Ok(viewModel);
         }
