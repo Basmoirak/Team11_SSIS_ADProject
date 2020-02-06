@@ -11,15 +11,16 @@
     </div>
 
     <div class="box-body">
-        <h3>Stock Adjustment Id : @Model.Id</h3>
-        <div class="row">
 
+        <h3>Stock Adjustment Id : @Model.Id</h3>
 
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
                         <th>Item</th>
                         <th>Adjustment</th>
+                        <th>Old Quantity</th>
+                        <th>New Quantity</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -28,6 +29,9 @@
                         <tr>
                             <td>@item.ItemId</td>
                             <td>@item.StockMovement</td>
+                            <td>@item.OldQuantity</td>
+                            <td>@item.NewQuantity</td>
+
                         </tr>
                     }
                 </tbody>

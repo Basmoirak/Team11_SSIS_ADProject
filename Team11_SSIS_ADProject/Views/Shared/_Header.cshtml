@@ -50,7 +50,7 @@
                                         </h4>
                                         <p>Why not buy a new awesome theme?</p>
                                     </a>
-                                </li>                               
+                                </li>
                             </ul>
                         </li>
                         <li class="footer"><a href="/Notification/SendNoti">Send New Notification</a></li>
@@ -181,37 +181,23 @@
                     </ul>
                 </li>
                 <!-- User Account: style can be found in dropdown.less -->
-                <li class="dropdown user user-menu">
+                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        
+
                         <span class="hidden-xs">@User.Identity.Name</span>
                     </a>
-                    <ul class="dropdown-menu">
-                        <!-- User image -->
-                        <li class="user-header">
-                            
-                            <p>
-                                @User.Identity.Name
-             
-                            </p>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li>
+                            <a href="#">Profile</a>
                         </li>
-                        
-                        </li>
-                        <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            </div>
 
-
-                            <div class="pull-right">
-                                <a href="@Url.Action("LogOut","Account")" class="btn btn-default btn-flat">Sign out</a>
-                            </div>
+                        <li>
+                            <a href="@Url.Action("LogOut","Account")">Sign out</a>
                         </li>
                     </ul>
+
                 </li>
 
-               
             </ul>
         </div>
     </nav>
