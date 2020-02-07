@@ -20,15 +20,18 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         IRequisitionService requisitionService;
         IItemRequisitionService itemRequisitionService;
         IInventoryService inventoryService;
+        IItemService itemService;
 
         public DepartmentController(IDisbursementService disbursementService ,IItemDisbursementService itemDisbursementService, 
-            IRequisitionService requisitionService, IItemRequisitionService itemRequisitionService, IInventoryService inventoryService)
+            IRequisitionService requisitionService, IItemRequisitionService itemRequisitionService, IInventoryService inventoryService,
+            IItemService itemService)
         {
             this.disbursementService = disbursementService;
             this.itemDisbursementService = itemDisbursementService;
             this.requisitionService = requisitionService;
             this.itemRequisitionService = itemRequisitionService;
             this.inventoryService = inventoryService;
+            this.itemService = itemService;
         }
 
 
@@ -36,7 +39,7 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         //Get Requisitions requested by the caller's department for mobile
         [HttpPost]
         [Route("api/department/requisition")]
-        public IHttpActionResult GetRequsitionsForDepartment([FromBody] EmailViewModel viewModel)
+        public IHttpActionResult GetRequisitionsForDepartment([FromBody] EmailViewModel viewModel)
         {
             List<Requisition> requisitions = requisitionService.getAllPendingRequisitionsByDepartment(viewModel.DepartmentId).ToList();
 
@@ -53,6 +56,23 @@ namespace Team11_SSIS_ADProject.Controllers.Api
             }).ToList();
 
             return Ok(requisitionViewModel);
+        }
+
+        //Get itemrequisition details
+        [HttpPost]
+        [Route("api/department/requisitiondetails")]
+        public IHttpActionResult GetRequisitionDetails([FromBody] RequisitionMobileViewModel viewModel)
+        {
+            List<ItemRequisition> itemRequisitions = itemRequisitionService.GetAllByRequisitionId(viewModel.RequisitionId).ToList();
+
+            List<RequisitionDetailsMobileViewModel> itemRequsitionViewModel = itemRequisitions.Select(ir => new RequisitionDetailsMobileViewModel()
+            {
+                ItemCode = ir.ItemId,
+                Description = itemService.Get(ir.ItemId).ItemDescription,
+                Quantity = ir.Quantity
+            }).ToList();
+
+            return Ok(itemRequsitionViewModel);  
         }
 
         //Approve requisition
@@ -98,7 +118,7 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         [Route("api/department/collection")]
         public IHttpActionResult GetDisbursementCollectionByDepartment([FromBody] EmailViewModel viewModel)
         {
-            List<GroupedDepartmentCollections> collection = itemDisbursementService.GetDepartmentCollection(viewModel.DepartmentId).ToList();
+            GroupedDepartmentCollections collection = itemDisbursementService.GetDepartmentCollection(viewModel.DepartmentId).FirstOrDefault();
 
             return Ok(collection);
         }

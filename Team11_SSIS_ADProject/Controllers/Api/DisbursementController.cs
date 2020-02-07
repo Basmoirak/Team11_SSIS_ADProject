@@ -26,12 +26,7 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         [Route("api/disbursement/retrieval")]
         public IHttpActionResult GetAllPendingRetrievals()
         {
-            DisbursementRetrievalMobileViewModel viewModel = new DisbursementRetrievalMobileViewModel
-            {
-                GroupedItemDisbursements = itemDisbursementService.groupItemDisbursementByItemID().ToList()
-            };
-
-            return Ok(viewModel);
+            return Ok(itemDisbursementService.groupItemDisbursementByItemID().ToList());
         }
 
         [HttpPost]
