@@ -26,6 +26,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
 
     public class RequisitionMobileViewModel
     {
+        public string DepartmentId { get; set; }
         public string RequisitionId { get; set; }
         public string Remarks { get; set; }
         public int Status { get; set; }

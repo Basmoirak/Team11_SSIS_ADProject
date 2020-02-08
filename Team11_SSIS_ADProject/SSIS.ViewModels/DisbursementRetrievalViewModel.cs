@@ -47,4 +47,18 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public int RequestedQuantity { get; set; }
         public int AvailableQuantity { get; set; }
     }
+
+    public class MobileCollectionsViewModel
+    {
+        public IEnumerable<MobileGroupedDepartmentCollections> groupedDepartmentCollections { get; set; }
+    }
+
+    public class MobileGroupedDepartmentCollections
+    {
+        public string DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
+        public string CollectionPoint { get; set; }
+        public IEnumerable<GroupedItemCollection> ItemDisbursements { get; set; }
+    }
+
 }

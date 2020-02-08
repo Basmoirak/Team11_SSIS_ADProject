@@ -52,9 +52,9 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         [Route("api/disbursement/collection")]
         public IHttpActionResult GetAllCollection()
         {
-            CollectionsViewModel viewModel = new CollectionsViewModel
+            MobileCollectionsViewModel viewModel = new MobileCollectionsViewModel
             {
-                groupedDepartmentCollections = itemDisbursementService.groupItemDisbursementByDepartment().ToList()
+                groupedDepartmentCollections = itemDisbursementService.groupItemDisbursementByDepartmentMobile().ToList()
             };
 
             return Ok(viewModel);
