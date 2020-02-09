@@ -32,9 +32,24 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             return purchaseOrderContext.GetAll();
         }
 
+        public int getPendingOrderCount()
+        {
+            return purchaseOrderContext.getPendingOrderCount();
+        }
+
         public void Save(PurchaseOrder purchaseOrder)
         {
-            purchaseOrderContext.Add(purchaseOrder);
+            PurchaseOrder po = purchaseOrderContext.Get(purchaseOrder.Id);
+            if(po == null)
+            {
+                purchaseOrderContext.Add(purchaseOrder);
+            }
+            else
+            {
+                po.Remark = purchaseOrder.Remark;
+                po.Status = purchaseOrder.Status;
+                po.ExpectedDate = purchaseOrder.ExpectedDate;
+            }
             purchaseOrderContext.Commit();
         }
     }

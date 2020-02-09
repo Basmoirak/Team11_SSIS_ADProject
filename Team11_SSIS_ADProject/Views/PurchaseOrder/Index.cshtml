@@ -7,18 +7,19 @@
         <div class="box-header with-border">
             <h2>All Purchase Orders</h2>
             <p>
-                <a class="btn btn-primary" href="/PurchaseOrder/SupplierList">
+                <a class="btn btn-primary" href="@Url.Action("PurchaseOrderForm", "PurchaseOrder")">
                     <i class="glyphicon glyphicon-plus"></i> Create
                 </a>
             </p>
         </div>
         <div class="box-body">
-            <table class="table table-hover table-bordered" id="purchaseOrderTable">
+            <table class="table table-hover table-bordered datatable" id="purchaseOrderTable">
                 <thead>
                     <tr>
-                        <th>Created Time</th>
-                        <th>Expected Date</th>
+                        <th>Created Date</th>
+
                         <th>Supplier</th>
+                        <th>Status</th>
                         <th>Remark</th>
                         <th></th>
                     </tr>
@@ -27,9 +28,27 @@
                     @foreach (var item in Model.PurchaseOrders)
                     {
                         <tr>
-                            <td>@item.createdDateTime</td>
-                            <td>@item.ExpectedDate</td>
+                            <td>@item.createdDateTime.ToString("dd MMMM yyyy")</td>
+
                             <td>@item.Supplier.SupplierName</td>
+                            <td>
+                                @if (item.Status == 0)
+                                {
+                                    <span class="label label-danger">Cancelled</span>
+                                }
+                                else if (item.Status == 1)
+                                {
+                                    <span class="label label-warning">Pending Approval</span>
+                                }
+                                else if (item.Status == 9)
+                                {
+                                    <span class="label label-success">Completed</span>
+                                }
+                                else
+                                {
+                                    <span>N/A</span>
+                                }
+                            </td>
                             <td>@item.Remark</td>
                             <td><a class="btn btn-info" href="@Url.Action("Details", "PurchaseOrder", new { id = item.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                         </tr>

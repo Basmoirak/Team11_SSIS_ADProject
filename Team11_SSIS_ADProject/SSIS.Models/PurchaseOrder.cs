@@ -10,11 +10,11 @@ namespace Team11_SSIS_ADProject.SSIS.Models
     {
         [Required]
         public string SupplierId { get; set; }
-        [Required]
         public DateTime ExpectedDate { get; set; }
         [Required]
         public int Status { get; set; }
-        public Supplier Supplier { get; set; }
+        public virtual Supplier Supplier { get; set; }
         public string Remark { get; set; }
+        public IEnumerable<ItemPurchaseOrder> ItemPurchaseOrders { get; set; }
     }
 }

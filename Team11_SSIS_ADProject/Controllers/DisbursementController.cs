@@ -54,7 +54,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 disbursementService.Save(disbursement);
             }
 
-            return RedirectToAction("Index","Disbursement");
+            return Json(new { message = "Successfully Disbursed." });
         }
 
         [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]

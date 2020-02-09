@@ -16,5 +16,6 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public const int FullDisbursement = 6;
         public const int ReadyForCollection = 7;
         public const int CollectionComplete = 8;
+        public const int Completed = 9;
     }
 }

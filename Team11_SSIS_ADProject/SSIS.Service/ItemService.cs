@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.SSIS.Service
 {
@@ -52,6 +53,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
                 i.ImagePath = item.ImagePath;
             }
             itemContext.Commit();
+        }
+        public IEnumerable<ItemPurchaseOrderViewModel> GetItemsLowerThanReorderLevel()
+        {
+            return itemContext.GetItemsLowerThanReorderLevel();
         }
 
         public IEnumerable<SelectListItem> GetItemList()
