@@ -369,6 +369,10 @@
     <Compile Include="Migrations\202002071148451_remove required in datetime purchaseorder.designer.cs">
       <DependentUpon>202002071148451_remove required in datetime purchaseorder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002090725420_change status into integer in department delegation.cs" />
+    <Compile Include="Migrations\202002090725420_change status into integer in department delegation.designer.cs">
+      <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -411,12 +415,14 @@
     <Compile Include="SSIS.Models\ItemPurchaseOrder.cs" />
     <Compile Include="SSIS.Models\ItemSupplier.cs" />
     <Compile Include="SSIS.Models\PurchaseOrder.cs" />
+    <Compile Include="SSIS.Repository\DepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Repository\DisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemDisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\ItemSupplierRepository.cs" />
     <Compile Include="SSIS.Repository\PurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\UserRepository.cs" />
+    <Compile Include="SSIS.Service\DepartmentDelegationService.cs" />
     <Compile Include="SSIS.Service\DisbursementService.cs" />
     <Compile Include="SSIS.Service\InventoryService.cs" />
     <Compile Include="SSIS.Service\ItemDisbursementService.cs" />
@@ -441,6 +447,7 @@
     <Compile Include="SSIS.Models\ItemCategory.cs" />
     <Compile Include="SSIS.Models\ItemRequisition.cs" />
     <Compile Include="SSIS.Models\ItemStockAdjustment.cs" />
+    <Compile Include="SSIS.ViewModels\DepartmentDelegationViewModel.cs" />
     <Compile Include="SSIS.ViewModels\DisbursementRetrievalViewModel.cs" />
     <Compile Include="SSIS.ViewModels\PurchaseOrderViewModel.cs" />
     <Compile Include="SSIS.ViewModels\StockAdjustmentViewModel.cs" />
@@ -4497,6 +4504,7 @@
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
     <Content Include="Views\PurchaseOrder\PurchaseOrderForm.cshtml" />
     <Content Include="Views\PurchaseOrder\Details.cshtml" />
+    <Content Include="Views\Department\ManageDelegation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4603,6 +4611,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002071148451_remove required in datetime purchaseorder.resx">
       <DependentUpon>202002071148451_remove required in datetime purchaseorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002090725420_change status into integer in department delegation.resx">
+      <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -49,7 +49,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="@Url.Action("Index", "PurchaseOrder")"><i class="fa fa-circle-o"></i>List All</a></li>                     
+                        <li><a href="@Url.Action("Index", "PurchaseOrder")"><i class="fa fa-circle-o"></i>List All</a></li>
                     </ul>
                 </li>
             }
@@ -81,6 +81,19 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="@Url.Action("DepartmentCollection", "Disbursement")"><i class="fa fa-circle-o"></i>Collection</a></li>
+                    </ul>
+                </li>
+
+                <!--Department Delegation-->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-shopping-bag"></i> <span>Delegation</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("Delegation", "Department")"><i class="fa fa-circle-o"></i>Manage Delegations</a></li>
                     </ul>
                 </li>
             }

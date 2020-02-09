@@ -9,6 +9,5 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class DepartmentDelegationRepository : Repository<DepartmentDelegation>, IDepartmentDelegationRepository
     {
-       
     }
 }
