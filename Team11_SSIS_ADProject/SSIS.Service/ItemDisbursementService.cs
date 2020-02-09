@@ -64,6 +64,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             return itemDisbursementContext.groupItemDisbursementByDepartment();
         }
 
+        public IEnumerable<MobileGroupedDepartmentCollections> groupItemDisbursementByDepartmentMobile()
+        {
+            return itemDisbursementContext.groupItemDisbursementByDepartmentMobile();
+        }
+
         public IEnumerable<GroupedItemID> groupItemDisbursementByItemID()
         {
             return itemDisbursementContext.groupItemDisbursementByItemID();

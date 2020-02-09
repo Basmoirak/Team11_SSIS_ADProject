@@ -85,5 +85,33 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 
             return grouped;
         }
+
+        public IEnumerable<MobileGroupedDepartmentCollections> groupItemDisbursementByDepartmentMobile()
+        {
+            var grouped = _context.Disbursements
+                .Include("Departments")
+                .Include("ItemDisbursements")
+                .Include("Items")
+                .Where(x => x.Status == CustomStatus.ReadyForCollection)
+                .GroupBy(x => x.Department)
+                .Select(group => new MobileGroupedDepartmentCollections
+                {
+                    DepartmentId = group.Key.Id,
+                    DepartmentName = group.Key.DepartmentName,
+                    CollectionPoint = group.Key.DepartmentCollectionPoint,
+                    ItemDisbursements = group.SelectMany(x => x.ItemDisbursements)
+                                             .GroupBy(x => x.Item)
+                                             .Select(collection => new GroupedItemCollection
+                                             {
+                                                 ItemID = collection.Key.Id,
+                                                 ItemCode = collection.Key.ItemNumber,
+                                                 ItemDescription = collection.Key.ItemDescription,
+                                                 AvailableQuantity = collection.Sum(x => x.AvailableQuantity),
+                                                 RequestedQuantity = collection.Sum(x => x.RequestedQuantity)
+                                             }).ToList()
+                }).ToList();
+
+            return grouped;
+        }
     }
 }
