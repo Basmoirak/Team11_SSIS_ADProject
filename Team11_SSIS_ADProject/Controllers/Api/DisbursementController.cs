@@ -30,8 +30,8 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         }
 
         [HttpPost]
-        [Route("api/disbursement/approveretrieval")]
-        public IHttpActionResult ApprovePendingRetrievals()
+        [Route("api/disbursement/confirmretrieval")]
+        public IHttpActionResult ConfirmPendingRetrievals()
         {
             var disbursements = disbursementService.GetAll()
                 .Where(x => x.Status == CustomStatus.ForRetrieval)

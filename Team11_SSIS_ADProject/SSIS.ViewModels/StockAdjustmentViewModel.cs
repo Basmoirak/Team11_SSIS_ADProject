@@ -34,5 +34,13 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public IEnumerable<ItemStockAdjustment> itemStockAdjustments { get; set; }
     }
 
+    public class MobileStockAdjustment
+    {
+        public string StockAdjustmentId { get; set; }
+        public string ItemId { get; set; }
+        public string CreatedBy { get; set; }
+        public string Remarks { get; set; }
+        public int Movement { get; set; }
+    }
 
 }
