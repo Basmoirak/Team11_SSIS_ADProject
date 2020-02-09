@@ -11,7 +11,7 @@
     </div>
 
     <div class="box-body">
-        <table class="table table-striped" style="width: 2px" id="ir_table">
+        <table class="table table-striped"  id="ir_table">
             <thead>
                 <tr>
                     <th>Item</th>
@@ -23,19 +23,11 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td>
-                        <select class="select2" id="itemId" required>
-                            <option id="default" value="">--Select an item--</option>
-                            @{
-                                foreach (var item in Model.Items)
-                                {
-                                    <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
-                                }
-                            }
-                        </select>
+                    <td id="imagesModalButton">
+                        <button data-toggle="modal" data-target="#imagesModal" class="btn btn-primary" id="showImages">Choose Item</button>
                     </td>
                     <td>
-                        @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", id = "quantity" } })
+                        @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "", id = "quantity" } })
                     </td>
 
                     <td>
@@ -44,6 +36,36 @@
                 </tr>
             </tfoot>
         </table>
+        <!--Image Modal starts-->
+        <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLabel">
+                            Choose Item <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </h3>
+
+                    </div>
+                    <div class="modal-body">
+                        <select class="image-picker show-html" id="itemId" required>
+                            <option id="default" value="">--Select an item--</option>
+                            @{
+                                foreach (var item in Model.Items)
+                                {
+                                    <option value="@item.Id" data-img-src="@Url.Content(item.ImagePath)" data-img-class="first" data-img-alt="Page 1">@item.ItemDescription</option>
+                                }
+                            }
+                        </select>
+
+                        <!--Modal body ends**-->
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        
         <hr />
         <div class="row">
             <div class="col-md-6">
@@ -62,8 +84,35 @@
 
 @section scripts
 {
+    
     <script>
+    
         $(document).ready(() => {
+            $("#itemId").imagepicker({
+                show_label: true,
+                clicked: function () {
+                    var selected = $("#itemId option:selected").text()
+                    console.log(selected)
+                    $("#imagesModalButton").html(selected +"<button class='btn btn-default' id='removeSelected'>Remove Selection</button>")
+                    
+              }
+            })
+
+            $(".thumbnails li img").click(function () {
+                
+                $("#imagesModal").modal("hide")
+                $("#quantity").focus()
+                $("#quantity").val("")
+            })
+
+            function resetItemIdField() {
+                $("#imagesModalButton").html('<button data-toggle="modal" data-target="#imagesModal" class="btn btn-primary" id="showImages">Choose Item</button>')
+            }
+
+            $("#removeSelected").click(function () {
+                console.log(this)
+            })
+            
             $("body").on("click", "#btnAdd", function () {
    
                 //get data from ids
@@ -76,6 +125,8 @@
                     toastr.error("Please choose item and enter quantity.")
                 }
                 else {
+                    //get back chooseitem button
+                    resetItemIdField()
                     //get tbody
                     var tBody = $("#ir_table > tbody")[0]
 
@@ -116,7 +167,7 @@
              
                 if ($("#ir_table TBODY").children().length > 0) {
                     $("#ir_table TBODY TR").each(function () {
-                        var row = $(this)
+                        var row = $(this)  
                         var itemRequisition = {}
                         itemRequisition.ItemId = $("#itemIdField").val()
 

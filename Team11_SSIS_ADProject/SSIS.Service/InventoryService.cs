@@ -37,5 +37,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             //Commit changes
             inventoryContext.Commit();
         }
+
+        public void Save(Inventory inventory)
+        {
+            inventoryContext.Add(inventory);
+            inventoryContext.Commit();
+        }
     }
 }

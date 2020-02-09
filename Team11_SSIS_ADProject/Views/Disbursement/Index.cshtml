@@ -94,25 +94,24 @@
             $("body").on("click", "#btnDisbursement", function () {
                 var disbursements = new Array()
 
-                if ($("#disbursementTable TBODY").children().length > 0) {
+                 console.log("fuck")
 
                     $.ajax({
                         type: "POST",
                         url: "/Disbursement/Disburse",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        success: function () {
+                        success: function (res) {
 
-                            //success message
-                            toastr.success("Retrievals sent for disbursement collection", {
+                            toastr.success(res.message, {
                                 progressBar : false
                             })
+                            setTimeout(() => {
+                                window.location.replace("/Disbursement");
+                            }, 1500)
                         }
                     })
-                }
-                else {
-                    toastr.error("You have no disbursements")
-                }
+                
 
             })
         })

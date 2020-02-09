@@ -1,0 +1,151 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.PurchaseOrderViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Details";
+    var style = "";
+    if(Model.Status == 0)
+    {
+        style = "opacity: 0.5;";
+    }
+}
+
+
+    <div class="box box-primary" style="@style">
+        <div class="box-header with-border">
+            <h2>
+                PO - @Model.Id
+                <small id="status">
+                    @if (Model.Status == 1)
+                    {
+                        <span class="label label-warning">
+                            Pending Approval
+                        </span>
+                    }
+                    @if (Model.Status == 9)
+                    {
+                        <span class="label label-success">
+                            Confimed
+                        </span>
+                    }
+                    @if (Model.Status == 0)
+                    {
+                        <span class="label label-danger">
+                            Cancelled
+                        </span>
+                    }
+                </small>
+                   
+
+            </h2>
+        </div>
+        <div class="box-body">
+            <input type="hidden" id="purchaseOrderId" value="@Model.Id"/>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Supplier Information</strong><br />
+                    @Model.Supplier.SupplierName<br />
+                    @Model.Supplier.SupplierContactName <br />
+                    <i>@Model.Supplier.SupplierAddress</i> <br />
+                    @Model.Supplier.SupplierPhone
+                </div>
+                <div class="col-md-6 text-right">
+                    <strong>Order Date</strong><br />
+                    @Model.createdDateTime.ToString("dd MMMM yyyy, dddd")
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><strong>Order Summary</strong></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div>
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left">Item</th>
+                                            <th class="text-center">Price</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-right">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var i in Model.ItemPurchaseOrders)
+                                        {
+                                            <tr>
+                                                <td class="text-left">@i.Item.ItemDescription</td>
+                                                <td class="text-center">$ @i.Price</td>
+                                                <td class="text-center">@i.Quantity</td>
+                                                <td class="text-right">$ @(i.Quantity * @i.Price)</td>
+                                            </tr>
+                                        }
+                                        <tr>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line"></td>
+                                            <td class="thick-line text-center"><strong>Grand Total</strong></td>
+                                            <td class="thick-line text-right">$ @Model.ItemPurchaseOrders.Sum(x => x.Quantity*x.Price)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box-footer">
+            @if (Model.Status == 1)
+            {
+                <button class="btn btn-success" id="confirm" onclick="return confirm('Are you sure? You cannot undo.')"><i class="glyphicon glyphicon-ok-circle"></i> Confirm</button>
+                <button class="btn btn-danger" id="cancel" onclick="return confirm('Are you sure? The action cannot be undone.')"><i class="glyphicon glyphicon-remove"></i> Cancel</button>
+            }
+        <a class="btn btn-info" href="/PurchaseOrder"><i class="glyphicon glyphicon-list"></i> See all</a>
+        </div>
+    </div>
+
+@section scripts{
+    <script>
+        $(document).ready(() => {
+            //confirm function
+            $("#confirm").click(function () {
+                var itemId = $("#purchaseOrderId").val()
+                $.ajax({
+                    type: "POST",
+                    url: "/PurchaseOrder/Confirm",
+                    data: JSON.stringify({
+                        id: itemId
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        toastr.success(res.message)
+                        $("#status").html("<span class='label label-success'>Confimed</span>")
+                        $("#confirm").hide()
+                    }
+                })
+            })
+            //cancel function
+            $("#cancel").click(function () {
+                var itemId = $("#purchaseOrderId").val()
+                $.ajax({
+                    type: "POST",
+                    url: "/PurchaseOrder/Cancel",
+                    data: JSON.stringify({
+                        id: itemId
+                    }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (res) {
+                        toastr.error(res.message)
+                        $("#status").html("<span class='label label-danger'>Cancelled</span>")
+                        $("#confirm").hide()
+                        $("#cancel").hide()
+                        $(".box").css("opacity", "0.5")
+                    }
+                })
+            })
+        })
+    </script>
+    }

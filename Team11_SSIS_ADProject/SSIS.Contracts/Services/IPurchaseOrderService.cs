@@ -13,5 +13,7 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Services
         PurchaseOrder Get(string id);
         IEnumerable<PurchaseOrder> GetAll();
         void Delete(string Id);
+
+        int getPendingOrderCount();
     }
 }

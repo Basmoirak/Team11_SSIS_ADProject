@@ -24,5 +24,6 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public string InventoryId { get; set; }
         public virtual Inventory Inventory { get; set; }
         public string ImagePath { get; set; }
+        public ICollection<ItemSupplier> ItemSuppliers { get; set; }
     }
 }

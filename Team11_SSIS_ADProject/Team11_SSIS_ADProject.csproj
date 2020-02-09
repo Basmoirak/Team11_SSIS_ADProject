@@ -365,6 +365,10 @@
     <Compile Include="Migrations\202002040428465_drop departmentId from purchaseorder.designer.cs">
       <DependentUpon>202002040428465_drop departmentId from purchaseorder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002071148451_remove required in datetime purchaseorder.cs" />
+    <Compile Include="Migrations\202002071148451_remove required in datetime purchaseorder.designer.cs">
+      <DependentUpon>202002071148451_remove required in datetime purchaseorder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -4491,13 +4495,12 @@
     <Content Include="Views\Disbursement\DepartmentCollection.cshtml" />
     <Content Include="Views\Item\ManageSuppliers.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
-    <Content Include="Views\PurchaseOrder\SupplierList.cshtml" />
     <Content Include="Views\PurchaseOrder\PurchaseOrderForm.cshtml" />
+    <Content Include="Views\PurchaseOrder\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\PurchaseOrderViewModel\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -4597,6 +4600,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002040428465_drop departmentId from purchaseorder.resx">
       <DependentUpon>202002040428465_drop departmentId from purchaseorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002071148451_remove required in datetime purchaseorder.resx">
+      <DependentUpon>202002071148451_remove required in datetime purchaseorder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

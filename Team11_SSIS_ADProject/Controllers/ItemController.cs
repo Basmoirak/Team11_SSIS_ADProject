@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Team11_SSIS_ADProject.Helpers;
 using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 
@@ -17,12 +19,14 @@ namespace Team11_SSIS_ADProject.Controllers
         IItemService itemService;
         ISupplierService supplierService;
         IItemSupplierService itemSupplierService;
-        public ItemController(IItemSupplierService itemSupplierService, IItemCategoryService itemCategoryService, IItemService itemService, ISupplierService supplierService)
+        IInventoryService inventoryService;
+        public ItemController(IInventoryService inventoryService, IItemSupplierService itemSupplierService, IItemCategoryService itemCategoryService, IItemService itemService, ISupplierService supplierService)
         {
             this.itemSupplierService = itemSupplierService;
             this.itemCategoryService = itemCategoryService;
             this.itemService = itemService;
             this.supplierService = supplierService;
+            this.inventoryService = inventoryService;
         }
 
         public ActionResult Create()
@@ -55,6 +59,14 @@ namespace Team11_SSIS_ADProject.Controllers
                 }
             }
             itemService.Save(item);
+
+            //creating new inventory row upon creating new item
+            var inventory = new Inventory()
+            {
+                Id = item.Id,
+                Quantity = 0
+            };
+            inventoryService.Save(inventory);
 
             return RedirectToAction("Index", "Item");
         }
@@ -111,12 +123,25 @@ namespace Team11_SSIS_ADProject.Controllers
             
             return Json(new { message = "Added Successfully."});
         }
-        
+
         public ActionResult FetchSuppliers(string id)
         {
             var suppliers = itemSupplierService.GetSuppliersByItem(id);
             int count = itemSupplierService.GetSuppliersByItem(id).Count();
-            return Json(new { suppliers = suppliers, count = count}, JsonRequestBehavior.AllowGet);
+
+            return Json(new
+            {
+                suppliers = suppliers.Select(x => new
+                    {
+                        Id = x.Id,
+                        ItemId = x.ItemId,
+                        Priority = x.Priority,
+                        SupplierName = x.Supplier.SupplierName,
+                        Price = x.Price
+                    }
+                ),
+                count = count
+            }, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult DeleteSupplier(string id)

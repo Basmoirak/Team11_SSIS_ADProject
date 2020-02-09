@@ -9,5 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
     public interface IItemSupplierRepository : IRepository<ItemSupplier>
     {
+        double GetItemPriceBySupplierIdAndItemId(string itemId, string supplierId);
     }
 }
