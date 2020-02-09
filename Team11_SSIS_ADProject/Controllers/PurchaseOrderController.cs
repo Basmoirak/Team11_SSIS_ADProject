@@ -136,5 +136,34 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return Json(new { message = "Order has been cancelled." });
         }
+
+        public ActionResult PurchaseOrderPendingList()
+        {
+            var purchaseOrderViewModel = new PurchaseOrderViewModel()
+            {
+                PurchaseOrders = purchaseOrderService.GetAll().Where(po=>po.Status==CustomStatus.PendingApproval).OrderByDescending(r => r.createdDateTime)
+            };
+            ViewBag.PoView = "Showing Results for Pending List";
+            return View("Index", purchaseOrderViewModel);
+        }
+        public ActionResult PurchaseOrderCancelledList()
+        {
+            var purchaseOrderViewModel = new PurchaseOrderViewModel()
+            {
+                PurchaseOrders = purchaseOrderService.GetAll().Where(po => po.Status == CustomStatus.Cancelled).OrderByDescending(r => r.createdDateTime)
+            };
+            ViewBag.PoView = "Showing Results for Cancelled List";
+            return View("Index", purchaseOrderViewModel);
+        }
+        public ActionResult PurchaseOrderCompletedList()
+        {
+            var purchaseOrderViewModel = new PurchaseOrderViewModel()
+            {
+                PurchaseOrders = purchaseOrderService.GetAll().Where(po => po.Status == CustomStatus.Completed).OrderByDescending(r => r.createdDateTime)
+            };
+            ViewBag.PoView = "Showing Results for Completed List";
+            return View("Index", purchaseOrderViewModel);
+        }
+        
     }
 }

@@ -6,88 +6,20 @@
     <div class="box box-primary">
         <div class="box-header with-border">
             <h2>All Requisitions</h2>
-        </div>
-        <div class="box-body">
+
             @if (User.IsInRole("Employee"))
             {
                 <p>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">
+                    <a class="btn btn-primary" href="@Url.Action("Create", "Requisition")">
                         <i class="glyphicon glyphicon-plus"></i> Create
-                    </button>
+                    </a>
                 </p>
             }
 
-
-            <!--Modal starts-->
-            <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3 class="modal-title" id="exampleModalLabel">
-                                Create new requisition <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </h3>
-
-                        </div>
-                        <div class="modal-body">
-                            <!--**Modal body starts-->
-                            <table class="table table-striped" id="ir_table">
-                                <thead>
-                                    <tr>
-                                        <th>Item</th>
-                                        <th>Quantity</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td>
-                                            <select class="select2" id="itemId" required>
-                                                <option id="default" value="">--Select an item--</option>
-                                                @{
-                                                    foreach (var item in Model.Items)
-                                                    {
-                                                        <option value="@item.Id" style="background-image:url(@Url.Content(item.ImagePath));">@item.ItemDescription</option>
-                                                    }
-                                                }
-
-                                            </select>
-                                        </td>
-                                        <td>
-                                            @Html.EditorFor(i => i.Quantity, new { htmlAttributes = new { @type = "number", @min = "0", @step = "1", @value = "0", id = "quantity" } })
-                                        </td>
-
-                                        <td>
-                                            <button class="btn btn-success" id="btnAdd"><i class="glyphicon glyphicon-plus-sign"></i>Add</button>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                            </table>
-                            <hr />
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="remark">Remark</label>
-                                        <textarea class="form-control" id="remark" placeholder="Optional"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--Modal body ends**-->
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" id="btnSave" class="btn btn-primary">Submit</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Modal ends-->
-
-            <table class="table table-hover table-bordered" id="requisitionTable">
+        </div>
+        <h3 style="text-align:center">@ViewBag.RView</h3>
+        <div class="box-body">
+            <table class="table table-hover table-bordered datatable" id="requisitionTable">
                 <thead>
                     <tr>
                         <th>Created Time</th>
@@ -100,7 +32,7 @@
                     @foreach (var item in Model.Requisitions)
                     {
                         <tr>
-                            <td>@item.createdDateTime</td>
+                            <td>@item.createdDateTime.ToString("dd-MMMM-yyyy h:mm tt")</td>
                             <td>@item.Department.DepartmentName</td>
                             @if (item.Status == 1)
                             {
@@ -120,6 +52,20 @@
                 </tbody>
 
             </table>
+            <p>
+                <a class="btn btn-warning" href="@Url.Action("RequisitionPendingList", "Requisition")">
+                    <i class="glyphicon glyphicon-list"></i> Pending List
+                </a>
+                <a class="btn btn-danger" href="@Url.Action("RequisitionRejectedList", "Requisition")">
+                    <i class="glyphicon glyphicon-list"></i> Rejected List
+                </a>
+                <a class="btn btn-success" href="@Url.Action("RequisitionApprovedList", "Requisition")">
+                    <i class="glyphicon glyphicon-list"></i> Approved List
+                </a>
+                <a class="btn btn-primary" href="@Url.Action("Index", "Requisition")">
+                    <i class="glyphicon glyphicon-list"></i> See All
+                </a>
+            </p>
         </div>
     </div>
 
@@ -210,16 +156,16 @@
                                 "<tr>"
                                 + "<td>"
                                 + "<span class='label label-success' style='width: 100px'>"
-                                +"New"
-                                +"</span>"
+                                + "New"
+                                + "</span>"
                                 + "</td>"
                                 + "<td>"
-                                +res.dept.DepartmentName
+                                + res.dept.DepartmentName
                                 + "</td>"
                                 + "<td>"
-                                +"<span class='label label-warning'>Pending Approval</span>"
-                                +"</td>"
-                                +"</tr>"
+                                + "<span class='label label-warning'>Pending Approval</span>"
+                                + "</td>"
+                                + "</tr>"
                             )
                             //hide the modal
                             $("#createModal").modal("hide")
@@ -231,7 +177,7 @@
                             $("#itemId").val("").trigger("change")
                             //success message
                             toastr.success("Requisition ID-" + res.id + " successfully created.", {
-                                progressBar : false
+                                progressBar: false
                             })
                             $.ajax({
                                 type: "POST",
@@ -245,12 +191,12 @@
                                     toastr.success("Notification send to head successfully");
                                 }
                             })
-                            
+
                         }
                     })
                 }
                 else {
-                    
+
                     toastr.error("You have no items to request.")
                 }
 
@@ -258,15 +204,15 @@
         })
         function Remove(button) {
 
-                    var row = $(button).closest("TR");
-                    var name = $("TD", row).eq(0).html();
-                    if (confirm("Do you want to delete: " + name)) {
-                        //Get the reference of the Table.
-                        var table = $("#ir_table")[0];
+            var row = $(button).closest("TR");
+            var name = $("TD", row).eq(0).html();
+            if (confirm("Do you want to delete: " + name)) {
+                //Get the reference of the Table.
+                var table = $("#ir_table")[0];
 
-                        //Delete the Table row using it's Index.
-                        table.deleteRow(row[0].rowIndex);
-                    }
+                //Delete the Table row using it's Index.
+                table.deleteRow(row[0].rowIndex);
+            }
         }
     </script>
 }

@@ -211,5 +211,35 @@ namespace Team11_SSIS_ADProject.Controllers
             }
             return newItemDisbursementList;
         }
+        public ActionResult RequisitionPendingList()
+        {
+            var requistionViewModel = new RequisitionViewModel()
+            {
+                Items = itemService.GetAll(),
+                Requisitions = requisitionService.GetAll().Where(r=>r.Status==CustomStatus.PendingApproval).OrderByDescending(r => r.createdDateTime)
+            };
+            ViewBag.RView = "Showing Results for Pending List";
+            return View("Index", requistionViewModel);
+        }
+        public ActionResult RequisitionRejectedList()
+        {
+            var requistionViewModel = new RequisitionViewModel()
+            {
+                Items = itemService.GetAll(),
+                Requisitions = requisitionService.GetAll().Where(r => r.Status == CustomStatus.Rejected).OrderByDescending(r => r.createdDateTime)
+            };
+            ViewBag.RView = "Showing Results for Rejected List";
+            return View("Index", requistionViewModel);
+        }
+        public ActionResult RequisitionApprovedList()
+        {
+            var requistionViewModel = new RequisitionViewModel()
+            {
+                Items = itemService.GetAll(),
+                Requisitions = requisitionService.GetAll().Where(r => r.Status == CustomStatus.Approved).OrderByDescending(r => r.createdDateTime)
+            };
+            ViewBag.RView = "Showing Results for Approved List";
+            return View("Index", requistionViewModel);
+        }
     }
 }
