@@ -377,6 +377,10 @@
     <Compile Include="Migrations\202002091511217_SeedNewUsers.designer.cs">
       <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002101438385_addNewRole.cs" />
+    <Compile Include="Migrations\202002101438385_addNewRole.designer.cs">
+      <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -4621,6 +4625,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002091511217_SeedNewUsers.resx">
       <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002101438385_addNewRole.resx">
+      <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

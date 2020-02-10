@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Team11_SSIS_ADProject.Models;
 using Team11_SSIS_ADProject.SSIS.Models;
 
 namespace Team11_SSIS_ADProject.SSIS.ViewModels
@@ -35,5 +36,11 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         [Required]
         [Display(Name = "Collection Point")]
         public string DepartmentCollectionPoint { get; set; }
+    }
+
+    public class DepartmentAdminViewModel
+    {
+        public IEnumerable<String> CollectionPoints { get; set; }
+        public IEnumerable<ApplicationUser> Users { get; set; }
     }
 }

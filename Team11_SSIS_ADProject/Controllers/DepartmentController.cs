@@ -75,6 +75,13 @@ namespace Team11_SSIS_ADProject.Controllers
             return RedirectToAction("Index", "Department");
         }
         [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentDelegation)]
+
+        public ActionResult Admin()
+        {
+
+            return View();
+        }
+
         public ActionResult Delegation()
         {
             var departmentId = User.Identity.GetDepartmentId();
@@ -87,15 +94,18 @@ namespace Team11_SSIS_ADProject.Controllers
                 DepartmentDelegations = departmentDelegationService.GetAll(),
                 DepartmentId = departmentId,
                 Department = departmentService.Get(departmentId)
-                
             };      
             return View("ManageDelegation", departmentDelegation);
         }
         [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentDelegation)]
         public ActionResult SaveDelegation(DepartmentDelegation delegation)
         {
-   
+            // Save department delegation
             departmentDelegationService.Save(delegation);
+
+            // Check if date is between date range
+            var deptDelegation = departmentDelegationService.Get(delegation.Id);
+
             return RedirectToAction("Delegation");
         }
 

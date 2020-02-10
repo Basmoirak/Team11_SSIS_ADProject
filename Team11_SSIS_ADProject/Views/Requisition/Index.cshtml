@@ -7,7 +7,7 @@
         <div class="box-header with-border">
             <h2>All Requisitions</h2>
 
-            @if (User.IsInRole("Employee"))
+            @if (User.IsInRole("Employee") || User.IsInRole("Representative"))
             {
                 <p>
                     <a class="btn btn-primary" href="@Url.Action("Create", "Requisition")">
