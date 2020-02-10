@@ -381,6 +381,10 @@
     <Compile Include="Migrations\202002101438385_addNewRole.designer.cs">
       <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.cs" />
+    <Compile Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.designer.cs">
+      <DependentUpon>202002101650562_AddUserNameToDepartmentDelegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -417,6 +421,7 @@
     <Compile Include="SSIS.Contracts\Services\IStockAdjustmentService.cs" />
     <Compile Include="SSIS.Contracts\Services\ISupplierService.cs" />
     <Compile Include="SSIS.Contracts\Services\IUserService.cs" />
+    <Compile Include="SSIS.Models\Custom\DateRangeHelper.cs" />
     <Compile Include="SSIS.Models\Custom\UserRoles.cs" />
     <Compile Include="SSIS.Models\Disbursement.cs" />
     <Compile Include="SSIS.Models\ItemDisbursement.cs" />
@@ -4629,6 +4634,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002101438385_addNewRole.resx">
       <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.resx">
+      <DependentUpon>202002101650562_AddUserNameToDepartmentDelegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

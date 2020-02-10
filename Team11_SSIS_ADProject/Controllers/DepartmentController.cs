@@ -112,10 +112,10 @@ namespace Team11_SSIS_ADProject.Controllers
             return View(adminViewModel);
         }
 
+        [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentAdmin)]
         public ActionResult SaveAdmin(DepartmentAdminViewModel viewModel)
         {
             ApplicationDbContext context = new ApplicationDbContext();
-            var usersContext = new ApplicationDbContext();
             var departmentId = User.Identity.GetDepartmentId();
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
@@ -125,7 +125,7 @@ namespace Team11_SSIS_ADProject.Controllers
             departmentService.Save(department);
 
             //Change current representative to employee role
-            var user = usersContext.Users
+            var user = context.Users
                                     .Where(x => x.DepartmentId == departmentId)
                                     .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Representative))
                                     .FirstOrDefault();
@@ -142,6 +142,7 @@ namespace Team11_SSIS_ADProject.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentDelegation)]
         public ActionResult Delegation()
         {
             var departmentId = User.Identity.GetDepartmentId();
@@ -150,17 +151,26 @@ namespace Team11_SSIS_ADProject.Controllers
             {
                 //users = get the department id of currently logged in user
                 //select all users with that id
-                Users = UsersContext.Users.ToList().Where(x => x.DepartmentId == departmentId),
+                Users = UsersContext.Users
+                        .Where(x => x.DepartmentId == departmentId)
+                        .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
+                        .ToList(),
                 DepartmentDelegations = departmentDelegationService.GetAll(),
                 DepartmentId = departmentId,
                 Department = departmentService.Get(departmentId)
             };      
             return View("ManageDelegation", departmentDelegation);
         }
+
         [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentDelegation)]
         public ActionResult SaveDelegation(DepartmentDelegation delegation)
         {
+            // Get username
+            var usersContext = new ApplicationDbContext();
+            var username = usersContext.Users.Where(x => x.Id == delegation.UserId).FirstOrDefault().Email;
+
             // Save department delegation
+            delegation.UserName = username;
             departmentDelegationService.Save(delegation);
 
             // Check if date is between date range

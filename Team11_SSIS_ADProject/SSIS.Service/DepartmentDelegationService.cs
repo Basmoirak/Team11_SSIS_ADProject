@@ -10,6 +10,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
     public class DepartmentDelegationService : IDepartmentDelegationService
     {
         IDepartmentDelegationRepository departmentDelegationContext;
+
         public DepartmentDelegationService(IDepartmentDelegationRepository departmentDelegationContext)
         {
             this.departmentDelegationContext = departmentDelegationContext;
@@ -21,7 +22,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public DepartmentDelegation Get(string id)
         {
-            throw new NotImplementedException();
+            return departmentDelegationContext.Get(id);
         }
 
         public IEnumerable<DepartmentDelegation> GetAll()
