@@ -40,7 +40,11 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
 
     public class DepartmentAdminViewModel
     {
-        public IEnumerable<String> CollectionPoints { get; set; }
+        [Display(Name = "Department Representative")]
+        public ApplicationUser User { get; set; }
+        [Display(Name = "Collection Point")]
+        public string CollectionPoint { get; set; }
+        public IEnumerable<string> CollectionPoints { get; set; }
         public IEnumerable<ApplicationUser> Users { get; set; }
     }
 }

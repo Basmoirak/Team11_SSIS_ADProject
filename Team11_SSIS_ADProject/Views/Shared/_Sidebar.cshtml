@@ -89,6 +89,20 @@
 
                 if (User.IsInRole("DepartmentHead"))
                 {
+                    <!--Department Admin-->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-briefcase"></i> <span>Administration</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Admin", "Department")"><i class="fa fa-circle-o"></i>Manage Admin</a></li>
+                        </ul>
+                    </li>
+
+
                     <!--Department Delegation-->
                     <li class="treeview">
                         <a href="#">

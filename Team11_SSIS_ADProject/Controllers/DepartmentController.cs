@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,7 +8,9 @@ using System.Web.Mvc;
 using Team11_SSIS_ADProject.Helpers;
 using Team11_SSIS_ADProject.Models;
 using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.Models.Custom;
 using Team11_SSIS_ADProject.SSIS.Models.Extensions;
 using Team11_SSIS_ADProject.SSIS.Service;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
@@ -18,10 +22,12 @@ namespace Team11_SSIS_ADProject.Controllers
     {
         IDepartmentService departmentService;
         IDepartmentDelegationService departmentDelegationService;
-        public DepartmentController(IDepartmentService departmentService, IDepartmentDelegationService departmentDelegationService)
+        IUserService userService;
+        public DepartmentController(IDepartmentService departmentService, IDepartmentDelegationService departmentDelegationService, IUserService userService)
         {
             this.departmentService = departmentService;
             this.departmentDelegationService = departmentDelegationService;
+            this.userService = userService;
         }
         [CustomAuthorize(Roles = CustomRoles.CanManageDepartment)]
         public ActionResult Create()
@@ -74,12 +80,66 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return RedirectToAction("Index", "Department");
         }
-        [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentDelegation)]
 
+        [CustomAuthorize(Roles = CustomRoles.CanManageDepartmentAdmin)]
         public ActionResult Admin()
         {
+            var departmentId = User.Identity.GetDepartmentId();
+            var UsersContext = new ApplicationDbContext();
+            var collectionPointList = new List<string>()
+            {
+                "Administration Building",
+                "Science School",
+                "Management School",
+                "Medical School",
+                "Engineering School",
+                "University Hospital"
+            };
 
-            return View();
+            var adminViewModel = new DepartmentAdminViewModel()
+            {
+                User = UsersContext.Users
+                    .Where(x => x.DepartmentId == departmentId)
+                    .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Representative))
+                    .FirstOrDefault(),
+                CollectionPoint = departmentService.Get(departmentId).DepartmentCollectionPoint,
+                CollectionPoints = collectionPointList,
+                Users = UsersContext.Users
+                    .Where(x => x.DepartmentId == departmentId)
+                    .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Representative || r.RoleId == UserRoles.Employee)).ToList()
+            };
+
+            return View(adminViewModel);
+        }
+
+        public ActionResult SaveAdmin(DepartmentAdminViewModel viewModel)
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var usersContext = new ApplicationDbContext();
+            var departmentId = User.Identity.GetDepartmentId();
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+
+            //Update department collection point
+            var department = departmentService.Get(departmentId);
+            department.DepartmentCollectionPoint = viewModel.CollectionPoint;
+            departmentService.Save(department);
+
+            //Change current representative to employee role
+            var user = usersContext.Users
+                                    .Where(x => x.DepartmentId == departmentId)
+                                    .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Representative))
+                                    .FirstOrDefault();
+            userManager.RemoveFromRole(user.Id, "Representative");
+            userManager.AddToRole(user.Id, "Employee");
+
+            //Change new representative
+            var newRepresentative = userService.FindUserByEmail(viewModel.User.Email);
+            userManager.RemoveFromRole(newRepresentative.Id, "Employee");
+            userManager.AddToRole(newRepresentative.Id, "Representative");
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Delegation()
