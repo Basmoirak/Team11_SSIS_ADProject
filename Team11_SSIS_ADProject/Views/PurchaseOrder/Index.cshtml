@@ -12,12 +12,12 @@
                 </a>
             </p>
         </div>
+        <h3 style="text-align:center">@ViewBag.PoView</h3>
         <div class="box-body">
             <table class="table table-hover table-bordered datatable" id="purchaseOrderTable">
                 <thead>
                     <tr>
                         <th>Created Date</th>
-
                         <th>Supplier</th>
                         <th>Status</th>
                         <th>Remark</th>
@@ -28,7 +28,7 @@
                     @foreach (var item in Model.PurchaseOrders)
                     {
                         <tr>
-                            <td>@item.createdDateTime.ToString("dd MMMM yyyy")</td>
+                            <td>@item.createdDateTime.ToString("dd-MMMM-yyyy h:mm tt")</td>
 
                             <td>@item.Supplier.SupplierName</td>
                             <td>
@@ -56,6 +56,19 @@
                 </tbody>
 
             </table>
-
+            <p>
+                <a class="btn btn-warning" href="@Url.Action("PurchaseOrderPendingList", "PurchaseOrder")">
+                    <i class="glyphicon glyphicon-list"></i> Pending List
+                </a>
+                <a class="btn btn-danger" href="@Url.Action("PurchaseOrderCancelledList", "PurchaseOrder")">
+                    <i class="glyphicon glyphicon-list"></i> Cancelled List
+                </a>
+                <a class="btn btn-success" href="@Url.Action("PurchaseOrderCompletedList", "PurchaseOrder")">
+                    <i class="glyphicon glyphicon-list"></i> Completed List
+                </a>
+                <a class="btn btn-primary" href="@Url.Action("Index", "PurchaseOrder")">
+                    <i class="glyphicon glyphicon-list"></i> See All
+                </a>
+            </p>
         </div>
     </div>
