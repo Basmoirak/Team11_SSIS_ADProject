@@ -28,5 +28,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         {
             return userContext.FindUserByEmail(email);
         }
+
+        public IEnumerable<ApplicationUser> FindAllDepartmentEmployeesByDepartment(string departmentId)
+        {
+            return userContext.FindAllDepartmentEmployeesByDepartment(departmentId);
+        }
     }
 }

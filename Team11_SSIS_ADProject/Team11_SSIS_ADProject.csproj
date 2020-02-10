@@ -373,6 +373,10 @@
     <Compile Include="Migrations\202002090725420_change status into integer in department delegation.designer.cs">
       <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002091511217_SeedNewUsers.cs" />
+    <Compile Include="Migrations\202002091511217_SeedNewUsers.designer.cs">
+      <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -4614,6 +4618,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002090725420_change status into integer in department delegation.resx">
       <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002091511217_SeedNewUsers.resx">
+      <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

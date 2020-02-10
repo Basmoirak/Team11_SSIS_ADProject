@@ -31,7 +31,21 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public void Save(DepartmentDelegation departmentDelegation)
         {
-            departmentDelegationContext.Add(departmentDelegation);
+            DepartmentDelegation dd = departmentDelegationContext.Get(departmentDelegation.Id);
+
+            if(dd == null)
+            {
+                departmentDelegationContext.Add(departmentDelegation);
+            }
+            else
+            {
+                dd.StartDate = departmentDelegation.StartDate;
+                dd.EndDate = departmentDelegation.EndDate;
+                dd.DepartmentId = departmentDelegation.DepartmentId;
+                dd.UserId = departmentDelegation.UserId;
+                dd.Status = departmentDelegation.Status;
+            }
+
             departmentDelegationContext.Commit();
         }
     }

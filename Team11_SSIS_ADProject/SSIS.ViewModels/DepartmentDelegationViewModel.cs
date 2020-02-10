@@ -28,4 +28,14 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public IEnumerable<ApplicationUser> Users { get; set; }
        
     }
+
+    public class DepartmentDelegationMobileViewModel
+    {
+        public string UserId { get; set; }
+        public string Email { get; set; }
+        public string DepartmentId { get; set; }
+        public string DepartmentName { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+    }
 }
