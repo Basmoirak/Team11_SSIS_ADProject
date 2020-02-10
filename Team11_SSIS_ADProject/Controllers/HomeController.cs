@@ -5,6 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Services;
+using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.Models.Extensions;
+using Team11_SSIS_ADProject.SSIS.ViewModels;
 using Team11_SSIS_ADProject.Models;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
@@ -16,12 +21,32 @@ namespace Team11_SSIS_ADProject.Controllers
     {
         IUserService userService;
         IDepartmentDelegationService departmentDelegationService;
-        public HomeController(IUserService userService, IDepartmentDelegationService departmentDelegationService)
+
+        IPurchaseOrderService purchaseOrderService;
+        IStockAdjustmentService stockAdjustmentService;
+        IDisbursementService disbursementService;
+        IItemService itemService;
+        IInventoryService inventoryService;
+
+        IRequisitionService requisitionService;
+        IItemDisbursementService itemDisbursementService;
+        public HomeController(IUserService userService, IDepartmentDelegationService departmentDelegationService, IPurchaseOrderService purchaseOrderService, IStockAdjustmentService stockAdjustmentService, IDisbursementService disbursementService, IItemService itemService, IInventoryService inventoryService, IRequisitionService requisitionService, IItemDisbursementService itemDisbursementService)
         {
             this.userService = userService;
             this.departmentDelegationService = departmentDelegationService;
-        }
 
+            //dashboard for store
+            this.purchaseOrderService = purchaseOrderService;
+            this.stockAdjustmentService = stockAdjustmentService;
+            this.disbursementService = disbursementService;
+            this.itemService = itemService;
+            this.inventoryService = inventoryService;
+
+            //dashboard for department
+            this.requisitionService = requisitionService;
+            this.itemDisbursementService = itemDisbursementService;
+
+        }
         public ActionResult Index()
         {
             try
@@ -52,6 +77,35 @@ namespace Team11_SSIS_ADProject.Controllers
             {
             }
 
+            if (User.IsInRole("StoreClerk") || User.IsInRole("StoreManager") || User.IsInRole("StoreSupervisor"))
+            {
+                var purchaseOrderCount = purchaseOrderService.GetAll().Where(po => po.Status == CustomStatus.PendingApproval).Count();
+                ViewBag.Poc = purchaseOrderCount;
+                var stockAdjustmentCount = stockAdjustmentService.GetAll().Where(sa => sa.Status == CustomStatus.PendingApproval).Count();
+                ViewBag.Sac = stockAdjustmentCount;
+                var disbursementCount = disbursementService.GetAll().Where(x => x.Status == CustomStatus.ForRetrieval).Count();
+                ViewBag.D = disbursementCount;
+                var itemCount = itemService.GetItemsLowerThanReorderLevel().Count();
+                ViewBag.I = itemCount;
+
+                var viewModel = new ItemViewModel()
+                {
+                    Items = itemService.GetAll()
+                };
+                return View("Index", viewModel);
+            }
+            if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
+            {
+                var requisitionCount = requisitionService.GetAll()
+                .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
+                .Where(r => r.Status == CustomStatus.PendingApproval).Count();
+                ViewBag.R = requisitionCount;
+
+                var collectionCount = itemDisbursementService.GetDepartmentCollection(User.Identity.GetDepartmentId()).Count();
+                ViewBag.C = collectionCount;
+
+                return View();
+            }
             return View();
         }
 
