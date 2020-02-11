@@ -14,8 +14,9 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public int Quantity { get; set; }
         [Required]
         public double Price { get; set; }
+        public string PurchaseOrderId { get; set; }
         public string Remark { get; set; }
-        public Item Item { get; set; }
+        public virtual Item Item { get; set; }
         public PurchaseOrder PurchaseOrder { get; set; }
     }
 }

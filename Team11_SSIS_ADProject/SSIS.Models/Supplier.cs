@@ -15,5 +15,6 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public string SupplierFax { get; set; }
         public string SupplierAddress { get; set; }
         public string SupplierGSTNumber { get; set; }
+        public ICollection<ItemSupplier> ItemSuppliers { get; set; }
     }
 }

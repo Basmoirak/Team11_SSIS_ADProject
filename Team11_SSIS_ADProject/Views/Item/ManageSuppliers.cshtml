@@ -51,7 +51,7 @@
                 <li style="display: none" id="p_@Model.Id"></li>
                 @foreach (var supplier in Model.SuppliersByItem)
                 {
-                    <li class="ui-state-default list-group-item" id="p_@supplier.Priority" data-id="@supplier.Id" data-priority="@supplier.Priority"><span class="glyphicon glyphicon-sort"></span>@supplier.Supplier.SupplierName  -  @supplier.Price $ <a href="#" onClick="remove('@supplier.Id')">Remove</a></li>
+                    <li class="ui-state-default list-group-item" id="p_@supplier.Priority" data-id="@supplier.Id" data-priority="@supplier.Priority"><span class="glyphicon glyphicon-sort"></span>@supplier.Supplier.SupplierName  -  @supplier.Price $ <a href="#" onClick="remove('@supplier.Id')" >&emsp;&emsp; Remove</a></li>
                 }
 
             </ul>
@@ -139,7 +139,7 @@
 
         function fetchSuppliers(itemId) {
             $("#supplierList").empty()
-
+            console.log(itemId)
             $.ajax({
                 type: "GET",
                 url: "/Item/FetchSuppliers",
@@ -160,7 +160,7 @@
                     suppliers.forEach(function (i) {
                         $("#supplierList").append("<li id = 'p_" + i.Priority + "' class='ui-state-default list-group-item'>"
                             + "<span class='glyphicon glyphicon-sort'></span>"
-                            + i.Supplier.SupplierName + " - "
+                            + i.SupplierName + " - "
                             + i.Price + "$"
                             + "<a href='#' onclick='remove(\"" + i.Id + "\")'>Remove</a>"
                             + "</li>")

@@ -10,11 +10,28 @@
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
+
     <style>
         .select2 {
             width:100%!important;
          }
-    </style>
+        body{
+            font-family: 'Roboto', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Roboto', sans-serif;
+        }
+        .datepicker-here {z-index:1151 !important;}
+        .thumbnails li img{
+                width: 100px;
+            }
+        .table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+     </style>
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -47,10 +64,13 @@
 
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/lib")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.js"></script>
     @RenderSection("scripts", required: false)
 
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     <script>
         $(document).ready(function () {
             $(".datatable").DataTable()

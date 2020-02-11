@@ -365,6 +365,26 @@
     <Compile Include="Migrations\202002040428465_drop departmentId from purchaseorder.designer.cs">
       <DependentUpon>202002040428465_drop departmentId from purchaseorder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002071148451_remove required in datetime purchaseorder.cs" />
+    <Compile Include="Migrations\202002071148451_remove required in datetime purchaseorder.designer.cs">
+      <DependentUpon>202002071148451_remove required in datetime purchaseorder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002090725420_change status into integer in department delegation.cs" />
+    <Compile Include="Migrations\202002090725420_change status into integer in department delegation.designer.cs">
+      <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002091511217_SeedNewUsers.cs" />
+    <Compile Include="Migrations\202002091511217_SeedNewUsers.designer.cs">
+      <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002101438385_addNewRole.cs" />
+    <Compile Include="Migrations\202002101438385_addNewRole.designer.cs">
+      <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.cs" />
+    <Compile Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.designer.cs">
+      <DependentUpon>202002101650562_AddUserNameToDepartmentDelegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -401,18 +421,21 @@
     <Compile Include="SSIS.Contracts\Services\IStockAdjustmentService.cs" />
     <Compile Include="SSIS.Contracts\Services\ISupplierService.cs" />
     <Compile Include="SSIS.Contracts\Services\IUserService.cs" />
+    <Compile Include="SSIS.Models\Custom\DateRangeHelper.cs" />
     <Compile Include="SSIS.Models\Custom\UserRoles.cs" />
     <Compile Include="SSIS.Models\Disbursement.cs" />
     <Compile Include="SSIS.Models\ItemDisbursement.cs" />
     <Compile Include="SSIS.Models\ItemPurchaseOrder.cs" />
     <Compile Include="SSIS.Models\ItemSupplier.cs" />
     <Compile Include="SSIS.Models\PurchaseOrder.cs" />
+    <Compile Include="SSIS.Repository\DepartmentDelegationRepository.cs" />
     <Compile Include="SSIS.Repository\DisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemDisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\ItemSupplierRepository.cs" />
     <Compile Include="SSIS.Repository\PurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\UserRepository.cs" />
+    <Compile Include="SSIS.Service\DepartmentDelegationService.cs" />
     <Compile Include="SSIS.Service\DisbursementService.cs" />
     <Compile Include="SSIS.Service\InventoryService.cs" />
     <Compile Include="SSIS.Service\ItemDisbursementService.cs" />
@@ -437,6 +460,7 @@
     <Compile Include="SSIS.Models\ItemCategory.cs" />
     <Compile Include="SSIS.Models\ItemRequisition.cs" />
     <Compile Include="SSIS.Models\ItemStockAdjustment.cs" />
+    <Compile Include="SSIS.ViewModels\DepartmentDelegationViewModel.cs" />
     <Compile Include="SSIS.ViewModels\DisbursementRetrievalViewModel.cs" />
     <Compile Include="SSIS.ViewModels\PurchaseOrderViewModel.cs" />
     <Compile Include="SSIS.ViewModels\StockAdjustmentViewModel.cs" />
@@ -4491,13 +4515,14 @@
     <Content Include="Views\Disbursement\DepartmentCollection.cshtml" />
     <Content Include="Views\Item\ManageSuppliers.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
-    <Content Include="Views\PurchaseOrder\SupplierList.cshtml" />
     <Content Include="Views\PurchaseOrder\PurchaseOrderForm.cshtml" />
+    <Content Include="Views\PurchaseOrder\Details.cshtml" />
+    <Content Include="Views\Department\ManageDelegation.cshtml" />
+    <Content Include="Views\Department\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\" />
-    <Folder Include="Views\PurchaseOrderViewModel\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -4597,6 +4622,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002040428465_drop departmentId from purchaseorder.resx">
       <DependentUpon>202002040428465_drop departmentId from purchaseorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002071148451_remove required in datetime purchaseorder.resx">
+      <DependentUpon>202002071148451_remove required in datetime purchaseorder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002090725420_change status into integer in department delegation.resx">
+      <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002091511217_SeedNewUsers.resx">
+      <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002101438385_addNewRole.resx">
+      <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.resx">
+      <DependentUpon>202002101650562_AddUserNameToDepartmentDelegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,13 +1,190 @@
-﻿@{
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.PurchaseOrderViewModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "New Purchase Order";
 }
-
-<div class="box box-primary">
+<div class="box box-success" id="successMessage">
     <div class="box-header with-border">
-        <h2>Create New Purchase Order</h2>
-
+        <h2 align="center">Successfully Created!</h2>
     </div>
-    <div class="box-body">
-
+    <div class="box-body" style="text-align: center">
+        <a class="btn btn-primary" href="@Url.Action("Index", "PurchaseOrder")"><i class="glyphicon glyphicon-arrow-right"></i> Proceed to PO List</a>
     </div>
 </div>
+@if (Model.ItemPurchaseOrderViewModels.Count() < 1)
+{
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h2 align="center">No Items to Order!</h2>
+        </div>
+        <div class="box-body" style="text-align: center">
+            <a class="btn btn-primary" href="@Url.Action("Index", "PurchaseOrder")"><i class="glyphicon glyphicon-arrow-right"></i> Proceed to PO List</a>
+        </div>
+    </div>
+}
+else
+{
+    if (Model.PendingOrderCount > 1)
+    {
+        <div class="alert alert-danger alert-dismissible">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <h4><i class="icon fa fa-info"></i> Pending Orders</h4>
+            Dear @User.Identity.Name.Substring(0,User.Identity.Name.Length-10).ToUpper(), you have already made purchase orders recently. You might want to check the status of previous orders before you make new one.
+            <a href="@Url.Action("Index", "PurchaseOrder")">Click here </a>to see the list.
+        </div>
+    }
+
+
+    <div class="box box-primary" id="purchaseOrderForm">
+        <div class="box-header with-border">
+            <h2>Create New Purchase Orders</h2>
+
+        </div>
+        <div class="box-body">
+            <table id="po_table" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Description</th>
+                        <th>Supplier</th>
+                        <th>Supplier Price</th>
+                        <th>Current Qty</th>
+                        <th>Reorder Qty</th>
+                        <th class="text-center">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ItemPurchaseOrderViewModels)
+                    {
+                        <tr class="itemRow">
+                            <td>@item.ItemNumber</td>
+                            <td>@item.ItemDescription</td>
+                            <td>
+                                <select class="select2 supplierId">
+                                    @foreach (var itemSupplier in item.ItemSuppliers.OrderBy(x => x.Priority))
+                                    {
+                                        <option value="@itemSupplier.SupplierId">@itemSupplier.Supplier.SupplierName</option>
+                                    }
+                                </select>
+                            </td>
+                            <td align="center">
+                                <span style="font-size: 15px" class="priceField label label-success">@item.Price $</span>
+                            </td>
+                            <td><span style="font-size: 15px" class="label label-primary">@item.InventoryQuantity - @item.ItemUnit</span></td>
+                            <td>
+                                <input type="number" step="1" min="0" style="width: 90px" value="@item.ItemReorderQty" class="itemReorderQuantity form-control" />
+                            </td>
+                            <td class="text-center">
+                                <span class="total"></span>
+                            </td>
+                            <!--for itemId-->
+                            <input type="hidden" class="itemIdField" value="@item.ItemId" />
+                        </tr>
+
+                    }
+                    <tr>
+                        <td class="thick-line"></td>
+                        <td class="thick-line"></td>
+                        <td class="thick-line"></td>
+                        <td class="thick-line"></td>
+                        <td class="thick-line"></td>
+                        <td class="thick-line text-center"><strong>Grand Total</strong></td>
+                        <td class="thick-line text-center"><span id="grandTotal" style="font-size: 20px"></span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <button class="btn btn-primary" id="sendBtn"><i class="glyphicon glyphicon-send"></i>  Send</button>
+            <small>*Orders will be grouped by different supplier.</small>
+        </div>
+    </div>
+}
+
+
+@section scripts {
+    <script>
+        function getNum(str) {
+            return /[-+]?[0-9]*\.?[0-9]+/.test(str)?parseFloat(str):0;
+        }
+        function calculateTotal() {
+            var grandTotal = 0
+            $(".priceField").each((index, ele) => {
+                var rate = getNum($(ele).text().substring(0, 3))
+                var itemReorderQuantity = $(ele).parent().parent().find(".itemReorderQuantity").val()
+                var total = rate * itemReorderQuantity
+
+                $(ele).parent().parent().find(".total").text("$ " + total)
+                grandTotal += total
+                
+            })
+            $("#grandTotal").text("$ " + grandTotal)
+        }
+        $(document).ready(() => {
+            //qty on change refersh total function
+            $(".itemReorderQuantity").on("input", () => {
+                calculateTotal()
+            })
+            //hide the successMessage at the beginning
+            $("#successMessage").hide()
+
+    
+            //total calculation function 
+            calculateTotal()
+
+            //price changing function
+            $(".supplierId").on("change", function () {
+                var itemId = $(this).parent().parent().find(".itemIdField").val()
+                var supplierId = this.value
+                var priceField = $(this).parent().next().find(".priceField")
+                $.ajax({
+                    type: "GET",
+                    data: {
+                        itemId: itemId,
+                        supplierId: supplierId
+                    },
+                    url: "/PurchaseOrder/GetItemPriceBySupplierIdAndItemId",
+                    success: function (res) {
+                        priceField.text(res.price + " $")
+                        calculateTotal()
+                    }
+                })
+
+            })
+            $("body").on("click", "#sendBtn", () => {
+
+                if ($("#po_table TBODY").children().length > 0) {
+
+                    var itemPurchaseOrders = new Array()
+
+                    $("#po_table TBODY .itemRow").each(function () {
+
+                        var row = $(this)
+                        var itemPurchaseOrder = {}
+                        itemPurchaseOrder.ItemId = row.find(".itemIdField").val()
+                        itemPurchaseOrder.ItemReorderQty = row.find(".itemReorderQuantity").val()
+                        itemPurchaseOrder.Price = row.find(".priceField").text().substring(0, 3)
+                        itemPurchaseOrder.SupplierId = row.find(".supplierId").val()
+
+                        itemPurchaseOrders.push(itemPurchaseOrder)
+                    })
+
+
+                    console.log(itemPurchaseOrders)
+                    $.ajax({
+                        type: "POST",
+                        url: "/PurchaseOrder/Save",
+                        data: {
+                            itemPurchaseOrders: itemPurchaseOrders
+                        },
+                        success: function (res) {
+                            console.log(res)
+                            $("#purchaseOrderForm").hide()
+                            $("#successMessage").show()
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}

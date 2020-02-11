@@ -22,12 +22,12 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public ItemPurchaseOrder Get(string id)
         {
-            throw new NotImplementedException();
+            return itemPurchaseOrderContext.Get(id);
         }
 
         public IEnumerable<ItemPurchaseOrder> GetAll()
         {
-            throw new NotImplementedException();
+            return itemPurchaseOrderContext.GetAll();
         }
 
         public void Save(ItemPurchaseOrder itemPurchaseOrder)
@@ -35,5 +35,6 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             itemPurchaseOrderContext.Add(itemPurchaseOrder);
             itemPurchaseOrderContext.Commit();
         }
+
     }
 }

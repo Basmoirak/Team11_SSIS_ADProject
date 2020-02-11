@@ -1,1 +1,166 @@
-﻿<h1>HEIN SUCKS</h1>
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.ItemViewModel
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<section class="content-header">
+    <h1>
+        Dashboard
+    </h1>
+</section>
+@if (User.IsInRole("StoreClerk") || User.IsInRole("StoreManager") || User.IsInRole("StoreSupervisor"))
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3> @ViewBag.D </h3>
+                        <p>Disbursement Count</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cube"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Disbursement")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3> @ViewBag.Poc </h3>
+                        <p>Pending Purchase Order</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-shopping-cart"></i>
+                    </div>
+                    <a href="@Url.Action("PurchaseOrderPendingList", "PurchaseOrder")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-orange">
+                    <div class="inner">
+                        <h3> @ViewBag.Sac </h3>
+                        <p>Pending Stock Adjustment</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-random"></i>
+                    </div>
+                    <a href="@Url.Action("StockAdjustmentPendingList", "StockAdjustment")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3> @ViewBag.I </h3>
+                        <p>Item Count of Low Inventory</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-warning"></i>
+                    </div>
+                    @if (User.IsInRole("StoreManager"))
+                    {
+                        <a href="@Url.Action("PurchaseOrderForm", "PurchaseOrder")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    }
+                    @if (User.IsInRole("StoreClerk") || User.IsInRole("StoreSupervisor"))
+                    {
+                        <a href="@Url.Action("Index", "PurchaseOrder")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="row box">
+            <div class="col-md-12">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Inventory Overview</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-condensed datatable" id="dashBoardTable">
+                        <thead>
+                            <tr>
+                                <th>Item Image</th>
+                                <th>Item Code</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Items)
+                            {
+                                <tr>
+                                    <td><img src="@Url.Content(item.ImagePath)" alt="@item.ItemDescription" style="width:50px; height:50px" /></td>
+                                    <td>@item.ItemNumber</td>
+                                    <td>@item.ItemDescription</td>
+                                    <td>@item.Inventory.Quantity</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </section>
+}
+
+@if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
+{
+    <section class="content">
+        <div class="row">
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-aqua">
+                    <div class="inner">
+                        <h3> @ViewBag.R </h3>
+                        <p>Pending Requisition</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cube"></i>
+                    </div>
+                    <a href="@Url.Action("RequisitionPendingList", "Requisition")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3> @ViewBag.C </h3>
+                        <p>Pending Collection</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cubes"></i>
+                    </div>
+                    <a href="@Url.Action("DepartmentCollection", "Disbursement")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-orange">
+                    <div class="inner">
+                        <h3> 10 </h3>
+                        <p>Pending Delegation</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section scripts
+{
+    <script>
+                    $(document).ready(function () {
+                        var table = $('#dashBoardTable').DataTable({
+                            pageLength: 3,
+                            lengthMenu: [[3, 10, 25, 50, 100], [3, 10, 25, 50, 100]]
+                        })
+                    });
+    </script>
+}

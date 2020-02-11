@@ -44,7 +44,10 @@ namespace Team11_SSIS_ADProject.Controllers
             var requistionViewModel = new RequisitionViewModel()
             {
                 Items = itemService.GetAll(),
-                Requisitions = requisitionService.GetAll().OrderByDescending(r => r.createdDateTime)
+                Requisitions = requisitionService.GetAll()
+                .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
+                .OrderByDescending(r => r.createdDateTime)
+                .OrderByDescending(r => r.Status)
             };
             return View("Index", requistionViewModel);
         }
@@ -210,6 +213,48 @@ namespace Team11_SSIS_ADProject.Controllers
                 
             }
             return newItemDisbursementList;
+        }
+        public ActionResult RequisitionPendingList()
+        {
+            var requistionViewModel = new RequisitionViewModel()
+            {
+                Items = itemService.GetAll(),
+                Requisitions = requisitionService.GetAll()
+                .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
+                .Where(r=>r.Status==CustomStatus.PendingApproval)
+                .OrderByDescending(r => r.createdDateTime)
+                .OrderByDescending(r => r.Status)
+            };
+            ViewBag.RView = "Showing Results for Pending List";
+            return View("Index", requistionViewModel);
+        }
+        public ActionResult RequisitionRejectedList()
+        {
+            var requistionViewModel = new RequisitionViewModel()
+            {
+                Items = itemService.GetAll(),
+                Requisitions = requisitionService.GetAll()
+                .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
+                .Where(r => r.Status == CustomStatus.Rejected)
+                .OrderByDescending(r => r.createdDateTime)
+                .OrderByDescending(r => r.Status)
+            };
+            ViewBag.RView = "Showing Results for Rejected List";
+            return View("Index", requistionViewModel);
+        }
+        public ActionResult RequisitionApprovedList()
+        {
+            var requistionViewModel = new RequisitionViewModel()
+            {
+                Items = itemService.GetAll(),
+                Requisitions = requisitionService.GetAll()
+                .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
+                .Where(r => r.Status == CustomStatus.Approved)
+                .OrderByDescending(r => r.createdDateTime)
+                .OrderByDescending(r => r.Status)
+            };
+            ViewBag.RView = "Showing Results for Approved List";
+            return View("Index", requistionViewModel);
         }
     }
 }

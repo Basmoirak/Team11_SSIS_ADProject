@@ -33,19 +33,17 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             return itemSupplierContext.GetAll();
         }
 
+        public double GetItemPriceBySupplierIdAndItemId(string itemId, string supplierId)
+        {
+            return itemSupplierContext.GetItemPriceBySupplierIdAndItemId(itemId, supplierId);
+        }
+
         public IEnumerable<ItemSupplier> GetSuppliersByItem(string Id)
         {
             return itemSupplierContext.GetAll()
                                        .Where(s => s.ItemId == Id)
                                        .OrderBy(s=> s.Priority)
                                        .ToList();
-        }
-
-        public IEnumerable<ItemSupplier> GetItemsLowerThanReorderLevelBySupplier(string Id)
-        {
-            return itemSupplierContext.GetAll()
-                                      .Where(s => (s.SupplierId == Id) && (s.Item.Inventory.Quantity < s.Item.ItemReorderLevel))                        
-                                      .ToList();
         }
 
         public void Save(ItemSupplier itemSupplier)

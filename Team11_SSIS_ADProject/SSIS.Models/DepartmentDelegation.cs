@@ -18,8 +18,8 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public Department Department { get; set; }
         [Required]
         public string UserId { get; set; }
-       
-        public bool Status { get; set; }
+        public string UserName { get; set; }
+        public int Status { get; set; }
 
     }
 }

@@ -22,10 +22,12 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         IInventoryService inventoryService;
         IItemService itemService;
         IDepartmentService departmentService;
+        IUserService userService;
+        IDepartmentDelegationService departmentDelegationService;
 
         public DepartmentController(IDisbursementService disbursementService ,IItemDisbursementService itemDisbursementService, 
             IRequisitionService requisitionService, IItemRequisitionService itemRequisitionService, IInventoryService inventoryService,
-            IItemService itemService, IDepartmentService departmentService)
+            IItemService itemService, IDepartmentService departmentService, IUserService userService, IDepartmentDelegationService departmentDelegationService)
         {
             this.disbursementService = disbursementService;
             this.itemDisbursementService = itemDisbursementService;
@@ -34,6 +36,8 @@ namespace Team11_SSIS_ADProject.Controllers.Api
             this.inventoryService = inventoryService;
             this.itemService = itemService;
             this.departmentService = departmentService;
+            this.userService = userService;
+            this.departmentDelegationService = departmentDelegationService;
         }
 
 
@@ -198,6 +202,42 @@ namespace Team11_SSIS_ADProject.Controllers.Api
                     inventoryService.Update(inventoryItem);
                 }
             }
+
+            return Ok();
+        }
+
+        //Retrieve users in department who are not the departmenthead
+        [HttpPost]
+        [Route("api/department/retrievedelegation")]
+        public IHttpActionResult RetrieveDelegation([FromBody] EmailViewModel viewModel)
+        {
+            var userList = userService.FindAllDepartmentEmployeesByDepartment(viewModel.DepartmentId);
+
+            var userListViewModel = userList.Select(x => new DepartmentDelegationMobileViewModel()
+            {
+                UserId = x.Id,
+                Email = x.Email,
+                DepartmentId = x.DepartmentId,
+                DepartmentName = departmentService.Get(x.DepartmentId).DepartmentName,
+            });
+
+            return Ok(userListViewModel);
+        }
+
+        //Create delegation for mobile
+        [HttpPost]
+        [Route("api/department/createdelegation")]
+        public IHttpActionResult CreateDelegation([FromBody] DepartmentDelegationMobileViewModel viewModel)
+        {
+            var delegation = new DepartmentDelegation()
+            {
+                Id = viewModel.UserId,
+                DepartmentId = viewModel.DepartmentId,
+                StartDate = viewModel.StartDate,
+                EndDate = viewModel.EndDate
+            };
+
+            departmentDelegationService.Save(delegation);
 
             return Ok();
         }

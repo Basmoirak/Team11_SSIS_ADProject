@@ -9,5 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Repositories
 {
     public interface IItemPurchaseOrderRepository : IRepository<ItemPurchaseOrder>
     {
+        
     }
 }

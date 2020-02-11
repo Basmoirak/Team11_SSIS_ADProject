@@ -1,0 +1,89 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.DepartmentDelegationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Manage Delegation";
+}
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h2>Manage Delegations for @Model.Department.DepartmentName</h2>
+        </div>
+        <div class="box-body">
+            <button class="btn btn-success" data-toggle="modal" data-target="#delegationModal"><i class="glyphicon glyphicon-plus-sign"></i> New Delegation</button>
+
+            <!--Modal starts-->
+            <div class="modal" id="delegationModal" tabindex="-1" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Create New Delegation</h4>
+                        </div>
+                        @using (Html.BeginForm("SaveDelegation", "Department"))
+                        {
+                            <div class="modal-body">
+                                @Html.HiddenFor(x => x.DepartmentId, new { value = Model.DepartmentId })
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(x => x.UserId)
+                                        <select class="select2" name="@Html.NameFor(x => x.UserId)">
+                                            <option value="">--Choose--</option>
+                                            @foreach (var item in Model.Users)
+                                            {
+                                                <option value="@item.Id">@item.Email</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(x => x.StartDate)
+                                        <input type="date" name="@Html.NameFor(x => x.StartDate)" id="startDate" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        @Html.LabelFor(x => x.EndDate)
+                                        <input type="date" name="@Html.NameFor(x => x.EndDate)" id="endDate" />
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        }
+                        </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <!--Modal ends-->
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Staff Username</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.DepartmentDelegations)
+                    {
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                            <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+@section scripts {
+<script>
+    $(document).ready(() => {
+       // $("#startDate, #endDate").datepicker()
+    })
+</script>
+}

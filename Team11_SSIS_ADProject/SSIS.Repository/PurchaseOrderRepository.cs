@@ -9,5 +9,9 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class PurchaseOrderRepository : Repository<PurchaseOrder>, IPurchaseOrderRepository
     {
+        public int getPendingOrderCount()
+        {
+            return _context.PurchaseOrders.Where(x => x.Status == CustomStatus.PendingApproval).Count();
+        }
     }
 }

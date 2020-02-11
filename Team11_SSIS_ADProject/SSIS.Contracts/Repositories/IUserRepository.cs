@@ -11,5 +11,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Repositories
     {
         ApplicationUser FindUserByEmail(string email);
         bool FindIfUserExist(string email);
+        IEnumerable<ApplicationUser> FindAllDepartmentEmployeesByDepartment(string departmentId);
     }
 }
