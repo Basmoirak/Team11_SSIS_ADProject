@@ -94,7 +94,7 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             Notification notification_ToHead = new Notification
             {
-                To = "1002633246@qq.com", //change to real email address whent test
+                To = "daniel_yn@yahoo.com.sg", //change to real email address whent test
                 Subject = "sss",
                 From = User.Identity.Name,
                 Body = "Requisition Detail"
@@ -107,7 +107,7 @@ namespace Team11_SSIS_ADProject.Controllers
             mm.Body = EmailBody(collectionsViewModel);
             SmtpClient client = new SmtpClient();
             mm.IsBodyHtml = true;
-            client.Send(mm);
+            //client.Send(mm);
 
             return Json(new { subject= notification_ToHead.Subject });
         }
