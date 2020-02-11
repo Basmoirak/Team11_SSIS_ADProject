@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.Contracts;
+using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.Controllers
@@ -12,9 +13,11 @@ namespace Team11_SSIS_ADProject.Controllers
     {
 
         IItemRequisitionService itemRequisitionService;
-        public ReportController(IItemRequisitionService itemRequisitionService)
+        IItemPurchaseOrderService itemPurchaseOrderService;
+        public ReportController(IItemRequisitionService itemRequisitionService, IItemPurchaseOrderService itemPurchaseOrderService)
         {
             this.itemRequisitionService = itemRequisitionService;
+            this.itemPurchaseOrderService = itemPurchaseOrderService;
         }
         // GET: Report
 
@@ -31,6 +34,20 @@ namespace Team11_SSIS_ADProject.Controllers
                 GroupedItemRequisitions = itemRequisitionService.groupItemRequisitionsByDateRange(startDate, endDate)
             };
             return View("Requisition", viewModel);
+        }
+        public ActionResult PurchaseOrder()
+        {
+            return View(new PurchaseOrderViewModel());
+        }
+
+        [HttpGet]
+        public ActionResult SearchPurchaseOrder(DateTime startDate, DateTime endDate)
+        {
+            var viewModel = new PurchaseOrderViewModel()
+            {
+                GroupedItemPurchaseOrders = itemPurchaseOrderService.groupItemPurchaseOrdersByDateRange(startDate, endDate)
+            };
+            return View("PurchaseOrder", viewModel);
         }
     }
 }

@@ -12,6 +12,8 @@ using Team11_SSIS_ADProject.SSIS.Service;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 using System.Security.Claims;
 using System.Web.Helpers;
+using System.Web.UI.WebControls;
+using System.IO;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
@@ -67,8 +69,10 @@ namespace Team11_SSIS_ADProject.Controllers
                        
             client.Send(mm);
         }
-        
-        //Send Email
+
+
+
+        //Send 
         [HttpPost]
         public ActionResult Notify(Notification notification)
         {
@@ -85,17 +89,25 @@ namespace Team11_SSIS_ADProject.Controllers
         }
 
         //Send email simultaneously when submit requisition 
-        public ActionResult notify_when_save(Notification notification)
+        [HttpPost]
+        public ActionResult notify_when_save(CollectionsViewModel collectionsViewModel)
         {
-            Notification notification_ToHead = new Notification 
+            Notification notification_ToHead = new Notification
             {
                 To = "1002633246@qq.com", //change to real email address whent test
-                Subject = "Requisition",
-                From= User.Identity.Name, 
-                Body="Requisition_approve"
+                Subject = "sss",
+                From = User.Identity.Name,
+                Body = "Requisition Detail"
             };
             notificationService.Save(notification_ToHead);
-            sendEmail(notification_ToHead);  
+            MailMessage mm = new MailMessage();
+            mm.To.Add(new MailAddress(notification_ToHead.To));
+            mm.Subject = notification_ToHead.Subject;
+            mm.From = new MailAddress(notification_ToHead.From);
+            mm.Body = EmailBody(collectionsViewModel);
+            SmtpClient client = new SmtpClient();
+            mm.IsBodyHtml = true;
+            client.Send(mm);
 
             return Json(new { subject= notification_ToHead.Subject });
         }
@@ -106,6 +118,23 @@ namespace Team11_SSIS_ADProject.Controllers
             notificationService.Delete(id);
 
             return Redirect(uri.ToString());
+        }
+
+        public String EmailBody(CollectionsViewModel collectionsViewModel)
+        {
+            String body = String.Empty; 
+            var s=new List<string>();
+            //foreach (var item in collectionsViewModel.groupedDepartmentCollections)
+            //{
+            //    s.Add(item.DepartmentName);
+            //}
+            using(StreamReader reader=new StreamReader(Server.MapPath("~/Views/HtmlPage1.html")))
+            {
+                body = reader.ReadToEnd();
+                
+            }
+            body = body.Replace("{blablabla}", "Aft replacing");
+            return body;
         }
 
     }

@@ -7,6 +7,7 @@ using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
+using Team11_SSIS_ADProject.SSIS.Service;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
@@ -18,7 +19,10 @@ namespace Team11_SSIS_ADProject.Controllers
         IItemService itemService;
         IItemSupplierService itemSupplierService;
         IInventoryService inventoryService;
-        public PurchaseOrderController(IInventoryService inventoryService, IItemSupplierService itemSupplierService, IItemService itemService, IPurchaseOrderService purchaseOrderService, IItemPurchaseOrderService itemPurchaseOrderService, ISupplierService supplierService)
+        IMLService mlService;
+        
+
+        public PurchaseOrderController(IInventoryService inventoryService, IItemSupplierService itemSupplierService, IItemService itemService, IPurchaseOrderService purchaseOrderService, IItemPurchaseOrderService itemPurchaseOrderService, ISupplierService supplierService,IMLService mlService)
         {
             this.purchaseOrderService = purchaseOrderService;
             this.itemPurchaseOrderService = itemPurchaseOrderService;
@@ -26,10 +30,15 @@ namespace Team11_SSIS_ADProject.Controllers
             this.itemService = itemService;
             this.itemSupplierService = itemSupplierService;
             this.inventoryService = inventoryService;
+            this.mlService = mlService;
         }
         // GET: PurchaseOrder
         public ActionResult Index()
         {
+            var mlviewmodel = new MLViewModel()
+            {
+                Items_ROL = mlService.Pred_ROL(5),
+            };
             var purchaseOrderViewModel = new PurchaseOrderViewModel()
             {              
                 PurchaseOrders = purchaseOrderService.GetAll().OrderByDescending(r => r.createdDateTime)

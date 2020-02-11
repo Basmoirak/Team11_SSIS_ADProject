@@ -27,7 +27,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public IEnumerable<ItemRequisition> GetAll()
         {
-            throw new NotImplementedException();
+            return itemRequisitionContext.GetAll();
         }
 
         public IEnumerable<ItemRequisition> GetAllByRequisitionId(string Id)

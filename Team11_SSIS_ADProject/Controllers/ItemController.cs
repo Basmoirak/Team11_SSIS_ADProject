@@ -40,7 +40,16 @@ namespace Team11_SSIS_ADProject.Controllers
         [HttpPost]
         public ActionResult Save(Item item)
         {
-            if(Request.Files.Count > 0)
+          //creating new inventory row upon creating new item
+            var inventory = new Inventory()
+            {
+                Id = item.Id,
+                Quantity = 0
+            };
+            inventoryService.Save(inventory);
+
+
+            if (Request.Files.Count > 0)
             {
                 HttpPostedFileBase postedFile = Request.Files[0];
 
@@ -56,21 +65,14 @@ namespace Team11_SSIS_ADProject.Controllers
                     postedFile.SaveAs(Server.MapPath(filePath));
 
                     item.ImagePath = filePath;
+                    item.InventoryId = item.Id;
                 }
                 else
                 {
                     item.ImagePath = Request.Form["newImagePath"];
                 }
-            }
-            itemService.Save(item);
-
-            //creating new inventory row upon creating new item
-            var inventory = new Inventory()
-            {
-                Id = item.Id,
-                Quantity = 0
             };
-            inventoryService.Save(inventory);
+            itemService.Save(item);
 
             return RedirectToAction("Index", "Item");
         }
