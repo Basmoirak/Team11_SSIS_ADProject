@@ -14,6 +14,7 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
         {
             var result = _context.Items
                         .Include("ItemSuppliers")
+                        .Include("Inventories")
                         .Where(x => x.Inventory.Quantity < x.ItemReorderLevel)
                         .Select(x => new ItemPurchaseOrderViewModel
                         {
