@@ -60,27 +60,39 @@
     <script>
         $(document).ready(() => {
 
-            $("body").on("click", "#btnCollection", function () {
+            $("body").on("click", "#btnCollection", function () {                
+                $.ajax({
+                    type: "POST",
+                    url: "/Notification/notify_when_save",
+                    data: JSON.stringify({
 
-                if ($("#collectionTable TBODY").children().length > 0) {
+                        CollectionsViewModel: CollectionsViewModel
+                    }),
+                    dataType: "json",
+                    success: function () {
+                        toastr.success("Notification with html send successfully");
+                    }
+                })
+                //if ($("#collectionTable TBODY").children().length > 0) {
+                //    $.ajax({
+                //        type: "POST",
+                //        url: "/Disbursement/ConfirmDepartmentCollection",
+                //        contentType: "application/json; charset=utf-8",
+                //        dataType: "json",
+                //        success: function () {
 
-                    $.ajax({
-                        type: "POST",
-                        url: "/Disbursement/ConfirmDepartmentCollection",
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: function () {
+                //            //success message
+                //            toastr.success("Department Collection confirmed", {
+                //                progressBar: false
 
-                            //success message
-                            toastr.success("Department Collection confirmed", {
-                                progressBar : false
-                            })
-                        }
-                    })
-                }
-                else {
-                    toastr.error("You have no pending collections")
-                }
+                //            })
+                           
+                //        }
+                //    })
+                //}
+                //else {
+                //    toastr.error("You have no pending collections")
+                //}
 
             })
         })

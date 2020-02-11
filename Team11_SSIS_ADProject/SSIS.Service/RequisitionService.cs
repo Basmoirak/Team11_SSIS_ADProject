@@ -7,10 +7,10 @@ using Team11_SSIS_ADProject.SSIS.Models;
 
 namespace Team11_SSIS_ADProject.SSIS.Service
 {
-    public class RequisitionRepostiory : IRequisitionService
+    public class RequisitionService : IRequisitionService
     {
         IRequisitionRepository requisitionContext;
-        public RequisitionRepostiory(IRequisitionRepository requisitionContext)
+        public RequisitionService(IRequisitionRepository requisitionContext)
         {
             this.requisitionContext = requisitionContext;
         }
