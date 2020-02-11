@@ -1,4 +1,4 @@
-﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.ItemViewModel
+﻿@model dynamic
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -108,24 +108,26 @@
 
 @if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
 {
-    <section class="content">
-        <div class="row">
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-aqua">
-                    <div class="inner">
-                        <h3> @ViewBag.R </h3>
-                        <p>Pending Requisition</p>
-                    </div>
-                    <div class="icon">
-                        <i class="fa fa-cube"></i>
-                    </div>
-                    <a href="@Url.Action("RequisitionPendingList", "Requisition")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3> @ViewBag.R </h3>
+                    <p>Pending Requisition</p>
                 </div>
+                <div class="icon">
+                    <i class="fa fa-cube"></i>
+                </div>
+                <a href="@Url.Action("RequisitionPendingList", "Requisition")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
+        </div>
+        @if (User.IsInRole("DepartmentHead"))
+        {
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-yellow">
+                <div class="small-box bg-orange">
                     <div class="inner">
                         <h3> @ViewBag.C </h3>
                         <p>Pending Collection</p>
@@ -138,19 +140,74 @@
             </div>
             <div class="col-lg-3 col-xs-6">
                 <!-- small box -->
-                <div class="small-box bg-orange">
+                <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3> 10 </h3>
+                        <h3> @ViewBag.pdC </h3>
                         <p>Pending Delegation</p>
                     </div>
                     <div class="icon">
                         <i class="fa fa-edit"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    <a href="@Url.Action("DelegationPendingList", "Department")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3> @ViewBag.adC </h3>
+                        <p>Active Delegation</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <a href="@Url.Action("DelegationActiveList", "Department")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="row box">
+        <div class="col-md-12">
+            <div class="box-header with-border">
+                <h3 class="box-title">Requisition Overview</h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-condensed datatable" id="dashBoardTable2">
+                    <thead>
+                        <tr>
+                            <th>Created Time</th>
+                            <th>Requested by</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var i in Model.Requisitions)
+                        {
+                            <tr>
+                                <td>@i.createdDateTime.ToString("dd-MMMM-yyyy h:mm tt")</td>
+                                <td>@i.Department.DepartmentName</td>
+                                @if (i.Status == 1)
+                                {
+                                    <td><span class="label label-warning">Pending Approval</span></td>
+                                }
+                                else if (i.Status == 2)
+                                {
+                                    <td><span class="label label-success">Approved</span></td>
+                                }
+                                else if (i.Status == 3)
+                                {
+                                    <td><span class="label label-danger">Rejected</span></td>
+                                }
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 }
 
 @section scripts
@@ -160,6 +217,13 @@
                         var table = $('#dashBoardTable').DataTable({
                             pageLength: 3,
                             lengthMenu: [[3, 10, 25, 50, 100], [3, 10, 25, 50, 100]]
+                        })
+                    });
+
+                    $(document).ready(function () {
+                        var table = $('#dashBoardTable2').DataTable({
+                            pageLength: 5,
+                            lengthMenu: [[5, 10, 25, 50, 100], [5, 10, 25, 50, 100]]
                         })
                     });
     </script>

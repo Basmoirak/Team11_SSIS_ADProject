@@ -197,5 +197,58 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return RedirectToAction("Delegation");
         }
+        public ActionResult DelegationPendingList()
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+            var UsersContext = new ApplicationDbContext();
+            var departmentDelegation = new DepartmentDelegationViewModel()
+            {
+                Users = UsersContext.Users
+                        .Where(x => x.DepartmentId == departmentId)
+                        .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
+                        .ToList(),
+                DepartmentDelegations = departmentDelegationService.GetAll().Where(x => x.Status == CustomStatus.isNotActive)
+                .Where(x=>x.StartDate.Date >= DateTime.Now.Date),
+                DepartmentId = departmentId,
+                Department = departmentService.Get(departmentId)
+            };
+            ViewBag.dD = "Showing Results for Pending List";
+            return View("ManageDelegation", departmentDelegation);
+        }
+        public ActionResult DelegationActiveList()
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+            var UsersContext = new ApplicationDbContext();
+            var departmentDelegation = new DepartmentDelegationViewModel()
+            {
+                Users = UsersContext.Users
+                        .Where(x => x.DepartmentId == departmentId)
+                        .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
+                        .ToList(),
+                DepartmentDelegations = departmentDelegationService.GetAll().Where(x => x.Status == CustomStatus.isActive),
+                DepartmentId = departmentId,
+                Department = departmentService.Get(departmentId)
+            };
+            ViewBag.dD = "Showing Results for Active List";
+            return View("ManageDelegation", departmentDelegation);
+        }
+        public ActionResult DelegationInactiveList()
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+            var UsersContext = new ApplicationDbContext();
+            var departmentDelegation = new DepartmentDelegationViewModel()
+            {
+                Users = UsersContext.Users
+                        .Where(x => x.DepartmentId == departmentId)
+                        .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
+                        .ToList(),
+                DepartmentDelegations = departmentDelegationService.GetAll().Where(x => x.Status == CustomStatus.isNotActive)
+                .Where(x => x.EndDate.Date <= DateTime.Now.Date),
+                DepartmentId = departmentId,
+                Department = departmentService.Get(departmentId)
+            };
+            ViewBag.dD = "Showing Results for Inactive List";
+            return View("ManageDelegation", departmentDelegation);
+        }
     }
 }
