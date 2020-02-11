@@ -57,6 +57,10 @@ namespace Team11_SSIS_ADProject.Controllers
 
                     item.ImagePath = filePath;
                 }
+                else
+                {
+                    item.ImagePath = Request.Form["newImagePath"];
+                }
             }
             itemService.Save(item);
 

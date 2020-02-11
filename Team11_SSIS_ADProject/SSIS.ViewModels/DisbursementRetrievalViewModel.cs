@@ -25,6 +25,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public string ItemDescription { get; set; }
         public int RequestedQuantity { get; set; }
         public int AvailableQuantity { get; set; }
+        public int Quantity { get; set; }
     }
 
     public class CollectionsViewModel

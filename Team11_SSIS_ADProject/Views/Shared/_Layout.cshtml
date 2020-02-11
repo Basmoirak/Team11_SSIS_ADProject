@@ -14,24 +14,32 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/image-picker/0.3.1/image-picker.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css" rel="stylesheet" />
 
+    <link href="https://unpkg.com/tableexport@5.2.0/dist/css/tableexport.min.css"></link>
     <style>
         .select2 {
-            width:100%!important;
-         }
-        body{
+            width: 100% !important;
+        }
+
+        body {
             font-family: 'Roboto', sans-serif;
         }
+
         h1, h2, h3, h4 {
             font-family: 'Roboto', sans-serif;
         }
-        .datepicker-here {z-index:1151 !important;}
-        .thumbnails li img{
-                width: 100px;
-            }
+
+        .datepicker-here {
+            z-index: 1151 !important;
+        }
+
+        .thumbnails li img {
+            width: 100px;
+        }
+
         .table > tbody > tr > .thick-line {
-    border-top: 2px solid;
-}
-     </style>
+            border-top: 2px solid;
+        }
+    </style>
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -71,10 +79,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.2/dist/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/tableexport@5.2.0/dist/js/tableexport.min.js"></script>
     <script>
         $(document).ready(function () {
             $(".datatable").DataTable()
             $(".select2").select2()
+            $('.export').tableExport()
         });
     </script>
 </body>
