@@ -171,6 +171,7 @@ namespace Team11_SSIS_ADProject.Controllers
 
             // Save department delegation
             delegation.UserName = username;
+            delegation.Status = CustomStatus.isActive;
             departmentDelegationService.Save(delegation);
 
             // Check if date is between date range
@@ -179,5 +180,22 @@ namespace Team11_SSIS_ADProject.Controllers
             return RedirectToAction("Delegation");
         }
 
+        public ActionResult EditDelegationStatus(string Id)
+        {
+            var delegation = departmentDelegationService.Get(Id);
+
+            if(delegation.Status == CustomStatus.isActive)
+            {
+                delegation.Status = CustomStatus.isNotActive;
+            }
+            else if(delegation.Status == CustomStatus.isNotActive)
+            {
+                delegation.Status = CustomStatus.isActive;
+            }
+
+            departmentDelegationService.Save(delegation);
+
+            return RedirectToAction("Delegation");
+        }
     }
 }

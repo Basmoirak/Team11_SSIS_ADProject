@@ -52,7 +52,12 @@ namespace Team11_SSIS_ADProject.Controllers
             try
             {
                 var userId = User.Identity.GetUserId();
-                var delegations = departmentDelegationService.GetAll().Where(x => x.UserId == userId).ToList();
+
+                // Retrieve delegations for user where the status is active
+                var delegations = departmentDelegationService.GetAll()
+                    .Where(x => x.UserId == userId)
+                    .Where(x => x.Status == CustomStatus.isActive).ToList();
+
                 if (delegations != null)
                 {
                     foreach (var item in delegations)
