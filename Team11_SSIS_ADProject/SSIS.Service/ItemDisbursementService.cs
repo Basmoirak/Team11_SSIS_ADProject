@@ -54,6 +54,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             itemDisbursementContext.Commit();
         }
 
+        public IEnumerable<ItemDisbursement> GetAllByDisbursementId(string id)
+        {
+            return itemDisbursementContext.getAllByDisbursementId(id);
+        }
+
         public IEnumerable<GroupedDepartmentCollections> GetDepartmentCollection(string departmentId)
         {
             return itemDisbursementContext.GetDepartmentCollection(departmentId);

@@ -18,5 +18,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Services
         IEnumerable<MobileGroupedDepartmentCollections> groupItemDisbursementByDepartmentMobile();
         IEnumerable<GroupedItemID> groupItemDisbursementByItemID();
         IEnumerable<GroupedDepartmentCollections> GetDepartmentCollection(string departmentId);
+        IEnumerable<ItemDisbursement> GetAllByDisbursementId(string id);
     }
 }
