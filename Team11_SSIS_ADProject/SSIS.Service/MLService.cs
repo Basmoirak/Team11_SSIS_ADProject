@@ -10,6 +10,7 @@ using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Service;
 using System.Web.Mvc;
 using Microsoft.ML;
+using Team11_SSIS_ADProject.SSIS.Contracts;
 
 namespace Team11_SSIS_ADProject.SSIS.Service
 {
@@ -17,10 +18,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
     {
         ItemRequisitionService itemRequisitionService;
         RequisitionService requisitionService;
-        ItemService itemService;
+        IItemRepository itemService;
         MLContext mlContext;
 
-        public MLService(ItemRequisitionService itemRequisitionService, RequisitionService requisitionService, ItemService itemService, MLContext mlContext)
+        public MLService(ItemRequisitionService itemRequisitionService, RequisitionService requisitionService, IItemRepository itemService, MLContext mlContext)
         {
             this.itemRequisitionService = itemRequisitionService;
             this.requisitionService = requisitionService;

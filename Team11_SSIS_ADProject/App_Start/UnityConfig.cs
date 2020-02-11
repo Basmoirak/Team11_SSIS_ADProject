@@ -99,7 +99,6 @@ namespace Team11_SSIS_ADProject
             container.RegisterType<IDepartmentDelegationService, DepartmentDelegationService>();
 
             //ML
-            container.RegisterType<IMLRepostiory, MLRepository>();
             container.RegisterType<IMLService, MLService>();
 
             // NOTE: To load from web.config uncomment the line below.

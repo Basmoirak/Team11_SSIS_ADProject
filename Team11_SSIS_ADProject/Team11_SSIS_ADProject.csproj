@@ -322,7 +322,6 @@
     <Compile Include="Controllers\ItemCategoryController.cs" />
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MLController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
@@ -474,7 +473,6 @@
     <Compile Include="SSIS.Contracts\Repositories\IItemDisbursementRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IItemSupplierRepository.cs" />
-    <Compile Include="SSIS.Contracts\Repositories\IMLRepostiory.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IUserRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentDelegationService.cs" />
@@ -518,7 +516,6 @@
     <Compile Include="SSIS.Repository\ItemDisbursementRepository.cs" />
     <Compile Include="SSIS.Repository\ItemPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\ItemSupplierRepository.cs" />
-    <Compile Include="SSIS.Repository\MLRepository.cs" />
     <Compile Include="SSIS.Repository\PurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\UserRepository.cs" />
     <Compile Include="SSIS.Service\DepartmentDelegationService.cs" />

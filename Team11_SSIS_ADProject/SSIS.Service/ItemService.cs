@@ -12,10 +12,12 @@ namespace Team11_SSIS_ADProject.SSIS.Service
     public class ItemService : IItemService
     {
         IItemRepository itemContext;
+        MLService mLService;
 
-        public ItemService(IItemRepository itemRepository)
+        public ItemService(IItemRepository itemRepository,MLService mLService)
         {
             this.itemContext = itemRepository;
+            this.mLService = mLService;
         }
 
         public void Delete(string id)
@@ -56,7 +58,15 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         }
         public IEnumerable<ItemPurchaseOrderViewModel> GetItemsLowerThanReorderLevel()
         {
-            return itemContext.GetItemsLowerThanReorderLevel();
+            var dic = mLService.Pred_ROL(5);
+            var list = itemContext.GetItemsLowerThanReorderLevel();
+
+            foreach (var item in list)
+            {
+                item.PredictedReorderQty = dic[item.ItemId];
+            }
+
+            return list;
         }
 
         public IEnumerable<SelectListItem> GetItemList()
