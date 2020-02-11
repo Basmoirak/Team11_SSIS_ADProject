@@ -64,17 +64,15 @@
                         <th>Staff Username</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach(var item in Model.DepartmentDelegations)
                     {
                         <tr>
-                            <td>@item.UserId</td>
+                            <td>@item.UserName</td>
                             <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
                             <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
-                            <td></td>
                         </tr>
                     }
                 </tbody>

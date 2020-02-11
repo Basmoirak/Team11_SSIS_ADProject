@@ -113,5 +113,35 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return Json(new { id = stockAdjustment.Id });
         }
+        public ActionResult StockAdjustmentPendingList()
+        {
+            var viewModel = new StockAdjustmentViewModel()
+            {
+                StockAdjustments = stockAdjustmentService.GetAll().Where(sa => sa.Status == CustomStatus.PendingApproval),
+                Items = itemService.GetAll()
+            };
+            ViewBag.SaView = "Showing Results for Pending List";
+            return View("Index", viewModel);
+        }
+        public ActionResult StockAdjustmentRejectedList()
+        {
+            var viewModel = new StockAdjustmentViewModel()
+            {
+                StockAdjustments = stockAdjustmentService.GetAll().Where(sa => sa.Status == CustomStatus.Rejected),
+                Items = itemService.GetAll()
+            };
+            ViewBag.SaView = "Showing Results for Rejected List";
+            return View("Index", viewModel);
+        }
+        public ActionResult StockAdjustmentApprovedList()
+        {
+            var viewModel = new StockAdjustmentViewModel()
+            {
+                StockAdjustments = stockAdjustmentService.GetAll().Where(sa => sa.Status == CustomStatus.Approved),
+                Items = itemService.GetAll()
+            };
+            ViewBag.SaView = "Showing Results for Approved List";
+            return View("Index", viewModel);
+        }
     }
 }

@@ -1,0 +1,38 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.DepartmentAdminViewModel
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h2>Department Admin</h2>
+    </div>
+
+    <div class="box-body">
+        @using (Html.BeginForm("SaveAdmin", "Department"))
+        {
+            @Html.LabelFor(m => m.CollectionPoint)
+            @Html.DropDownListFor(m => m.CollectionPoint,
+           new SelectList(Model.CollectionPoints),
+           "Select Collection Point",
+           new { @class = "select2" })
+
+            <br /><br />
+            
+            @Html.LabelFor(m => m.User)
+            @Html.DropDownListFor(m => m.User.Email,
+           new SelectList(Model.Users.Select(x => x.Email)),
+           "Select Department Representative",
+           new { @class = "select2" })
+
+            <br /><br />
+
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        }
+
+    </div>
+</div>

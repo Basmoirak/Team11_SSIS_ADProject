@@ -69,7 +69,7 @@
             }
             <!-- Store View End -->
             <!-- Department View Start -->
-            @if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
+            @if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead") || User.IsInRole("Representative"))
             {
 
                 <!--Department Requisitions-->
@@ -85,31 +85,51 @@
                     </ul>
                 </li>
 
-                <!--Department Collections-->
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-shopping-bag"></i> <span>Collection</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="@Url.Action("DepartmentCollection", "Disbursement")"><i class="fa fa-circle-o"></i>Collection</a></li>
-                    </ul>
-                </li>
+                if (User.IsInRole("Representative"))
+                {
+                    <!--Department Collections-->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i> <span>Collection</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("DepartmentCollection", "Disbursement")"><i class="fa fa-circle-o"></i>Collection</a></li>
+                        </ul>
+                    </li>
+                }
 
-                <!--Department Delegation-->
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-shopping-bag"></i> <span>Delegation</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="@Url.Action("Delegation", "Department")"><i class="fa fa-circle-o"></i>Manage Delegations</a></li>
-                    </ul>
-                </li>
+                if (User.IsInRole("DepartmentHead"))
+                {
+                    <!--Department Admin-->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-briefcase"></i> <span>Administration</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Admin", "Department")"><i class="fa fa-circle-o"></i>Manage Admin</a></li>
+                        </ul>
+                    </li>
+
+
+                    <!--Department Delegation-->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-shopping-bag"></i> <span>Delegation</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("Delegation", "Department")"><i class="fa fa-circle-o"></i>Manage Delegations</a></li>
+                        </ul>
+                    </li>
+                }
             }
             <!-- Department View End -->
             @*<li class="treeview">

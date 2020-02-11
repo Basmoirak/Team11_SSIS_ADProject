@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using Team11_SSIS_ADProject.Models;
 using Team11_SSIS_ADProject.SSIS.Contracts.Repositories;
+using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.Models.Custom;
 
 namespace Team11_SSIS_ADProject.SSIS.Repository
 {
@@ -15,6 +17,13 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
         public UserRepository()
         {
             this._context = new ApplicationDbContext();
+        }
+
+        public IEnumerable<ApplicationUser> FindAllDepartmentEmployeesByDepartment(string departmentId)
+        {
+            return _context.Users
+                .Where(user => user.DepartmentId == departmentId)
+                .Where(r => r.Roles.Any(x => x.RoleId == UserRoles.Employee));
         }
 
         public ApplicationUser FindUserByEmail(string email)

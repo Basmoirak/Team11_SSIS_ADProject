@@ -16,7 +16,6 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         public UserService(IUserRepository userRepository)
         {
             userContext = userRepository;
-            //this.userContext = new UserRepository();
         }
 
         public bool FindIfUserExist(string email)
@@ -27,6 +26,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         public ApplicationUser FindUserByEmail(string email)
         {
             return userContext.FindUserByEmail(email);
+        }
+
+        public IEnumerable<ApplicationUser> FindAllDepartmentEmployeesByDepartment(string departmentId)
+        {
+            return userContext.FindAllDepartmentEmployeesByDepartment(departmentId);
         }
     }
 }

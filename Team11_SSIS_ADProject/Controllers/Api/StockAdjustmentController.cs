@@ -55,7 +55,7 @@ namespace Team11_SSIS_ADProject.Controllers.Api
                 ItemId = viewModel.ItemId,
                 StockMovement = viewModel.Movement,
                 OldQuantity = stockAdjustmentService.GetItemQuantity(viewModel.ItemId),
-                NewQuantity = stockAdjustmentService.GetItemQuantity(viewModel.ItemId)
+                NewQuantity = stockAdjustmentService.GetItemQuantity(viewModel.ItemId) + viewModel.Movement
             };
 
             itemStockAdjustmentService.Save(itemStockAdjustment);

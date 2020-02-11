@@ -374,6 +374,18 @@
     <Compile Include="Migrations\202002090725420_change status into integer in department delegation.designer.cs">
       <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002091511217_SeedNewUsers.cs" />
+    <Compile Include="Migrations\202002091511217_SeedNewUsers.designer.cs">
+      <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002101438385_addNewRole.cs" />
+    <Compile Include="Migrations\202002101438385_addNewRole.designer.cs">
+      <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.cs" />
+    <Compile Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.designer.cs">
+      <DependentUpon>202002101650562_AddUserNameToDepartmentDelegation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
@@ -410,6 +422,7 @@
     <Compile Include="SSIS.Contracts\Services\IStockAdjustmentService.cs" />
     <Compile Include="SSIS.Contracts\Services\ISupplierService.cs" />
     <Compile Include="SSIS.Contracts\Services\IUserService.cs" />
+    <Compile Include="SSIS.Models\Custom\DateRangeHelper.cs" />
     <Compile Include="SSIS.Models\Custom\UserRoles.cs" />
     <Compile Include="SSIS.Models\Disbursement.cs" />
     <Compile Include="SSIS.Models\ItemDisbursement.cs" />
@@ -4508,6 +4521,7 @@
     <Content Include="Views\Department\ManageDelegation.cshtml" />
     <Content Include="Views\Report\Requisition.cshtml" />
     <Content Include="Views\Report\PurchaseOrder.cshtml" />
+    <Content Include="Views\Department\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -4617,6 +4631,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202002090725420_change status into integer in department delegation.resx">
       <DependentUpon>202002090725420_change status into integer in department delegation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002091511217_SeedNewUsers.resx">
+      <DependentUpon>202002091511217_SeedNewUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002101438385_addNewRole.resx">
+      <DependentUpon>202002101438385_addNewRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002101650562_AddUserNameToDepartmentDelegation.resx">
+      <DependentUpon>202002101650562_AddUserNameToDepartmentDelegation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
