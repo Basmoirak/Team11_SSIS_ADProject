@@ -64,16 +64,38 @@
                         <th>Staff Username</th>
                         <th>Start Date</th>
                         <th>End Date</th>
+                        <th>Status</th>
+                        <th>Set Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach(var item in Model.DepartmentDelegations)
                     {
-                        <tr>
-                            <td>@item.UserName</td>
-                            <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
-                            <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
-                        </tr>
+                    <tr>
+                        <td>@item.UserName</td>
+                        <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                        <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
+
+                        @if (@item.Status == 10)
+                        {
+                            <td><span class="label label-success">Is Active</span></td>
+                        }
+                        else
+                        {
+                            <td><span class="label label-danger">Not Active</span></td>
+                        }
+
+                        @if (item.Status == 10)
+                        {
+                            <td><a class="btn btn-danger" href="@Url.Action("EditDelegationStatus", "Department", new { id = item.Id })"><i class="glyphicon glyphicon-remove"></i></a></td>
+                        }
+                        else if (item.Status == 11)
+                        {
+                            <td><a class="btn btn-primary" href="@Url.Action("EditDelegationStatus", "Department", new { id = item.Id })"><i class="glyphicon glyphicon-ok"></i></a></td>
+                        }
+
+
+                    </tr>
                     }
                 </tbody>
             </table>
