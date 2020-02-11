@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Team11_SSIS_ADProject.SSIS.Models;
+using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
@@ -14,5 +15,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         IEnumerable<ItemRequisition> GetAll();
         void Delete(string Id);
         IEnumerable<ItemRequisition> GetAllByRequisitionId(string Id);
+        IEnumerable<GroupedItemID> groupItemRequisitionsByDateRange(DateTime startDate, DateTime endDate);
     }
 }

@@ -40,8 +40,14 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public void Save(Inventory inventory)
         {
-            inventoryContext.Add(inventory);
-            inventoryContext.Commit();
+            var inv = inventoryContext.Get(inventory.Id);
+            if(inv == null)
+            {
+                inventoryContext.Add(inventory);
+                inventoryContext.Commit();
+            }
+   
+            
         }
     }
 }

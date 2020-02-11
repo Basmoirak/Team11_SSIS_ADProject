@@ -17,5 +17,7 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public const int ReadyForCollection = 7;
         public const int CollectionComplete = 8;
         public const int Completed = 9;
+        public const int isActive = 10;
+        public const int isNotActive = 11;
     }
 }

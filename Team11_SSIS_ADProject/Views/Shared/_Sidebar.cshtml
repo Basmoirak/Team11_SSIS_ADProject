@@ -52,6 +52,20 @@
                         <li><a href="@Url.Action("Index", "PurchaseOrder")"><i class="fa fa-circle-o"></i>List All</a></li>
                     </ul>
                 </li>
+
+                <!--Reports -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-tags"></i> <span>Reports</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="@Url.Action("Requisition", "Report")"><i class="fa fa-circle-o"></i>Requisitions</a></li>
+                        <li><a href="@Url.Action("PurchaseOrder", "Report")"><i class="fa fa-circle-o"></i>Purchase Orders</a></li>
+                    </ul>
+                </li>
             }
             <!-- Store View End -->
             <!-- Department View Start -->

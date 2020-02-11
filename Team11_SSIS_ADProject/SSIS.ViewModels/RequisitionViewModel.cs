@@ -22,6 +22,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public IEnumerable<Item> Items { get; set; }
         [Display(Name = "Quantity")]
         public int Quantity { get; set; }
+        public IEnumerable<GroupedItemID> GroupedItemRequisitions { get; set; }
     }
 
     public class RequisitionMobileViewModel
