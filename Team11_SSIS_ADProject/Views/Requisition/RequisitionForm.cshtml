@@ -169,7 +169,7 @@
                     $("#ir_table TBODY TR").each(function () {
                         var row = $(this)  
                         var itemRequisition = {}
-                        itemRequisition.ItemId = $("#itemIdField").val()
+                        itemRequisition.ItemId = row.find("#itemIdField").val() //$("#itemIdField").val()
 
                         itemRequisition.Quantity = row.find("TD").eq(1).html()
                         itemRequisitions.push(itemRequisition)
@@ -209,8 +209,9 @@
                                 url: "/Notification/notify_when_save",
                                 data: JSON.stringify({
 
-                                    Notification: Notification
+                                    requisition: requisition
                                 }),
+                                contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 success: function (res) {
                                     alert("Notification send to head successfully");

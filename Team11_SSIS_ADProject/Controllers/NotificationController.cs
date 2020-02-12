@@ -20,10 +20,12 @@ namespace Team11_SSIS_ADProject.Controllers
     public class NotificationController : Controller
     {
         INotificationService notificationService;
+        IItemService itemService;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService,IItemService itemService)
         {
             this.notificationService = notificationService;
+            this.itemService = itemService;
         }
         
         // GET: Notification
@@ -90,7 +92,7 @@ namespace Team11_SSIS_ADProject.Controllers
 
         //Send email simultaneously when submit requisition 
         [HttpPost]
-        public ActionResult notify_when_save(CollectionsViewModel collectionsViewModel)
+        public ActionResult notify_when_save(Requisition requisition)
         {
             Notification notification_ToHead = new Notification
             {
@@ -104,7 +106,7 @@ namespace Team11_SSIS_ADProject.Controllers
             mm.To.Add(new MailAddress(notification_ToHead.To));
             mm.Subject = notification_ToHead.Subject;
             mm.From = new MailAddress(notification_ToHead.From);
-            mm.Body = EmailBody(collectionsViewModel);
+            mm.Body = EmailBody(requisition);
             SmtpClient client = new SmtpClient();
             mm.IsBodyHtml = true;
             client.Send(mm);
@@ -120,20 +122,34 @@ namespace Team11_SSIS_ADProject.Controllers
             return Redirect(uri.ToString());
         }
 
-        public String EmailBody(CollectionsViewModel collectionsViewModel)
+        public String EmailBody(Requisition requisition)
         {
             String body = String.Empty; 
             var s=new List<string>();
-            //foreach (var item in collectionsViewModel.groupedDepartmentCollections)
-            //{
-            //    s.Add(item.DepartmentName);
-            //}
+            int startindex = 0;
+            String table = null;
             using(StreamReader reader=new StreamReader(Server.MapPath("~/Views/HtmlPage1.html")))
             {
                 body = reader.ReadToEnd();
                 
             }
-            body = body.Replace("{blablabla}", "Aft replacing");
+            int num = requisition.ItemRequisitions.Count();
+            String[] tableline = new string[num];
+            for (int i = 0; i < num; i++)
+            {
+                tableline[i] = "<tr></tr>";
+            }
+            foreach (var item in requisition.ItemRequisitions)
+            {
+                String itemname = itemService.Get(item.ItemId).ItemDescription;
+                tableline[startindex]=tableline[startindex].Insert(4, "<td>"+itemname+"</td>"+ "<td>" + item.Quantity + "</td>");
+                startindex++;
+            }
+            foreach (var line in tableline)
+            {
+                table += line;
+            }
+            body = body.Replace("{sss}", table);
             return body;
         }
 

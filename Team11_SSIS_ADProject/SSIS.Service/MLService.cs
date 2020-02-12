@@ -163,15 +163,21 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             var listofROL = new Dictionary<String, double>();
             foreach (var item in listofprediction)
             {
-                listofROL.Add(item.Key,Math.Round(item.Value) * 7); //assuming lead time = 7
+                listofROL.Add(item.Key,Math.Round(item.Value) * 3); //assuming lead time = 7
             }
             return listofROL;
         }
 
         //calculate reorder-qty
-        public Dictionary<String, double> Pred_RQty()
+        public Dictionary<String, double> Pred_RQty(int day)
         {
-            throw new NotImplementedException();
+            var listofprediction = Predict(day);
+            var listofRQty = new Dictionary<String, double>();
+            foreach (var item in listofprediction)
+            {
+                listofRQty.Add(item.Key, Math.Round(item.Value) * 7); //assuming lead time = 7
+            }
+            return listofRQty;
         }
 
     }
