@@ -73,5 +73,10 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         {
             return itemDisbursementContext.groupItemDisbursementByItemID();
         }
+
+        public IEnumerable<GroupedItemID> groupItemDisbursementsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return itemDisbursementContext.groupItemDisbursementsByDateRange(startDate, endDate);
+        }
     }
 }

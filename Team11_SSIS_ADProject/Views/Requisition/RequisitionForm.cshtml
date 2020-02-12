@@ -169,7 +169,7 @@
                     $("#ir_table TBODY TR").each(function () {
                         var row = $(this)  
                         var itemRequisition = {}
-                        itemRequisition.ItemId = $("#itemIdField").val()
+                        itemRequisition.ItemId = row.find("input[id^='itemIdField']").val()
 
                         itemRequisition.Quantity = row.find("TD").eq(1).html()
                         itemRequisitions.push(itemRequisition)

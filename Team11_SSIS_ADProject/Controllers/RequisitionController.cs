@@ -47,7 +47,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 Requisitions = requisitionService.GetAll()
                 .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
                 .OrderByDescending(r => r.createdDateTime)
-                .OrderByDescending(r => r.Status)
+                .OrderBy(r => r.Status)
             };
             return View("Index", requistionViewModel);
         }

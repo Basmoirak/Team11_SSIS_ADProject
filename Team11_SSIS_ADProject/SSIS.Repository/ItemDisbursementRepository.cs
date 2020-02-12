@@ -113,5 +113,23 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 
             return grouped;
         }
+
+        public IEnumerable<GroupedItemID> groupItemDisbursementsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            DateTime newEndDate = endDate.AddDays(1).AddTicks(-1);
+            var grouped = _context.Disbursements
+                            .Include("ItemDisbursements")
+                            .Include("Items")
+                            .Where(x => x.createdDateTime >= startDate && x.createdDateTime <= newEndDate && x.Status == CustomStatus.CollectionComplete)
+                            .SelectMany(x => x.ItemDisbursements)
+                            .GroupBy(x => x.Item)
+                            .Select(group => new GroupedItemID
+                            {
+                                ItemCode = group.Key.ItemNumber,
+                                ItemDescription = group.Key.ItemDescription,
+                                Quantity = group.Sum(x => x.AvailableQuantity)
+                            }).ToList();
+            return grouped;
+        }
     }
 }

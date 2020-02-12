@@ -87,6 +87,9 @@ namespace Team11_SSIS_ADProject.Migrations
                 DepartmentCollectionPoint = "Management School"
             });
 
+
+
+
             //Add Items
             context.Items.AddOrUpdate(c => c.Id, new Item() {
                 Id = "1", ItemNumber = "C001", ItemDescription = "Clips Double 1", ItemReorderLevel = 50, ItemReorderQty = 30,

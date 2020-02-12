@@ -4522,6 +4522,7 @@
     <Content Include="Views\Report\Requisition.cshtml" />
     <Content Include="Views\Report\PurchaseOrder.cshtml" />
     <Content Include="Views\Department\Admin.cshtml" />
+    <Content Include="Views\Report\Collection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
