@@ -15,17 +15,18 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
         {
             DateTime newEndDate = endDate.AddDays(1).AddTicks(-1);
 
-            var grouped = _context.PurchaseOrders
-                            .Include("ItemPurchaseOrders")
+            var grouped = _context.ItemPurchaseOrders
                             .Include("Items")
                             .Where(x => x.createdDateTime >= startDate && x.createdDateTime <= newEndDate)
-                            .SelectMany(x => x.ItemPurchaseOrders)
-                            .Select(x => new GroupedItemID
+                            .GroupBy(x => x.Item)
+                            .Select(group => new GroupedItemID
                             {
-                                ItemCode = "dd",
-                                ItemDescription = "dd",
-  
+                                ItemCode = group.Key.ItemNumber,
+                                ItemDescription = group.Key.ItemDescription,
+                                Quantity = group.Sum(x => x.Quantity)
                             }).ToList();
+   
+
             return grouped;
         }
     }

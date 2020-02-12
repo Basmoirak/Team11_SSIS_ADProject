@@ -14,10 +14,12 @@ namespace Team11_SSIS_ADProject.Controllers
 
         IItemRequisitionService itemRequisitionService;
         IItemPurchaseOrderService itemPurchaseOrderService;
-        public ReportController(IItemRequisitionService itemRequisitionService, IItemPurchaseOrderService itemPurchaseOrderService)
+        IItemDisbursementService itemDisbursementService;
+        public ReportController(IItemDisbursementService itemDisbursementService, IItemRequisitionService itemRequisitionService, IItemPurchaseOrderService itemPurchaseOrderService)
         {
             this.itemRequisitionService = itemRequisitionService;
             this.itemPurchaseOrderService = itemPurchaseOrderService;
+            this.itemDisbursementService = itemDisbursementService;
         }
         // GET: Report
 
@@ -48,6 +50,19 @@ namespace Team11_SSIS_ADProject.Controllers
                 GroupedItemPurchaseOrders = itemPurchaseOrderService.groupItemPurchaseOrdersByDateRange(startDate, endDate)
             };
             return View("PurchaseOrder", viewModel);
+        }
+        public ActionResult Collection()
+        {
+            return View(new DisbursementRetrievalViewModel());
+        }
+        [HttpGet]
+        public ActionResult SearchCollection(DateTime startDate, DateTime endDate)
+        {
+            var viewModel = new DisbursementRetrievalViewModel()
+            {
+                GroupedItemDisbursements = itemDisbursementService.groupItemDisbursementsByDateRange(startDate, endDate)
+            };
+            return View("Collection", viewModel);
         }
     }
 }

@@ -11,8 +11,6 @@ using Team11_SSIS_ADProject.SSIS.Models;
 using Team11_SSIS_ADProject.SSIS.Models.Extensions;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 using Team11_SSIS_ADProject.Models;
-using Team11_SSIS_ADProject.SSIS.Contracts;
-using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models.Custom;
 
 namespace Team11_SSIS_ADProject.Controllers
@@ -93,13 +91,13 @@ namespace Team11_SSIS_ADProject.Controllers
                 var itemCount = itemService.GetItemsLowerThanReorderLevel().Count();
                 ViewBag.I = itemCount;
 
-                var viewModel = new ItemViewModel()
+                dynamic viewModel = new ItemViewModel()
                 {
                     Items = itemService.GetAll()
                 };
                 return View("Index", viewModel);
             }
-            if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
+            if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead") || User.IsInRole("Representative"))
             {
                 var requisitionCount = requisitionService.GetAll()
                 .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
@@ -109,7 +107,21 @@ namespace Team11_SSIS_ADProject.Controllers
                 var collectionCount = itemDisbursementService.GetDepartmentCollection(User.Identity.GetDepartmentId()).Count();
                 ViewBag.C = collectionCount;
 
-                return View();
+                var activeDelegationCount = departmentDelegationService.GetAll().Where(x => x.DepartmentId == User.Identity.GetDepartmentId()).Where(x => x.Status == CustomStatus.isActive).Count();
+                ViewBag.adC = activeDelegationCount;
+
+                var pendingDelegationCount = departmentDelegationService.GetAll().Where(x => x.DepartmentId == User.Identity.GetDepartmentId()).Where(x => x.Status == CustomStatus.isNotActive).Where(x => x.StartDate > DateTime.Now).Count();
+                ViewBag.pdC = pendingDelegationCount;
+
+                dynamic requistionViewModel = new RequisitionViewModel()
+                {
+                    Items = itemService.GetAll(),
+                    Requisitions = requisitionService.GetAll()
+                .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
+                .OrderByDescending(r => r.createdDateTime)
+                .OrderByDescending(r => r.Status)
+                };
+                return View("Index", requistionViewModel);
             }
             return View();
         }

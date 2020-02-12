@@ -13,5 +13,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         DepartmentDelegation Get(string id);
         IEnumerable<DepartmentDelegation> GetAll();
         void Delete(string Id);
+        IEnumerable<DepartmentDelegation> GetAllByDepartmentId(string Id);
     }
 }

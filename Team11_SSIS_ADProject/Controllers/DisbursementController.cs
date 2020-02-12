@@ -39,6 +39,13 @@ namespace Team11_SSIS_ADProject.Controllers
             return View(viewModel);
         }
 
+        public ActionResult Details(string id)
+        {
+            var viewModel = itemDisbursementService.GetAllByDisbursementId(id);
+
+            return View(viewModel);
+        }
+
         [CustomAuthorize(Roles = CustomRoles.CanManageDisbursements)]
         [HttpPost]
         public ActionResult Disburse()
@@ -104,7 +111,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 }
             }
 
-            return RedirectToAction("DepartmentCollection", "Disbursement");
+            return Json (new { message = "Success! You'll soon be redirected." });
         }
     }
 }

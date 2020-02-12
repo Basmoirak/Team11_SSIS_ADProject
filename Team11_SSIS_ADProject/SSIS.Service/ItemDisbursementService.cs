@@ -54,6 +54,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             itemDisbursementContext.Commit();
         }
 
+        public IEnumerable<ItemDisbursement> GetAllByDisbursementId(string id)
+        {
+            return itemDisbursementContext.getAllByDisbursementId(id);
+        }
+
         public IEnumerable<GroupedDepartmentCollections> GetDepartmentCollection(string departmentId)
         {
             return itemDisbursementContext.GetDepartmentCollection(departmentId);
@@ -72,6 +77,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         public IEnumerable<GroupedItemID> groupItemDisbursementByItemID()
         {
             return itemDisbursementContext.groupItemDisbursementByItemID();
+        }
+
+        public IEnumerable<GroupedItemID> groupItemDisbursementsByDateRange(DateTime startDate, DateTime endDate)
+        {
+            return itemDisbursementContext.groupItemDisbursementsByDateRange(startDate, endDate);
         }
     }
 }

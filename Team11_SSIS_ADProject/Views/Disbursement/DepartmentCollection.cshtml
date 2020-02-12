@@ -46,10 +46,13 @@
                     }
                 </tbody>
             </table>
+            @if (User.IsInRole("Representative"))
+            {
+                <p>
+                    <button type="button" id="btnCollection" class="btn btn-primary">Confirm</button>
+                </p>
+            }
 
-            <p>
-                <button type="button" id="btnCollection" class="btn btn-primary">Confirm</button>
-            </p>
 
         </div>
     </div>
@@ -60,39 +63,26 @@
     <script>
         $(document).ready(() => {
 
-            $("body").on("click", "#btnCollection", function () {                
-                $.ajax({
-                    type: "POST",
-                    url: "/Notification/notify_when_save",
-                    data: JSON.stringify({
+            $("body").on("click", "#btnCollection", function () {
 
-                        CollectionsViewModel: CollectionsViewModel
-                    }),
-                    dataType: "json",
-                    success: function () {
-                        toastr.success("Notification with html send successfully");
-                    }
-                })
-                //if ($("#collectionTable TBODY").children().length > 0) {
-                //    $.ajax({
-                //        type: "POST",
-                //        url: "/Disbursement/ConfirmDepartmentCollection",
-                //        contentType: "application/json; charset=utf-8",
-                //        dataType: "json",
-                //        success: function () {
 
-                //            //success message
-                //            toastr.success("Department Collection confirmed", {
-                //                progressBar: false
+                    $.ajax({
+                        type: "POST",
+                        url: "/Disbursement/ConfirmDepartmentCollection",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (res) {
 
-                //            })
-                           
-                //        }
-                //    })
-                //}
-                //else {
-                //    toastr.error("You have no pending collections")
-                //}
+                            //success message
+                            toastr.success(res.message)
+
+                            setTimeout(() => {
+                                window.location.replace("/Disbursement/DepartmentCollection");
+                            }, 1500)
+                        }
+                    })
+                
+
 
             })
         })
