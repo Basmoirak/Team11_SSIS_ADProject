@@ -17,7 +17,7 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 
             var grouped = _context.ItemPurchaseOrders
                             .Include("Items")
-                            .Where(x => x.createdDateTime >= startDate && x.createdDateTime <= newEndDate)
+                            .Where(x => x.createdDateTime >= startDate && x.createdDateTime <= newEndDate && x.PurchaseOrder.Status == 9)
                             .GroupBy(x => x.Item)
                             .Select(group => new GroupedItemID
                             {
@@ -28,6 +28,21 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
    
 
             return grouped;
+        }
+
+        public IEnumerable<GroupedItemID> ItemPurchaseOrdersThisWeek()
+        {
+            var date = DateTime.Now.Date.AddDays(-7);
+            var result = _context.ItemPurchaseOrders
+                        .Include("Items")
+                        .Where(x => x.createdDateTime >= date)
+                        .GroupBy(x => x.Item)
+                        .Select(group => new GroupedItemID
+                        {
+                            ItemDescription = group.Key.ItemDescription,
+                            Quantity = group.Sum(x => x.Quantity)
+                        }).ToList();
+            return result;
         }
     }
 }

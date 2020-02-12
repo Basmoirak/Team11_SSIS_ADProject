@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Team11_SSIS_ADProject.SSIS.Models;
@@ -26,6 +27,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public int RequestedQuantity { get; set; }
         public int AvailableQuantity { get; set; }
         public int Quantity { get; set; }
+        public DateTime Date { get; set; }
     }
 
     public class CollectionsViewModel

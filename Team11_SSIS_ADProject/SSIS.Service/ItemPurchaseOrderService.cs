@@ -36,6 +36,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             return itemPurchaseOrderContext.groupItemPurchaseOrdersByDateRange(startDate, endDate);
         }
 
+        public IEnumerable<GroupedItemID> ItemPurchaseOrdersThisWeek()
+        {
+            return itemPurchaseOrderContext.ItemPurchaseOrdersThisWeek();
+        }
+
         public void Save(ItemPurchaseOrder itemPurchaseOrder)
         {
             itemPurchaseOrderContext.Add(itemPurchaseOrder);
