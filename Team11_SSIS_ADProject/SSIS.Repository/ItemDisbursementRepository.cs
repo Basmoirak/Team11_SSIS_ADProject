@@ -10,6 +10,13 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
 {
     public class ItemDisbursementRepository : Repository<ItemDisbursement>, IItemDisbursementRepository
     {
+        public IEnumerable<ItemDisbursement> getAllByDisbursementId(string id)
+        {
+            return _context.ItemDisbursements
+                .Where(x => x.DisbursementId == id)
+                .ToList();
+        }
+
         public IEnumerable<GroupedItemID> groupItemDisbursementByItemID()
         {
             var grouped = _context.Disbursements

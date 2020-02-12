@@ -22,20 +22,21 @@
                 <tr>
                     <th>Department</th>
                     <th>Status</th>
-                    <th>Edit</th>
+                    <th>View</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var disbursement in Model.Disbursements)
                 {
                 <tr>
-                    <td>@disbursement.Department.DepartmentName
-                    </td>
-                    @if(@disbursement.Status == 4)
-                    {
-                        <td><span class="label label-success">For Retrieval</span></td>
-                    }
-                    <td>@Html.ActionLink("Edit", "Edit", "Disbursement", new { id = disbursement.Id }, new { @class = "btn btn-primary" })</td>
+                    <td>
+                        @disbursement.Department.DepartmentName
+                </td>
+                @if (@disbursement.Status == 4)
+                {
+                    <td><span class="label label-success">For Retrieval</span></td>
+                }
+                <td><a class="btn btn-info" href="@Url.Action("Details", "Disbursement", new { id = disbursement.Id })"><i class="glyphicon glyphicon-eye-open"></i></a></td>
                 </tr>
                 }
             </tbody>
