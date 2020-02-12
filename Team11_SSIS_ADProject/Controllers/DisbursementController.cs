@@ -111,7 +111,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 }
             }
 
-            return RedirectToAction("DepartmentCollection", "Disbursement");
+            return Json (new { message = "Success! You'll soon be redirected." });
         }
     }
 }
