@@ -316,6 +316,7 @@
     <Compile Include="Controllers\Api\DisbursementController.cs" />
     <Compile Include="Controllers\Api\StockAdjustmentController.cs" />
     <Compile Include="Controllers\Api\UserController.cs" />
+    <Compile Include="Controllers\ChartController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\DisbursementController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -476,6 +477,7 @@
     <Compile Include="SSIS.Contracts\Repositories\IItemSupplierRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IPurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IUserRepository.cs" />
+    <Compile Include="SSIS.Contracts\Services\IChartService.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentDelegationService.cs" />
     <Compile Include="SSIS.Contracts\Repositories\IDepartmentRepository.cs" />
     <Compile Include="SSIS.Contracts\Services\IDepartmentService.cs" />
@@ -519,6 +521,7 @@
     <Compile Include="SSIS.Repository\ItemSupplierRepository.cs" />
     <Compile Include="SSIS.Repository\PurchaseOrderRepository.cs" />
     <Compile Include="SSIS.Repository\UserRepository.cs" />
+    <Compile Include="SSIS.Service\ChartService.cs" />
     <Compile Include="SSIS.Service\DepartmentDelegationService.cs" />
     <Compile Include="SSIS.Service\DisbursementService.cs" />
     <Compile Include="SSIS.Service\InventoryService.cs" />
@@ -545,6 +548,7 @@
     <Compile Include="SSIS.Models\ItemCategory.cs" />
     <Compile Include="SSIS.Models\ItemRequisition.cs" />
     <Compile Include="SSIS.Models\ItemStockAdjustment.cs" />
+    <Compile Include="SSIS.ViewModels\ChartViewModel.cs" />
     <Compile Include="SSIS.ViewModels\DepartmentDelegationViewModel.cs" />
     <Compile Include="SSIS.ViewModels\DisbursementRetrievalViewModel.cs" />
     <Compile Include="SSIS.ViewModels\MLViewModel.cs" />
@@ -4610,6 +4614,7 @@
     <Content Include="Views\Department\Admin.cshtml" />
     <Content Include="Views\Disbursement\Details.cshtml" />
     <Content Include="Views\Report\Collection.cshtml" />
+    <Content Include="Views\Chart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

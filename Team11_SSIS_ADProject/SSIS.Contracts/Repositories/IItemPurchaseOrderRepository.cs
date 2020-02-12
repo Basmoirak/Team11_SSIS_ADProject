@@ -11,5 +11,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Repositories
     public interface IItemPurchaseOrderRepository : IRepository<ItemPurchaseOrder>
     {
         IEnumerable<GroupedItemID> groupItemPurchaseOrdersByDateRange(DateTime startDate, DateTime endDate);
+        IEnumerable<GroupedItemID> ItemPurchaseOrdersThisWeek();
     }
 }

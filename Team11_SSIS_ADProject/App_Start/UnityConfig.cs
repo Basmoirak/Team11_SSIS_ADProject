@@ -101,6 +101,9 @@ namespace Team11_SSIS_ADProject
             //ML
             container.RegisterType<IMLService, MLService>();
 
+            //Chart
+            container.RegisterType<IChartService, ChartService>();
+
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();

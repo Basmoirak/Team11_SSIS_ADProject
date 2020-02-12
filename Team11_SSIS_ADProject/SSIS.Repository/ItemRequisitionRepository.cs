@@ -37,5 +37,37 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
                             }).ToList();
             return grouped;
         }
+
+        public IEnumerable<GroupedItemID> ItemRequisitionsThisWeek()
+        {
+            var date = DateTime.Now.Date.AddDays(-7);
+            var result = _context.ItemRequisitions
+                        .Include("Items")
+                        .Where(x => x.createdDateTime >= date)
+                        .GroupBy(x => x.Item)
+                        .Select(group => new GroupedItemID
+                        {
+                            ItemDescription = group.Key.ItemDescription,
+                            Quantity = group.Sum(x => x.Quantity)
+                        }).ToList();
+            return result;
+        }
+
+        public IEnumerable<GroupedItemID> ItemRequisitionsTrend(string id)
+        {
+            var date = DateTime.Now.Date.AddDays(-7);
+            var result = _context.ItemRequisitions
+                        .Include("Items")
+                        .Where(x => x.createdDateTime >= date && x.ItemId == id)
+                        .GroupBy(x => x.createdDateTime)
+                        .Select(group => new GroupedItemID
+                        {
+                            Quantity = group.Sum(x => x.Quantity),
+                            Date = group.Key
+                        })
+                        .ToList();
+            
+            return result;
+        }
     }
 }

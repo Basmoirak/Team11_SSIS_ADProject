@@ -34,6 +34,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         [Display(Name = "Choose the image")]
         public string ImagePath { get; set; }
         public IEnumerable<ItemSupplier> SuppliersByItem {get; set;}
+        public int InventoryQuantity { get; set; }
 
     }
 }
