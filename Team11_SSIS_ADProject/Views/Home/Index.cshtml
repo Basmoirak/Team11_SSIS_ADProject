@@ -106,7 +106,7 @@
     </section>
 }
 
-@if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
+@if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead") || User.IsInRole("Representative"))
 {
 <section class="content">
     <div class="row">
@@ -123,6 +123,24 @@
                 <a href="@Url.Action("RequisitionPendingList", "Requisition")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
+
+        @if (User.IsInRole("Representative"))
+        {
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-orange">
+                    <div class="inner">
+                        <h3> @ViewBag.C </h3>
+                        <p>Pending Collection</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fa fa-cubes"></i>
+                    </div>
+                    <a href="@Url.Action("DepartmentCollection", "Disbursement")" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        }
+
         @if (User.IsInRole("DepartmentHead"))
         {
             <div class="col-lg-3 col-xs-6">
