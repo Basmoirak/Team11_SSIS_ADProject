@@ -11,7 +11,7 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts.Services
     public interface IMLService
     {
         Dictionary<String,double> Pred_ROL(int day);
-        Dictionary<String, double> Pred_RQty();
+        Dictionary<String, double> Pred_RQty(int day);
         void Evaluate();
         Dictionary<String, float> Predict(int day);
     }

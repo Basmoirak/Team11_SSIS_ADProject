@@ -49,7 +49,7 @@ namespace Team11_SSIS_ADProject.Controllers.Api
                 };
                 if(user.Roles.FirstOrDefault().RoleId == UserRoles.Representative)
                 {
-                    rolename = "DepartmentHead";
+                    rolename = "Employee";
                     departmentId = user.DepartmentId;
                 }
                     if (user.Roles.FirstOrDefault().RoleId == UserRoles.StoreClerk) rolename = "StoreClerk"; 

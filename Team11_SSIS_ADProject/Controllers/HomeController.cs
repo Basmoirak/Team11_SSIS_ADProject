@@ -97,7 +97,7 @@ namespace Team11_SSIS_ADProject.Controllers
                 };
                 return View("Index", viewModel);
             }
-            if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead"))
+            if (User.IsInRole("Employee") || User.IsInRole("DepartmentHead") || User.IsInRole("Representative"))
             {
                 var requisitionCount = requisitionService.GetAll()
                 .Where(x => x.DepartmentId == User.Identity.GetDepartmentId())
