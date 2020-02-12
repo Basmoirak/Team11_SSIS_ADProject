@@ -16,5 +16,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
         void Delete(string Id);
         IEnumerable<ItemRequisition> GetAllByRequisitionId(string Id);
         IEnumerable<GroupedItemID> groupItemRequisitionsByDateRange(DateTime startDate, DateTime endDate);
+        IEnumerable<GroupedItemID> groupDepartmentItemRequisitionsByDateRange(DateTime startDate, DateTime endDate, string departmentId);
     }
 }

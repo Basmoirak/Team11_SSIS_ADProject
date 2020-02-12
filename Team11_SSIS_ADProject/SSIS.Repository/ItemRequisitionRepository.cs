@@ -38,6 +38,26 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
             return grouped;
         }
 
+        public IEnumerable<GroupedItemID> groupDepartmentItemRequisitionsByDateRange(DateTime startDate, DateTime endDate, string departmentId)
+        {
+            DateTime newEndDate = endDate.AddDays(1).AddTicks(-1);
+            var grouped = _context.Requisitions
+                            .Include("ItemRequisitions")
+                            .Include("Items")
+                            .Where(x => x.DepartmentId == departmentId)
+                            .Where(x => x.Status == CustomStatus.Approved)
+                            .Where(x => x.createdDateTime >= startDate && x.createdDateTime <= newEndDate)
+                            .SelectMany(x => x.ItemRequisitions)
+                            .GroupBy(x => x.Item)
+                            .Select(group => new GroupedItemID
+                            {
+                                ItemCode = group.Key.ItemNumber,
+                                ItemDescription = group.Key.ItemDescription,
+                                Quantity = group.Sum(x => x.Quantity)
+                            }).ToList();
+            return grouped;
+        }
+
         public IEnumerable<GroupedItemID> ItemRequisitionsThisWeek()
         {
             var date = DateTime.Now.Date.AddDays(-7);
