@@ -49,5 +49,9 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
             departmentDelegationContext.Commit();
         }
+        public IEnumerable<DepartmentDelegation> GetAllByDepartmentId(string Id)
+        {
+            return departmentDelegationContext.GetAllByDepartmentId(Id);
+        }
     }
 }

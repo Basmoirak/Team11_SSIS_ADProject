@@ -9,6 +9,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
 {
     public interface IDepartmentDelegationRepository : IRepository<DepartmentDelegation>
     {
-        
+        IEnumerable<DepartmentDelegation> GetAllByDepartmentId(string id);
     }
 }

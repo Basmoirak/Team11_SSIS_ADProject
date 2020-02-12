@@ -155,7 +155,7 @@ namespace Team11_SSIS_ADProject.Controllers
                         .Where(x => x.DepartmentId == departmentId)
                         .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
                         .ToList(),
-                DepartmentDelegations = departmentDelegationService.GetAll(),
+                DepartmentDelegations = departmentDelegationService.GetAllByDepartmentId(departmentId),
                 DepartmentId = departmentId,
                 Department = departmentService.Get(departmentId)
             };      
@@ -207,7 +207,7 @@ namespace Team11_SSIS_ADProject.Controllers
                         .Where(x => x.DepartmentId == departmentId)
                         .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
                         .ToList(),
-                DepartmentDelegations = departmentDelegationService.GetAll().Where(x => x.Status == CustomStatus.isNotActive)
+                DepartmentDelegations = departmentDelegationService.GetAllByDepartmentId(departmentId).Where(x => x.Status == CustomStatus.isNotActive)
                 .Where(x=>x.StartDate.Date >= DateTime.Now.Date),
                 DepartmentId = departmentId,
                 Department = departmentService.Get(departmentId)
@@ -225,7 +225,7 @@ namespace Team11_SSIS_ADProject.Controllers
                         .Where(x => x.DepartmentId == departmentId)
                         .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
                         .ToList(),
-                DepartmentDelegations = departmentDelegationService.GetAll().Where(x => x.Status == CustomStatus.isActive),
+                DepartmentDelegations = departmentDelegationService.GetAllByDepartmentId(departmentId).Where(x => x.Status == CustomStatus.isActive),
                 DepartmentId = departmentId,
                 Department = departmentService.Get(departmentId)
             };
@@ -242,7 +242,7 @@ namespace Team11_SSIS_ADProject.Controllers
                         .Where(x => x.DepartmentId == departmentId)
                         .Where(x => x.Roles.Any(r => r.RoleId == UserRoles.Employee || r.RoleId == UserRoles.Representative))
                         .ToList(),
-                DepartmentDelegations = departmentDelegationService.GetAll().Where(x => x.Status == CustomStatus.isNotActive)
+                DepartmentDelegations = departmentDelegationService.GetAllByDepartmentId(departmentId).Where(x => x.Status == CustomStatus.isNotActive)
                 .Where(x => x.EndDate.Date <= DateTime.Now.Date),
                 DepartmentId = departmentId,
                 Department = departmentService.Get(departmentId)
