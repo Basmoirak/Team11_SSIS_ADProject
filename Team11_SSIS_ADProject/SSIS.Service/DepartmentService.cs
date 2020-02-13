@@ -10,7 +10,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class DepartmentService : IDepartmentService
     {
-        IDepartmentRepository departmentContext;
+        public IDepartmentRepository departmentContext;
         public DepartmentService(IDepartmentRepository departmentRepository)
         {
             this.departmentContext = departmentRepository;
