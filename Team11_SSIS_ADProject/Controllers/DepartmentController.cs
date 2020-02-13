@@ -14,7 +14,8 @@ namespace Team11_SSIS_ADProject.Controllers
     [CustomAuthorize(Roles = CustomRoles.CanManageDepartment)]
     public class DepartmentController : Controller
     {
-        IDepartmentService departmentService;
+        public IDepartmentService departmentService;
+
         public DepartmentController(IDepartmentService departmentService)
         {
             this.departmentService = departmentService;

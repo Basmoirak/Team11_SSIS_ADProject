@@ -13,10 +13,11 @@ namespace Team11_SSIS_ADProject.Controllers
     [CustomAuthorize(Roles = CustomRoles.CanManageItems)]
     public class ItemController : Controller
     {
-        IItemCategoryService itemCategoryService;
-        IItemService itemService;
-        ISupplierService supplierService;
-        IItemSupplierService itemSupplierService;
+        public IItemCategoryService itemCategoryService;
+        public IItemService itemService;
+        public ISupplierService supplierService;
+        public IItemSupplierService itemSupplierService;
+
         public ItemController(IItemSupplierService itemSupplierService, IItemCategoryService itemCategoryService, IItemService itemService, ISupplierService supplierService)
         {
             this.itemSupplierService = itemSupplierService;
@@ -36,7 +37,7 @@ namespace Team11_SSIS_ADProject.Controllers
         [HttpPost]
         public ActionResult Save(Item item)
         {
-            if(Request.Files.Count > 0)
+            if(Request?.Files?.Count > 0)
             {
                 HttpPostedFileBase postedFile = Request.Files[0];
 

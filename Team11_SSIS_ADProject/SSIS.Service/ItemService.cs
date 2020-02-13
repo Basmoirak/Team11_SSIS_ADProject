@@ -10,7 +10,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class ItemService : IItemService
     {
-        IItemRepository itemContext;
+        public IItemRepository itemContext;
 
         public ItemService(IItemRepository itemRepository)
         {

@@ -14,16 +14,18 @@ namespace Team11_SSIS_ADProject.Controllers
     [CustomAuthorize(Roles = CustomRoles.CanManageSupplier)]
     public class SupplierController : Controller
     {
-        ISupplierService supplierService;
+        public ISupplierService supplierService;
         public SupplierController(ISupplierService supplierService)
         {
             this.supplierService = supplierService;
         }
+
         public ActionResult Create()
         {
             var supplier = new SupplierViewModel();
             return View("SupplierForm", supplier);
         }
+
         // GET: Supplier
         public ActionResult Index()
         {
@@ -34,6 +36,7 @@ namespace Team11_SSIS_ADProject.Controllers
 
             return View(viewModel);
         }
+
         [HttpPost]
         public ActionResult Save(Supplier supplier)
         {
@@ -44,6 +47,7 @@ namespace Team11_SSIS_ADProject.Controllers
         public ActionResult Edit(string id)
         {
             var s = supplierService.Get(id);
+
             var supplier = new SupplierViewModel()
             {
                 SupplierCode = s.SupplierCode,

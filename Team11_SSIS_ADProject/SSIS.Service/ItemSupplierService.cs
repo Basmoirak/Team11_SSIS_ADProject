@@ -10,7 +10,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class ItemSupplierService : IItemSupplierService
     {
-        IItemSupplierRepository itemSupplierContext;
+        public IItemSupplierRepository itemSupplierContext;
         public ItemSupplierService(IItemSupplierRepository itemSupplierContext)
         {
             this.itemSupplierContext = itemSupplierContext;
