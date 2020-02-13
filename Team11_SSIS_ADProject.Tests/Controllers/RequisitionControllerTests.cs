@@ -3,38 +3,44 @@
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.Models;
-using Team11_SSIS_ADProject.Tests.Mocks;
+//using Team11_SSIS_ADProject.Tests.Mocks;
 using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
+using Team11_SSIS_ADProject.SSIS.Service;
+using Team11_SSIS_ADProject.SSIS.Repository;
 
 namespace Team11_SSIS_ADProject.Controllers.Tests
 {
     [TestClass()]
     public class RequisitionControllerTests
     {
-        IRequisitionService requisitionService;
-        IItemRequisitionService itemRequisitionService;
-        IItemService itemService;
-        IDepartmentService departmentService;
-        IDisbursementService disbursementService;
-        IItemDisbursementService itemDisbursementService;
-        IInventoryService inventoryService;
+        RequisitionService requisitionService;
+        ItemRequisitionService itemRequisitionService;
+        ItemService itemService;
+        DepartmentService departmentService;
+        DisbursementService disbursementService;
+        ItemDisbursementService itemDisbursementService;
+        InventoryService inventoryService;
 
-        [TestMethod()]
-        public void IndexTest()
+        RequisitionRepository requisitionRepository = new RequisitionRepository();
+        ItemRequisitionRepository itemRequisitionRepository = new ItemRequisitionRepository();
+        ItemRepository itemRepository = new ItemRepository();
+        DepartmentRepository departmentRepository = new DepartmentRepository();
+        DisbursementRepository disbursementRepository = new DisbursementRepository();
+        ItemDisbursementRepository itemDisbursementRepository = new ItemDisbursementRepository();
+        InventoryRepository inventoryRepository = new InventoryRepository();
+
+        public RequisitionControllerTests()
         {
-            IRepository<Requisition> requisitionContext = new MockContext<Requisition>();
-
-            requisitionContext.Add(new Requisition());
-
-            RequisitionController requisitionController = new RequisitionController(departmentService, itemService, requisitionService, itemRequisitionService, disbursementService, itemDisbursementService, inventoryService);
-
-            var result = requisitionController.Index() as ViewResult;
-            var viewModel = (RequisitionViewModel)result.ViewData.Model;
-            // Assert
-            Assert.IsNotNull(viewModel.Requisitions);
+            requisitionService = new RequisitionService(requisitionRepository);
+            itemRequisitionService = new ItemRequisitionService(itemRequisitionRepository);
+            itemService = new ItemService(itemRepository, new MLService(itemRequisitionService, requisitionService, itemRepository, new Microsoft.ML.MLContext()));
+            departmentService = new DepartmentService(departmentRepository);
+            disbursementService = new DisbursementService(disbursementRepository);
+            itemDisbursementService = new ItemDisbursementService(itemDisbursementRepository);
+            inventoryService = new InventoryService(inventoryRepository);
         }
-  
+
         [TestMethod()]
         public void SaveTest()
         {
