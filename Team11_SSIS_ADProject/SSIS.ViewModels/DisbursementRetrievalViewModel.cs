@@ -37,6 +37,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
 
     public class GroupedDepartmentCollections
     {
+        public string DepartmentId { get; set; }
         public string DepartmentName { get; set; }
         public string CollectionPoint { get; set; }
         public IEnumerable<GroupedItemCollection> ItemDisbursements { get; set; }

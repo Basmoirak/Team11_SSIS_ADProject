@@ -88,16 +88,14 @@ namespace Team11_SSIS_ADProject.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
-        public ActionResult ConfirmDepartmentCollection()
+        public ActionResult ConfirmStoreCollection(string departmentId)
         {
-            var departmentId = User.Identity.GetDepartmentId();
-
-            var disbursements = disbursementService
-                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.ReadyForCollection, departmentId)
+            // If Department Employee already confirmed
+            var disbursementsConfirmedByDepartment = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.DepartmentConfirmedCollection, departmentId)
                 .ToList();
 
-            foreach (var d in disbursements)
+            foreach (var d in disbursementsConfirmedByDepartment)
             {
                 var disbursement = disbursementService.Get(d.Id);
                 disbursement.Status = CustomStatus.CollectionComplete;
@@ -109,6 +107,57 @@ namespace Team11_SSIS_ADProject.Controllers
                     inventoryItem.Quantity = inventoryItem.Quantity - id.AvailableQuantity;
                     inventoryService.Update(inventoryItem);
                 }
+            }
+
+            // If Store clerk has not confirmed
+            var disbursementsNotConfirmedByDepartment = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.ReadyForCollection, departmentId)
+                .ToList();
+
+            foreach (var d in disbursementsNotConfirmedByDepartment)
+            {
+                var disbursement = disbursementService.Get(d.Id);
+                disbursement.Status = CustomStatus.StoreConfirmedCollection;
+                disbursementService.Save(disbursement);
+            }
+
+            return Json(new { message = "Success! You'll soon be redirected." });
+        }
+
+        [HttpPost]
+        public ActionResult ConfirmDepartmentCollection()
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+
+            // If Store clerk already confirmed
+            var disbursementsConfirmedByStoreClerk = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.StoreConfirmedCollection, departmentId)
+                .ToList();
+
+            foreach (var d in disbursementsConfirmedByStoreClerk)
+            {
+                var disbursement = disbursementService.Get(d.Id);
+                disbursement.Status = CustomStatus.CollectionComplete;
+                disbursementService.Save(disbursement);
+
+                foreach (var id in d.ItemDisbursements)
+                {
+                    var inventoryItem = inventoryService.Get(id.ItemId);
+                    inventoryItem.Quantity = inventoryItem.Quantity - id.AvailableQuantity;
+                    inventoryService.Update(inventoryItem);
+                }
+            }
+
+            // If Store clerk has not confirmed
+            var disbursementsNotConfirmedByStoreClerk = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.ReadyForCollection, departmentId)
+                .ToList();
+
+            foreach (var d in disbursementsNotConfirmedByStoreClerk)
+            {
+                var disbursement = disbursementService.Get(d.Id);
+                disbursement.Status = CustomStatus.DepartmentConfirmedCollection;
+                disbursementService.Save(disbursement);
             }
 
             return Json (new { message = "Success! You'll soon be redirected." });

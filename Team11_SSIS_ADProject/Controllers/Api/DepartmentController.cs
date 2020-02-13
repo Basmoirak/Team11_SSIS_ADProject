@@ -185,11 +185,12 @@ namespace Team11_SSIS_ADProject.Controllers.Api
         {
             var departmentId = viewModel.DepartmentId;
 
-            var disbursements = disbursementService
-                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.ReadyForCollection, departmentId)
+            // If Store clerk already confirmed
+            var disbursementsConfirmedByStoreClerk = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.StoreConfirmedCollection, departmentId)
                 .ToList();
 
-            foreach (var d in disbursements)
+            foreach (var d in disbursementsConfirmedByStoreClerk)
             {
                 var disbursement = disbursementService.Get(d.Id);
                 disbursement.Status = CustomStatus.CollectionComplete;
@@ -201,6 +202,18 @@ namespace Team11_SSIS_ADProject.Controllers.Api
                     inventoryItem.Quantity = inventoryItem.Quantity - id.AvailableQuantity;
                     inventoryService.Update(inventoryItem);
                 }
+            }
+
+            // If Store clerk has not confirmed
+            var disbursementsNotConfirmedByStoreClerk = disbursementService
+                .getAllDisbursementsByStatusAndDepartmentId(CustomStatus.ReadyForCollection, departmentId)
+                .ToList();
+
+            foreach (var d in disbursementsNotConfirmedByStoreClerk)
+            {
+                var disbursement = disbursementService.Get(d.Id);
+                disbursement.Status = CustomStatus.DepartmentConfirmedCollection;
+                disbursementService.Save(disbursement);
             }
 
             return Ok();

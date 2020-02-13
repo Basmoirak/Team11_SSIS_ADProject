@@ -19,5 +19,7 @@ namespace Team11_SSIS_ADProject.SSIS.Models
         public const int Completed = 9;
         public const int isActive = 10;
         public const int isNotActive = 11;
+        public const int DepartmentConfirmedCollection = 12;
+        public const int StoreConfirmedCollection = 13;
     }
 }

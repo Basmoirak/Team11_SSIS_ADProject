@@ -5,22 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <div class="alert alert-success alert-dismissible">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <h4><i class="icon fa fa-shopping-cart"></i> Store Collection</h4>
-        You may view the pending collections for each respective department below.
-    </div>
+<div class="alert alert-success alert-dismissible">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <h4><i class="icon fa fa-shopping-cart"></i> Store Collection</h4>
+    You may view the pending collections for each respective department below.
+</div>
 
 @foreach (var department in Model.groupedDepartmentCollections)
 {
     <div class="box box-primary box-solid collapsed-box">
         <div class="box-header with-border">
             <h2 class="box-title">@department.DepartmentName &nbsp &nbsp</h2>
-            <h2 class="box-title btn btn-soundcloud">@department.CollectionPoint</h2> 
+            <h2 class="box-title btn btn-soundcloud">@department.CollectionPoint</h2>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-plus"></i>
-                </button>
+                </button> 
             </div>
         </div>
 
@@ -36,7 +36,7 @@
                 </thead>
 
                 <tbody>
-                    @foreach(var itemDisbursement in department.ItemDisbursements)
+                    @foreach (var itemDisbursement in department.ItemDisbursements)
                     {
                         <tr>
                             <td>@itemDisbursement.ItemCode</td>
@@ -46,7 +46,51 @@
                     }
                 </tbody>
             </table>
-        </div>    
+
+            <input type="hidden" value="@department.DepartmentId" class="departmentId"/>
+            @if (User.IsInRole("StoreClerk"))
+            {
+                <p>
+                    <button type="button" id="btnCollection" class="btn btn-primary">Confirm</button>
+                </p>
+            }
+        </div>
     </div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(() => {
+
+            $("body").on("click", "#btnCollection", function () {
+
+                var Id = $(this).parent().prev().val()
+                console.log(Id)
+                   $.ajax({
+                        type: "POST",
+                        url: "/Disbursement/ConfirmStoreCollection/",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({
+                            departmentId: Id
+                        }),
+                        dataType: "json",
+                        success: function (res) {
+
+                            //success message
+                            toastr.success(res.message)
+
+                            setTimeout(() => {
+                                window.location.replace("/Disbursement/StoreCollection");
+                            }, 1500)
+                        }
+                    })
+
+
+
+            })
+        })
+
+    </script>
 }
 
