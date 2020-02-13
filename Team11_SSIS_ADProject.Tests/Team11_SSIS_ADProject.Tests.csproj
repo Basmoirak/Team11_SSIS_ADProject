@@ -178,6 +178,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\DepartmentControllerTests.cs" />
+    <Compile Include="Controllers\ItemControllerTests.cs" />
+    <Compile Include="Controllers\SupplierControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>

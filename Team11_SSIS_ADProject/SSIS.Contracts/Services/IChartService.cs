@@ -8,13 +8,11 @@ using Team11_SSIS_ADProject.SSIS.ViewModels;
 
 namespace Team11_SSIS_ADProject.SSIS.Contracts.Services
 {
-    public interface IItemPurchaseOrderService
+    public interface IChartService
     {
-        void Save(ItemPurchaseOrder itemPurchaseOrder);
-        ItemPurchaseOrder Get(string id);
-        IEnumerable<ItemPurchaseOrder> GetAll();
-        void Delete(string Id);
-        IEnumerable<GroupedItemID> groupItemPurchaseOrdersByDateRange(DateTime startDate, DateTime endDate);
+        IEnumerable<ItemViewModel> GetInventories();
+        IEnumerable<GroupedItemID> ItemRequisitionsThisWeek();
         IEnumerable<GroupedItemID> ItemPurchaseOrdersThisWeek();
+        IEnumerable<GroupedItemID> ItemRequisitionsTrend(string id);
     }
 }

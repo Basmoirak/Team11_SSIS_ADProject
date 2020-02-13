@@ -13,7 +13,7 @@ namespace Team11_SSIS_ADProject.Controllers
     [CustomAuthorize(Roles = CustomRoles.CanManageItemCategory)]
     public class ItemCategoryController : Controller
     {
-        IItemCategoryService itemCategoryService;
+        public IItemCategoryService itemCategoryService;
 
         public ItemCategoryController(IItemCategoryService itemCategoryService)
         {

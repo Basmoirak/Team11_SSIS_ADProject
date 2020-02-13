@@ -40,6 +40,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             return itemRequisitionContext.groupItemRequisitionsByDateRange(startDate, endDate);
         }
 
+        public IEnumerable<GroupedItemID> groupDepartmentItemRequisitionsByDateRange(DateTime startDate, DateTime endDate, string departmentId)
+        {
+            return itemRequisitionContext.groupDepartmentItemRequisitionsByDateRange(startDate, endDate, departmentId);
+        }
+
         public void Save(ItemRequisition itemRequisition)
         {
             //Check if itemCategory is in DB

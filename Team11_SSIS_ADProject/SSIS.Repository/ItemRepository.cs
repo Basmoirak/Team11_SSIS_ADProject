@@ -30,5 +30,17 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
                         .ToList();
             return result;
         }
+        public IEnumerable<ItemViewModel> GetInventories()
+        {
+            var result = _context.Items
+                        .Include("Inventories")
+                        .Select(x => new ItemViewModel
+                        {
+                            ItemDescription = x.ItemDescription,
+                            InventoryQuantity = x.Inventory.Quantity
+                        })
+                        .ToList();
+            return result;
+        }
     }
 }

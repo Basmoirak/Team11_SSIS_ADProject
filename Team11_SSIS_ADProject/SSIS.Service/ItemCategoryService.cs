@@ -11,7 +11,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 {
     public class ItemCategoryService : IItemCategoryService
     {
-        IItemCategoryRepository itemCategoryContext;
+        public IItemCategoryRepository itemCategoryContext;
         public ItemCategoryService(IItemCategoryRepository itemCategoryRepository)
         {
             this.itemCategoryContext = itemCategoryRepository;

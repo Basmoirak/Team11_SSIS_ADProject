@@ -96,8 +96,8 @@ namespace Team11_SSIS_ADProject.Controllers
         {
             Notification notification_ToHead = new Notification
             {
-                To = "daniel_yn@yahoo.com.sg", //change to real email address whent test
-                Subject = "sss",
+                To = "", //change to real email address whent test
+                Subject = "New Requisition",
                 From = User.Identity.Name,
                 Body = "Requisition Detail"
             };

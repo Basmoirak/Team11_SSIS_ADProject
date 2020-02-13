@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Team11_SSIS_ADProject.SSIS.Contracts;
 using Team11_SSIS_ADProject.SSIS.Contracts.Services;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
+using Team11_SSIS_ADProject.SSIS.Models.Extensions;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
@@ -63,6 +64,25 @@ namespace Team11_SSIS_ADProject.Controllers
                 GroupedItemDisbursements = itemDisbursementService.groupItemDisbursementsByDateRange(startDate, endDate)
             };
             return View("Collection", viewModel);
+        }
+
+        //For Individual Departments
+        public ActionResult DepartmentRequisition()
+        {
+            return View(new RequisitionViewModel());
+        }
+
+        [HttpGet]
+        public ActionResult DepartmentSearchRequisition(DateTime startDate, DateTime endDate)
+        {
+            var departmentId = User.Identity.GetDepartmentId();
+
+            var viewModel = new RequisitionViewModel()
+            {
+                GroupedItemRequisitions = itemRequisitionService
+                        .groupDepartmentItemRequisitionsByDateRange(startDate, endDate, departmentId)
+            };
+            return View("DepartmentRequisition", viewModel);
         }
     }
 }
