@@ -88,13 +88,15 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             list.Add(new DailyUsage_Train { ItemId = "1", ItemDescription = "Clips Double 1", OrderDay = 8, DailyUsage = 65f });
             list.Add(new DailyUsage_Train { ItemId = "1", ItemDescription = "Clips Double 1", OrderDay = 7, DailyUsage = 45f });
             list.Add(new DailyUsage_Train { ItemId = "1", ItemDescription = "Clips Double 1", OrderDay = 6, DailyUsage = 35f });
-            list.Add(new DailyUsage_Train { ItemId = "1", ItemDescription = "Clips Double 1", OrderDay = 6, DailyUsage = 70f });
             list.Add(new DailyUsage_Train { ItemId = "2", ItemDescription = "Clips Double 2", OrderDay = 8, DailyUsage = 73f });
             list.Add(new DailyUsage_Train { ItemId = "2", ItemDescription = "Clips Double 2", OrderDay = 7, DailyUsage = 63f });
             list.Add(new DailyUsage_Train { ItemId = "2", ItemDescription = "Clips Double 2", OrderDay = 2, DailyUsage = 45f });
+            list.Add(new DailyUsage_Train { ItemId = "3", ItemDescription = "Clips Double 3/4", OrderDay = 2, DailyUsage = 35f });
+            list.Add(new DailyUsage_Train { ItemId = "3", ItemDescription = "Clips Double 3/4", OrderDay = 3, DailyUsage = 35f });
             list.Add(new DailyUsage_Train { ItemId = "7", ItemDescription = "Envelope Brown (3x6)", OrderDay = 8, DailyUsage = 70f });
             list.Add(new DailyUsage_Train { ItemId = "7", ItemDescription = "Envelope Brown (3x6)", OrderDay = 7, DailyUsage = 66f });
             list.Add(new DailyUsage_Train { ItemId = "7", ItemDescription = "Envelope Brown (3x6)", OrderDay = 6, DailyUsage = 72f });
+            list.Add(new DailyUsage_Train { ItemId = "7", ItemDescription = "Envelope Brown (3x6)", OrderDay = 14, DailyUsage = 56f });
             list.Add(new DailyUsage_Train { ItemId = "8", ItemDescription = "Envelope Brown (5x7)", OrderDay = 8, DailyUsage = 45f });
             list.Add(new DailyUsage_Train { ItemId = "9", ItemDescription = "Envelope White (3x6)", OrderDay = 8, DailyUsage = 55f });
             list.Add(new DailyUsage_Train { ItemId = "10", ItemDescription = "Envelope White (5x7)", OrderDay = 8, DailyUsage = 65f });
@@ -123,12 +125,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         public void Evaluate()
         {
             var model = Train();
-            IDataView dataView = this.mlContext.Data.LoadFromEnumerable(Getdata().Skip((int)Getdata().Count() / 2));
+            IDataView dataView = this.mlContext.Data.LoadFromEnumerable(Getdata().Skip((int)Getdata().Count() / 2)); //get test data
             var predictions = model.Transform(dataView);
             var metrics = mlContext.Regression.Evaluate(predictions, "Label", "Score");
 
             var R_Squared = metrics.RSquared;           //The closer its value is to 1, the better the model is. ∈(0,1)
-            var RMS = metrics.RootMeanSquaredError;     //Lower RMS ,Better model
 
         }
 
@@ -163,7 +164,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             var listofROL = new Dictionary<String, double>();
             foreach (var item in listofprediction)
             {
-                listofROL.Add(item.Key,Math.Round(item.Value) * 3); //assuming lead time = 7
+                listofROL.Add(item.Key,Math.Round(item.Value) * 3+ 50); //assuming lead time = 3 and saftey stock=50
             }
             return listofROL;
         }
@@ -175,10 +176,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
             var listofRQty = new Dictionary<String, double>();
             foreach (var item in listofprediction)
             {
-                listofRQty.Add(item.Key, Math.Round(item.Value) * 7); //assuming lead time = 7
+                listofRQty.Add(item.Key, Math.Round(item.Value) * 5); 
             }
             return listofRQty;
         }
+
 
     }
 }

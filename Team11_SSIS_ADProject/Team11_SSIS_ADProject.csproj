@@ -325,6 +325,7 @@
     <Compile Include="Controllers\ItemController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\PredictionController.cs" />
     <Compile Include="Controllers\PurchaseOrderController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\RequisitionController.cs" />
@@ -639,6 +640,8 @@
     <Content Include="Content\adminlte\img\credit\visa.png" />
     <Content Include="Content\adminlte\img\default-50x50.gif" />
     <Content Include="Content\adminlte\img\icons.png" />
+    <Content Include="Content\adminlte\img\inbox.png" />
+    <Content Include="Content\adminlte\img\outbox.png" />
     <Content Include="Content\adminlte\img\photo1.png" />
     <Content Include="Content\adminlte\img\photo2.png" />
     <Content Include="Content\adminlte\img\photo3.jpg" />
@@ -4616,6 +4619,7 @@
     <Content Include="Views\Report\Collection.cshtml" />
     <Content Include="Views\Chart\Index.cshtml" />
     <Content Include="Views\Report\DepartmentRequisition.cshtml" />
+    <Content Include="Views\Prediction\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

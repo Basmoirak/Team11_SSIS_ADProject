@@ -1,0 +1,120 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.MlViewModel_2
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="col-md-6">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h2>Prediction of Daily Usage of items Chart</h2>
+                <input type="date" id="thedate" class="form-control"/>
+            </div>
+            <div class="box-body">
+                <canvas id="predictionchart" width="2000" height="1000"></canvas>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+    <div class="col-md-6">
+
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        $(document).ready(() => {
+            var time = new Date();
+            var day = ("0" + time.getDate()).slice(-2);
+            var month = ("0" + (time.getMonth() + 1)).slice(-2);
+            var today = time.getFullYear() + "-" + (month) + "-" + (day);
+            $('#thedate').val(today);
+
+            loadRequisitionTrendChart($("#thedate").val())
+            var predictionchart = document.getElementById('predictionchart').getContext('2d')
+
+            //on change date
+            $("#thedate").on("change", () => {
+                var itemId = $("#thedate").val()
+                var date = itemId.replace(/\D/g, "")
+                console.log(parseInt(date))
+                loadRequisitionTrendChart(date);
+            })
+
+
+        })
+
+        function loadRequisitionTrendChart(date) {
+
+            $.ajax({
+                type: "GET",
+                url: "/Prediction/PredictionofDailyUsage/" + date,
+                success: function (res) {
+                    console.log(res)
+
+                    var data = res.mlviewmodel
+                    console.log(data)
+                    var item = []
+                    var quantity = []
+                    for (var i in data.Items) {
+                        item.push(data.Items[i])
+                    }
+                    for (var i in data.usage) {
+                        quantity.push(data.usage[i])
+                    }
+
+                    var myChart = new Chart(predictionchart, {
+                        type: 'line',
+                        data: {
+                            labels: item,
+                            datasets: [{
+                                label: "Quantity",
+                                data: quantity,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)',
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)',
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                }
+            })
+        }
+    </script>
+}
