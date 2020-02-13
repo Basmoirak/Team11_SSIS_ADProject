@@ -20,7 +20,7 @@ namespace Team11_SSIS_ADProject.Controllers
     
     public class DepartmentController : Controller
     {
-        IDepartmentService departmentService;
+        public IDepartmentService departmentService;
         IDepartmentDelegationService departmentDelegationService;
         IUserService userService;
         public DepartmentController(IDepartmentService departmentService, IDepartmentDelegationService departmentDelegationService, IUserService userService)

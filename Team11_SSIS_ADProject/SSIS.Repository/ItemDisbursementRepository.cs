@@ -44,10 +44,11 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
                 .Include("Departments")
                 .Include("ItemDisbursements")
                 .Include("Items")
-                .Where(x => x.Status == CustomStatus.ReadyForCollection)
+                .Where(x => x.Status == CustomStatus.ReadyForCollection || x.Status == CustomStatus.DepartmentConfirmedCollection)
                 .GroupBy(x => x.Department)
                 .Select(group => new GroupedDepartmentCollections
                 {
+                    DepartmentId = group.Key.Id,
                     DepartmentName = group.Key.DepartmentName,
                     CollectionPoint = group.Key.DepartmentCollectionPoint,
                     ItemDisbursements = group.SelectMany(x => x.ItemDisbursements)
@@ -71,7 +72,35 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
                 .Include("Departments")
                 .Include("ItemDisbursements")
                 .Include("Items")
-                .Where(x => x.Status == CustomStatus.ReadyForCollection)
+                .Where(x => x.Status == CustomStatus.ReadyForCollection || x.Status == CustomStatus.StoreConfirmedCollection)
+                .Where(x => x.DepartmentId == departmentId)
+                .GroupBy(x => x.Department)
+                .Select(group => new GroupedDepartmentCollections
+                {
+                    DepartmentName = group.Key.DepartmentName,
+                    CollectionPoint = group.Key.DepartmentCollectionPoint,
+                    ItemDisbursements = group.SelectMany(x => x.ItemDisbursements)
+                                             .GroupBy(x => x.Item)
+                                             .Select(collection => new GroupedItemCollection
+                                             {
+                                                 ItemID = collection.Key.Id,
+                                                 ItemCode = collection.Key.ItemNumber,
+                                                 ItemDescription = collection.Key.ItemDescription,
+                                                 AvailableQuantity = collection.Sum(x => x.AvailableQuantity),
+                                                 RequestedQuantity = collection.Sum(x => x.RequestedQuantity)
+                                             }).ToList()
+                }).ToList();
+
+            return grouped;
+        }
+
+        public IEnumerable<GroupedDepartmentCollections> GetDepartmentCollectionForStore(string departmentId)
+        {
+            var grouped = _context.Disbursements
+                .Include("Departments")
+                .Include("ItemDisbursements")
+                .Include("Items")
+                .Where(x => x.Status == CustomStatus.ReadyForCollection || x.Status == CustomStatus.DepartmentConfirmedCollection)
                 .Where(x => x.DepartmentId == departmentId)
                 .GroupBy(x => x.Department)
                 .Select(group => new GroupedDepartmentCollections
@@ -99,7 +128,7 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
                 .Include("Departments")
                 .Include("ItemDisbursements")
                 .Include("Items")
-                .Where(x => x.Status == CustomStatus.ReadyForCollection)
+                .Where(x => x.Status == CustomStatus.ReadyForCollection || x.Status == CustomStatus.DepartmentConfirmedCollection)
                 .GroupBy(x => x.Department)
                 .Select(group => new MobileGroupedDepartmentCollections
                 {
