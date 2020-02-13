@@ -179,9 +179,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DepartmentControllerTests.cs" />
+    <Compile Include="Controllers\ItemControllerTests.cs" />
     <Compile Include="Controllers\RequisitionControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Controllers\HomeControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />

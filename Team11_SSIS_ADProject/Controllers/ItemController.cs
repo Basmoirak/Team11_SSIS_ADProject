@@ -16,7 +16,7 @@ namespace Team11_SSIS_ADProject.Controllers
     public class ItemController : Controller
     {
         IItemCategoryService itemCategoryService;
-        IItemService itemService;
+        public IItemService itemService;
         ISupplierService supplierService;
         IItemSupplierService itemSupplierService;
         IInventoryService inventoryService;
