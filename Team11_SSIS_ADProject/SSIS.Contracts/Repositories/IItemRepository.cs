@@ -11,5 +11,6 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
     public interface IItemRepository : IRepository<Item>
     {
         IEnumerable<ItemPurchaseOrderViewModel> GetItemsLowerThanReorderLevel();
+        IEnumerable<ItemViewModel> GetInventories();
     }
 }

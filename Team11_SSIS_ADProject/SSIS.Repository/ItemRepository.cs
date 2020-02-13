@@ -14,6 +14,7 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
         {
             var result = _context.Items
                         .Include("ItemSuppliers")
+                        .Include("Inventories")
                         .Where(x => x.Inventory.Quantity < x.ItemReorderLevel)
                         .Select(x => new ItemPurchaseOrderViewModel
                         {
@@ -25,6 +26,18 @@ namespace Team11_SSIS_ADProject.SSIS.Repository
                             InventoryQuantity = x.Inventory.Quantity,
                             ItemReorderQty = x.ItemReorderQty,
                             ItemUnit = x.ItemUnit
+                        })
+                        .ToList();
+            return result;
+        }
+        public IEnumerable<ItemViewModel> GetInventories()
+        {
+            var result = _context.Items
+                        .Include("Inventories")
+                        .Select(x => new ItemViewModel
+                        {
+                            ItemDescription = x.ItemDescription,
+                            InventoryQuantity = x.Inventory.Quantity
                         })
                         .ToList();
             return result;

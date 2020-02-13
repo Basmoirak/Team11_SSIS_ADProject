@@ -12,5 +12,8 @@ namespace Team11_SSIS_ADProject.SSIS.Contracts
     {
         IEnumerable<ItemRequisition> GetAllByRequisitionId(string id);
         IEnumerable<GroupedItemID>  groupItemRequisitionsByDateRange(DateTime startDate, DateTime endDate);
+        IEnumerable<GroupedItemID> groupDepartmentItemRequisitionsByDateRange(DateTime startDate, DateTime endDate, string departmentId);
+        IEnumerable<GroupedItemID> ItemRequisitionsThisWeek();
+        IEnumerable<GroupedItemID> ItemRequisitionsTrend(string id);
     }
 }

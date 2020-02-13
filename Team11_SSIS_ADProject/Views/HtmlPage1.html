@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        h3{
+            margin:auto;
+        }
+        img{
+            margin:auto;
+        }
+        p{
+            margin:auto;
+        }
+        .div1 {
+            background-repeat:no-repeat;
+            margin:auto;
+            }
+        .table-fill {
+            background: white;
+            border-radius: 3px;
+            border-collapse: collapse;
+            max-width: 600px;
+            padding: 5px;
+            width: 100%;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            animation: float 5s infinite;
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+        th {
+            border-top-left-radius: 3px;
+            color: #D5DDE5;
+            background: #1b1e24;
+            border-bottom: 4px solid #9ea7af;
+            border-right: 1px solid #343a45;
+            font-size: 14px;
+            font-weight: 100;
+            padding: 12px;
+            text-align: left;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            vertical-align: middle;
+            display: table-cell;
+            vertical-align: inherit;
+            font-weight: bold;
+        }
+
+        tr:nth-child(odd) td {
+            background: #EBEBEB;
+        }
+        td {
+            display: table-cell;
+            vertical-align: inherit;
+            text-align: left;
+        }
+        td {
+            background: #FFFFFF;
+            padding: 10px;
+            text-align: left;
+            vertical-align: middle;
+            font-weight: 300;
+            font-size: 12px;
+            text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+            border-right: 1px solid #C1C3D1;
+        }
+        table {
+            display: table;
+            border-collapse: separate;
+            border-spacing: 2px;
+            border-color: grey;
+        }
+        thead {
+            display: table-header-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <p>The Requisition information are shown below:</p>
+        <img style="margin-left:160px" width="200" src="https://i.imgur.com/EMSUwJk.png" />
+        <h3>Requisition Detail</h3>
+        <table class="table-fill">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {sss}
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+        </table>
+    </div>
+    
+</body>
+</html>

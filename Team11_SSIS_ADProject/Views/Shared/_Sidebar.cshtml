@@ -56,7 +56,7 @@
                 <!--Reports -->
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-tags"></i> <span>Reports</span>
+                        <i class="fa fa-list"></i> <span>Reports</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -64,7 +64,11 @@
                     <ul class="treeview-menu">
                         <li><a href="@Url.Action("Requisition", "Report")"><i class="fa fa-circle-o"></i>Requisitions</a></li>
                         <li><a href="@Url.Action("PurchaseOrder", "Report")"><i class="fa fa-circle-o"></i>Purchase Orders</a></li>
+                        <li><a href="@Url.Action("Collection", "Report")"><i class="fa fa-circle-o"></i> Collection</a></li>
                     </ul>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Chart")"><i class="glyphicon glyphicon-new-window"></i> Charts</a>
                 </li>
             }
             <!-- Store View End -->
@@ -129,45 +133,13 @@
                             <li><a href="@Url.Action("Delegation", "Department")"><i class="fa fa-circle-o"></i>Manage Delegations</a></li>
                         </ul>
                     </li>
+
+                    <li>
+                        <a href="@Url.Action("DepartmentRequisition", "Report")"><i class="glyphicon glyphicon-new-window"></i>Requisition Report</a>
+                    </li>
                 }
             }
             <!-- Department View End -->
-            @*<li class="treeview">
-            <a href="#">
-                <i class="fa fa-share"></i> <span>Multilevel</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-circle-o"></i> Level One
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-circle-o"></i> Level Two
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                                <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            </ul>
-        </li>*@
         </ul>
     </section>
-    <!-- /.sidebar -->
 </aside>

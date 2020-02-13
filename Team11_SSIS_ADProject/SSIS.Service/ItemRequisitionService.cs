@@ -27,7 +27,7 @@ namespace Team11_SSIS_ADProject.SSIS.Service
 
         public IEnumerable<ItemRequisition> GetAll()
         {
-            throw new NotImplementedException();
+            return itemRequisitionContext.GetAll();
         }
 
         public IEnumerable<ItemRequisition> GetAllByRequisitionId(string Id)
@@ -38,6 +38,11 @@ namespace Team11_SSIS_ADProject.SSIS.Service
         public IEnumerable<GroupedItemID> groupItemRequisitionsByDateRange(DateTime startDate, DateTime endDate)
         {
             return itemRequisitionContext.groupItemRequisitionsByDateRange(startDate, endDate);
+        }
+
+        public IEnumerable<GroupedItemID> groupDepartmentItemRequisitionsByDateRange(DateTime startDate, DateTime endDate, string departmentId)
+        {
+            return itemRequisitionContext.groupDepartmentItemRequisitionsByDateRange(startDate, endDate, departmentId);
         }
 
         public void Save(ItemRequisition itemRequisition)

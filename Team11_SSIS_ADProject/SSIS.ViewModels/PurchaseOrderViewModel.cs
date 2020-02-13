@@ -19,7 +19,8 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public IEnumerable<ItemSupplier> ItemSuppliersByItemId { get; set; }
         public IEnumerable<Item> Items { get; set; }
         public int PendingOrderCount { get; set; }
-        
+        public IEnumerable<GroupedItemID> GroupedItemPurchaseOrders{ get; set; }
+
     }
 
     public class ItemPurchaseOrderViewModel
@@ -33,6 +34,7 @@ namespace Team11_SSIS_ADProject.SSIS.ViewModels
         public string ItemUnit { get; set; }
         public double Price { get; set; }
         public string SupplierId { get; set; }
+        public double PredictedReorderQty { get; set; }
 
     }
 }

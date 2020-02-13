@@ -1,0 +1,331 @@
+﻿@model Team11_SSIS_ADProject.SSIS.ViewModels.ItemViewModel
+@{
+    ViewBag.Title = "Charts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h2>Inventory Chart</h2>
+                </div>
+                <div class="box-body">
+                    <canvas id="inventoryChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h2>Last 7 Requisitions Trend</h2>
+                    <select id="itemId" class="form-control select2">
+                        @foreach (var item in Model.Items)
+                        {
+                            <option value="@item.Id">@item.ItemDescription</option>
+                        }
+
+                    </select>
+                </div>
+                <div class="box-body">
+                    <canvas id="itemRequisitionTrendChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h2>
+                        Item Requisitions Last 7 Days
+
+                    </h2>
+                   
+                </div>
+                <div class="box-body">
+                    <canvas id="iRThisWeekChart" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h2>New Item Arrivals Last 7 Days</h2>
+                </div>
+                <div class="box-body">
+                    <canvas id="iPoThisWeek" width="200" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+@section scripts{
+    <script>
+       
+
+        $(document).ready(() => {
+            //load requisiton trend on start
+            loadRequisitionTrendChart($("#itemId option:selected").val())
+            var inventoryChart = document.getElementById('inventoryChart').getContext('2d')
+            var iRThisWeekChart = document.getElementById('iRThisWeekChart').getContext('2d')
+            var iPoThisWeek = document.getElementById('iPoThisWeek').getContext('2d')
+            var itemRequisitionTrendChart = document.getElementById('itemRequisitionTrendChart').getContext('2d')
+            //inventory chart
+            $.ajax({
+                type: "GET",
+                url: "/Chart/GetInventories",
+                success: function (res) {
+                    var data = res.inventories
+                    console.log(data)
+                    var item = []
+                    var quantity = []
+                    for (var i in data) {
+                        item.push(data[i].ItemDescription)
+                        quantity.push(data[i].InventoryQuantity)    
+                    }
+           
+                    var myChart = new Chart(inventoryChart, {
+                    type: 'bar',
+                    data: {
+                        labels: item,
+                        datasets: [{
+                            label: "Quantity",
+                            data: quantity,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                }
+            })
+
+            //item requisitons this week
+            $.ajax({
+                type: "GET",
+                url: "/Chart/ItemRequisitionsThisWeek",
+                success: function (res) {
+                    var data = res.iRThisWeek
+
+                    var item = []
+                    var quantity = []
+                    for (var i in data) {
+                        item.push(data[i].ItemDescription)
+                        quantity.push(data[i].Quantity)    
+                    }
+           
+                    var myChart = new Chart(iRThisWeekChart, {
+                    type: 'bar',
+                    data: {
+                        labels: item,
+                        datasets: [{
+                            label: "Quantity",
+                            data: quantity,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                }
+            })
+
+            //purchase orders this week
+            $.ajax({
+                type: "GET",
+                url: "/Chart/ItemPurchaseOrdersThisWeek",
+                success: function (res) {
+                    var data = res.iPoThisWeek
+
+                    var item = []
+                    var quantity = []
+                    for (var i in data) {
+                        item.push(data[i].ItemDescription)
+                        quantity.push(data[i].Quantity)    
+                    }
+
+                    var myChart = new Chart(iPoThisWeek, {
+                    type: 'bar',
+                    data: {
+                        labels: item,
+                        datasets: [{
+                            label: "Quantity",
+                            data: quantity,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                }
+            })
+            //on change item
+            $("#itemId").on("change", () => {
+                var itemId = $("#itemId option:selected").val()
+                console.log(itemId)
+                loadRequisitionTrendChart(itemId)
+            })
+            
+            
+        })
+          //requisitionTrendChart
+        function loadRequisitionTrendChart(id) {
+           
+            $.ajax({
+                type: "GET",
+                url: "/Chart/ItemRequisitionsTrend/"+id,
+                success: function (res) {
+                    console.log(res)
+
+                    var data = res.iRs
+
+                    var date = []
+                    var quantity = []
+                    for (var i in data) {
+                        var dateString = data[i].Date.replace(/\D/g, "")
+                        console.log(parseInt(dateString))
+                        var d = moment(parseInt(dateString)).format("DD-MM-YYYY");
+                        
+                        console.log(d)
+                        date.push(d)
+                        quantity.push(data[i].Quantity)    
+                    }
+
+                    var myChart = new Chart(itemRequisitionTrendChart, {
+                    type: 'line',
+                    data: {
+                        labels: date,
+                        datasets: [{
+                            label: "Item",
+                            data: quantity,
+                            borderColor: "#3e95cd",
+                            fill: false
+                           
+        
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+                }
+            })
+        }
+    </script>
+    }
+
+

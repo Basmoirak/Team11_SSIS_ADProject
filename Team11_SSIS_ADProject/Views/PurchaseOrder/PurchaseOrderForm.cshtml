@@ -51,6 +51,7 @@ else
                         <th>Current Qty</th>
                         <th>Reorder Qty</th>
                         <th class="text-center">Total</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,29 +69,33 @@ else
                                 </select>
                             </td>
                             <td align="center">
-                                <span style="font-size: 15px" class="priceField label label-success">@item.Price $</span>
+                                <span style="font-size: 15px" class="priceField label label-success">@item.Price</span><span> $</span>
                             </td>
                             <td><span style="font-size: 15px" class="label label-primary">@item.InventoryQuantity - @item.ItemUnit</span></td>
                             <td>
-                                <input type="number" step="1" min="0" style="width: 90px" value="@item.ItemReorderQty" class="itemReorderQuantity form-control" />
+                                <input type="number" step="1" min="0" style="width: 90px" value="@item.PredictedReorderQty" class="itemReorderQuantity form-control" />
                             </td>
                             <td class="text-center">
                                 <span class="total"></span>
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-danger" onclick="Remove(this);" value="Remove">
                             </td>
                             <!--for itemId-->
                             <input type="hidden" class="itemIdField" value="@item.ItemId" />
                         </tr>
 
                     }
-                    <tr>
-                        <td class="thick-line"></td>
-                        <td class="thick-line"></td>
-                        <td class="thick-line"></td>
-                        <td class="thick-line"></td>
-                        <td class="thick-line"></td>
-                        <td class="thick-line text-center"><strong>Grand Total</strong></td>
-                        <td class="thick-line text-center"><span id="grandTotal" style="font-size: 20px"></span></td>
-                    </tr>
+                <tr>
+                    <td class="thick-line"></td>
+                    <td class="thick-line"></td>
+                    <td class="thick-line"></td>
+                    <td class="thick-line"></td>
+                    <td class="thick-line"></td>
+                    <td class="thick-line text-center"><strong>Grand Total</strong></td>
+                    <td class="thick-line text-center"><span id="grandTotal" style="font-size: 20px"></span></td>
+                    <td class="thick-line"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
@@ -106,6 +111,24 @@ else
     <script>
         function getNum(str) {
             return /[-+]?[0-9]*\.?[0-9]+/.test(str)?parseFloat(str):0;
+        }
+         //remove row function
+            function Remove(button) {
+                
+                    var row = $(button).closest("TR");
+                    var name = $("TD", row).eq(0).html();
+                    if (confirm("Do you want to delete: " + name)) {
+                        //Get the reference of the Table.
+                        var table = $("#po_table")[0];
+ 
+                        //Delete the Table row using it's Index.
+                        table.deleteRow(row[0].rowIndex);
+                        calculateTotal();
+
+                        if ($("#po_table TBODY").children().length = 0) {
+
+                        }
+                    }
         }
         function calculateTotal() {
             var grandTotal = 0
@@ -163,7 +186,7 @@ else
                         var itemPurchaseOrder = {}
                         itemPurchaseOrder.ItemId = row.find(".itemIdField").val()
                         itemPurchaseOrder.ItemReorderQty = row.find(".itemReorderQuantity").val()
-                        itemPurchaseOrder.Price = row.find(".priceField").text().substring(0, 3)
+                        itemPurchaseOrder.Price = row.find(".priceField").text()
                         itemPurchaseOrder.SupplierId = row.find(".supplierId").val()
 
                         itemPurchaseOrders.push(itemPurchaseOrder)
@@ -185,6 +208,7 @@ else
                     })
                 }
             })
+           
         })
     </script>
 }

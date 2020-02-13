@@ -12,16 +12,20 @@ using Team11_SSIS_ADProject.SSIS.Service;
 using Team11_SSIS_ADProject.SSIS.ViewModels;
 using System.Security.Claims;
 using System.Web.Helpers;
+using System.Web.UI.WebControls;
+using System.IO;
 
 namespace Team11_SSIS_ADProject.Controllers
 {
     public class NotificationController : Controller
     {
         INotificationService notificationService;
+        IItemService itemService;
 
-        public NotificationController(INotificationService notificationService)
+        public NotificationController(INotificationService notificationService,IItemService itemService)
         {
             this.notificationService = notificationService;
+            this.itemService = itemService;
         }
         
         // GET: Notification
@@ -67,8 +71,10 @@ namespace Team11_SSIS_ADProject.Controllers
                        
             client.Send(mm);
         }
-        
-        //Send Email
+
+
+
+        //Send 
         [HttpPost]
         public ActionResult Notify(Notification notification)
         {
@@ -85,17 +91,25 @@ namespace Team11_SSIS_ADProject.Controllers
         }
 
         //Send email simultaneously when submit requisition 
-        public ActionResult notify_when_save(Notification notification)
+        [HttpPost]
+        public ActionResult notify_when_save(Requisition requisition)
         {
-            Notification notification_ToHead = new Notification 
+            Notification notification_ToHead = new Notification
             {
-                To = "1002633246@qq.com", //change to real email address whent test
-                Subject = "Requisition",
-                From= User.Identity.Name, 
-                Body="Requisition_approve"
+                To = "", //change to real email address whent test
+                Subject = "New Requisition",
+                From = User.Identity.Name,
+                Body = "Requisition Detail"
             };
             notificationService.Save(notification_ToHead);
-            sendEmail(notification_ToHead);  
+            MailMessage mm = new MailMessage();
+            mm.To.Add(new MailAddress(notification_ToHead.To));
+            mm.Subject = notification_ToHead.Subject;
+            mm.From = new MailAddress(notification_ToHead.From);
+            mm.Body = EmailBody(requisition);
+            SmtpClient client = new SmtpClient();
+            mm.IsBodyHtml = true;
+            //client.Send(mm);
 
             return Json(new { subject= notification_ToHead.Subject });
         }
@@ -106,6 +120,37 @@ namespace Team11_SSIS_ADProject.Controllers
             notificationService.Delete(id);
 
             return Redirect(uri.ToString());
+        }
+
+        public String EmailBody(Requisition requisition)
+        {
+            String body = String.Empty; 
+            var s=new List<string>();
+            int startindex = 0;
+            String table = null;
+            using(StreamReader reader=new StreamReader(Server.MapPath("~/Views/HtmlPage1.html")))
+            {
+                body = reader.ReadToEnd();
+                
+            }
+            int num = requisition.ItemRequisitions.Count();
+            String[] tableline = new string[num];
+            for (int i = 0; i < num; i++)
+            {
+                tableline[i] = "<tr></tr>";
+            }
+            foreach (var item in requisition.ItemRequisitions)
+            {
+                String itemname = itemService.Get(item.ItemId).ItemDescription;
+                tableline[startindex]=tableline[startindex].Insert(4, "<td>"+itemname+"</td>"+ "<td>" + item.Quantity + "</td>");
+                startindex++;
+            }
+            foreach (var line in tableline)
+            {
+                table += line;
+            }
+            body = body.Replace("{sss}", table);
+            return body;
         }
 
     }

@@ -11,6 +11,7 @@
         <div class="box-body">
             <button class="btn btn-success" data-toggle="modal" data-target="#delegationModal"><i class="glyphicon glyphicon-plus-sign"></i> New Delegation</button>
 
+            <h3 style="text-align:center">@ViewBag.dD</h3>
             <!--Modal starts-->
             <div class="modal" id="delegationModal" tabindex="-1" role="dialog">
                 <div class="modal-dialog" role="document">
@@ -36,6 +37,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <br />
                                 <div class="row">
                                     <div class="col-md-6">
                                         @Html.LabelFor(x => x.StartDate)
@@ -46,14 +48,14 @@
                                         <input type="date" name="@Html.NameFor(x => x.EndDate)" id="endDate" />
                                     </div>
                                 </div>
-                                
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
                         }
-                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
             <!--Modal ends-->
@@ -69,36 +71,50 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var item in Model.DepartmentDelegations)
+                    @foreach (var item in Model.DepartmentDelegations)
                     {
-                    <tr>
-                        <td>@item.UserName</td>
-                        <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
-                        <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
+                        <tr>
+                            <td>@item.UserName</td>
+                            <td>@item.StartDate.ToString("dd-MMM-yyyy")</td>
+                            <td>@item.EndDate.ToString("dd-MMM-yyyy")</td>
 
-                        @if (@item.Status == 10)
-                        {
-                            <td><span class="label label-success">Is Active</span></td>
-                        }
-                        else
-                        {
-                            <td><span class="label label-danger">Not Active</span></td>
-                        }
+                            @if (@item.Status == 10)
+                            {
+                                <td><span class="label label-success">Is Active</span></td>
+                            }
+                            else
+                            {
+                                <td><span class="label label-danger">Not Active</span></td>
+                            }
 
-                        @if (item.Status == 10)
-                        {
-                            <td><a class="btn btn-danger" href="@Url.Action("EditDelegationStatus", "Department", new { id = item.Id })"><i class="glyphicon glyphicon-remove"></i></a></td>
-                        }
-                        else if (item.Status == 11)
-                        {
-                            <td><a class="btn btn-primary" href="@Url.Action("EditDelegationStatus", "Department", new { id = item.Id })"><i class="glyphicon glyphicon-ok"></i></a></td>
-                        }
+                            @if (item.Status == 10)
+                            {
+                                <td><a class="btn btn-danger" href="@Url.Action("EditDelegationStatus", "Department", new { id = item.Id })"><i class="glyphicon glyphicon-remove"></i></a></td>
+                            }
+                            else if (item.Status == 11)
+                            {
+                                <td><a class="btn btn-primary" href="@Url.Action("EditDelegationStatus", "Department", new { id = item.Id })"><i class="glyphicon glyphicon-ok"></i></a></td>
+                            }
 
 
-                    </tr>
+                        </tr>
                     }
                 </tbody>
             </table>
+            <p>
+                <a class="btn btn-warning" href="@Url.Action("DelegationPendingList", "Department")">
+                    <i class="glyphicon glyphicon-list"></i> Pending List
+                </a>
+                <a class="btn btn-danger" href="@Url.Action("DelegationInactiveList", "Department")">
+                    <i class="glyphicon glyphicon-list"></i> Inactive List
+                </a>
+                <a class="btn btn-success" href="@Url.Action("DelegationActiveList", "Department")">
+                    <i class="glyphicon glyphicon-list"></i> Active List
+                </a>
+                <a class="btn btn-primary" href="@Url.Action("Delegation", "Department")">
+                    <i class="glyphicon glyphicon-list"></i> See All
+                </a>
+            </p>
         </div>
     </div>
     

@@ -75,7 +75,7 @@ namespace Team11_SSIS_ADProject
             //Requisitions
             container.RegisterType<IRequisitionRepository, RequisitionRepository>();
             container.RegisterType<IItemRequisitionRepository, ItemRequisitionRepository>();
-            container.RegisterType<IRequisitionService, RequisitionRepostiory>();
+            container.RegisterType<IRequisitionService, RequisitionService>();
             container.RegisterType<IItemRequisitionService, ItemRequisitionService>();
 
             //Disbursements
@@ -97,6 +97,12 @@ namespace Team11_SSIS_ADProject
             //DepartmentDelegation
             container.RegisterType<IDepartmentDelegationRepository, DepartmentDelegationRepository>();
             container.RegisterType<IDepartmentDelegationService, DepartmentDelegationService>();
+
+            //ML
+            container.RegisterType<IMLService, MLService>();
+
+            //Chart
+            container.RegisterType<IChartService, ChartService>();
 
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
